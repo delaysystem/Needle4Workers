@@ -1,0 +1,24 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "tubot-needle",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-09-21",
+	"assets": {
+		"directory": "./public"
+	},
+	"kv_namespaces": [
+		{
+			"binding": "DETERMINISTIC_CACHE",
+			"id": "tubot-needle-cache"
+		}
+	],
+	"vars": {
+		"NEEDLE_LAYERS": "16",
+		"MAX_PRUNED_TOOLS": "5",
+		"WEIGHTS_URL": "/weights/needle3-16l.cact"
+	},
+	"observability": {
+		"enabled": true
+	},
+	"upload_source_maps": true
+}

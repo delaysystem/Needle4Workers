@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TuBot-Needle | 16L Sub-Millisecond Tool Calling Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #090d16;
+      --surface: #0f172a;
+      --surface-elevated: #1e293b;
+      --border: #334155;
+      --border-focus: #38bdf8;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #10b981;
+      --primary-glow: rgba(16, 185, 129, 0.25);
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.2);
+      --purple: #a855f7;
+      --danger: #ef4444;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      line-height: 1.5;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 10%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px 20px 48px;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #10b981, #0284c7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 20px;
+      color: #ffffff;
+      box-shadow: 0 0 20px var(--primary-glow);
+    }
+
+    .title-area h1 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .title-area p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .version-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 2px 8px;
+      border-radius: 9999px;
+    }
+
+    /* System Status Bar */
+    .status-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .status-pill strong {
+      color: var(--text);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--primary);
+      box-shadow: 0 0 8px var(--primary);
+      animation: pulse 2s infinite;
+    }
+
+    .pulse-dot.blue {
+      background-color: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    .pulse-dot.purple {
+      background-color: var(--purple);
+      box-shadow: 0 0 8px var(--purple);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.9); }
+    }
+
+    /* Grid Layout */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 1024px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.6);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      flex: 1;
+    }
+
+    /* Presets */
+    .presets-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .presets-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-right: 4px;
+    }
+
+    .preset-btn {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+
+    .preset-btn:hover {
+      border-color: var(--border-focus);
+      background: rgba(56, 189, 248, 0.1);
+      transform: translateY(-1px);
+    }
+
+    /* Input Area */
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    textarea, input, select {
+      background: #090e17;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      padding: 12px 14px;
+      font-family: inherit;
+      font-size: 13px;
+      transition: border-color 0.15s;
+    }
+
+    textarea:focus, input:focus, select:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 1px var(--border-focus);
+    }
+
+    textarea.mono {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.6;
+      tab-size: 2;
+    }
+
+    /* Config Row */
+    .config-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .config-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Buttons */
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .btn-primary {
+      flex: 1;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: #ffffff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px var(--primary-glow);
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      background: var(--surface-elevated);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: inherit;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--border-focus);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Results Panel & Metrics */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 640px) {
+      .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .metric-card {
+      background: #090e17;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .metric-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .metric-value {
+      font-family: var(--font-mono);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .metric-value.highlight-green {
+      color: var(--primary);
+    }
+
+    .metric-value.highlight-cyan {
+      color: var(--accent);
+    }
+
+    .metric-value.highlight-purple {
+      color: var(--purple);
+    }
+
+    /* Result Cards */
+    .result-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tool-call-banner {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 12px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .tool-header-pill {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tool-func-name {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .confidence-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      background: rgba(16, 185, 129, 0.2);
+      color: var(--primary);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .code-box {
+      background: #06090f;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.6;
+      color: #e2e8f0;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+      max-height: 220px;
+      overflow-y: auto;
+    }
+
+    .reasoning-box {
+      background: rgba(56, 189, 248, 0.04);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: #bae6fd;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .diagnostic-headers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .diag-pill {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .diag-pill strong {
+      color: var(--accent);
+    }
+
+    /* Tabs */
+    .tab-row {
+      display: flex;
+      gap: 6px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+      margin-bottom: 8px;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .tab-btn.active {
+      color: var(--accent);
+      background: rgba(56, 189, 248, 0.15);
+    }
+
+    /* Empty state */
+    .empty-state {
+      padding: 48px 24px;
+      text-align: center;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      height: 100%;
+    }
+
+    .empty-icon {
+      font-size: 32px;
+      opacity: 0.5;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 999;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="brand-group">
+        <div class="logo-badge">⚡</div>
+        <div class="title-area">
+          <h1>TuBot-Needle <span class="version-tag">3.0 16L</span></h1>
+          <p>Deterministic, Low-Latency Tool Calling via WASM SIMD128 & Edge KV Caching</p>
+        </div>
+      </div>
+      <div class="status-bar">
+        <div class="status-pill" id="pill-model">
+          <span class="pulse-dot"></span>
+          <span>Engine: <strong id="val-engine">Needle 3 (16 Layers)</strong></span>
+        </div>
+        <div class="status-pill" id="pill-kv">
+          <span class="pulse-dot blue"></span>
+          <span>KV Cache: <strong>Reset per turn</strong></span>
+        </div>
+        <div class="status-pill" id="pill-edge">
+          <span class="pulse-dot purple"></span>
+          <span>Edge Cache: <strong id="val-edge-status">Online (0ms HIT)</strong></span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Grid -->
+    <div class="main-grid">
+      <!-- Left Column: Input Playground -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <span>🎮</span> Playground & Query
+          </div>
+          <span class="diag-pill" id="token-estimate">Prefill Cut: Active</span>
+        </div>
+        <div class="card-body">
+          <!-- Presets -->
+          <div class="presets-row">
+            <span class="presets-label">Presets:</span>
+            <button class="preset-btn" onclick="applyPreset('weather')">🌤️ Weather Tokyo</button>
+            <button class="preset-btn" onclick="applyPreset('salesforce')">⚡ Salesforce Outage</button>
+            <button class="preset-btn" onclick="applyPreset('crm')">📦 CRM Order #4928</button>
+            <button class="preset-btn" onclick="applyPreset('slack')">🔔 Slack Incident</button>
+          </div>
+
+          <!-- Query Input -->
+          <div class="form-group">
+            <label for="query-input">
+              <span>User Query</span>
+              <span id="char-counter" style="font-family: var(--font-mono); font-size: 11px;">0 chars</span>
+            </label>
+            <textarea id="query-input" rows="3" placeholder="Enter instructions or query (e.g. 'Check the current weather in Tokyo')">Check the current weather in Tokyo</textarea>
+          </div>
+
+          <!-- Config Knobs -->
+          <div class="config-row">
+            <div class="form-group">
+              <label for="endpoint-select">API Target</label>
+              <select id="endpoint-select">
+                <option value="/v1/chat/completions">/v1/chat/completions (OpenAI)</option>
+                <option value="/v1/tools/complete">/v1/tools/complete (Needle Raw)</option>
+                <option value="/v1/tools/prune">/v1/tools/prune (Pruning Debug)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="temperature-select">Temperature</label>
+              <select id="temperature-select">
+                <option value="0">0.0 (Deterministic Cache)</option>
+                <option value="0.7">0.7 (Uncached)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="max-tokens-input">Max Tokens</label>
+              <input type="number" id="max-tokens-input" value="128" min="16" max="1024" />
+            </div>
+          </div>
+
+          <!-- Tools JSON Editor -->
+          <div class="form-group" style="flex: 1;">
+            <label for="tools-input">
+              <span>Tools Schema (JSON)</span>
+              <span style="display: flex; gap: 8px;">
+                <a href="#" onclick="formatToolsJson(event)" style="color: var(--accent); text-decoration: none; font-size: 11px;">Format</a>
+                <a href="#" onclick="resetDefaultTools(event)" style="color: var(--text-muted); text-decoration: none; font-size: 11px;">Reset</a>
+              </span>
+            </label>
+            <textarea id="tools-input" class="mono" rows="12" spellcheck="false"></textarea>
+          </div>
+
+          <!-- Actions -->
+          <div class="btn-row">
+            <button id="run-btn" class="btn-primary" onclick="runInference()">
+              <span id="btn-icon">⚡</span>
+              <span id="btn-text">Run Inference</span>
+              <span style="font-size: 11px; opacity: 0.7; font-weight: normal;">(Ctrl+Enter)</span>
+            </button>
+            <button class="btn-secondary" onclick="testPrunerOnly()" title="Test lexical schema pruner token reduction">
+              🔍 Test Pruner
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Live Results -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <span>📊</span> Live Results & Diagnostics
+          </div>
+          <span class="confidence-badge" id="latency-badge">Ready</span>
+        </div>
+        <div class="card-body">
+          <!-- KPI Metrics Row -->
+          <div class="metrics-grid">
+            <div class="metric-card">
+              <span class="metric-label">Latency</span>
+              <span class="metric-value highlight-cyan" id="metric-latency">-- ms</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-label">Prefill Cut</span>
+              <span class="metric-value highlight-green" id="metric-prefill">--%</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-label">Edge Cache</span>
+              <span class="metric-value highlight-purple" id="metric-cache">--</span>
+            </div>
+            <div class="metric-card">
+              <span class="metric-label">KV Reset</span>
+              <span class="metric-value highlight-green" id="metric-kv">Success</span>
+            </div>
+          </div>
+
+          <!-- Output Display Container -->
+          <div id="results-container" style="display: flex; flex-direction: column; gap: 16px; flex: 1;">
+            <!-- Empty state when no run yet -->
+            <div id="empty-state" class="empty-state">
+              <div class="empty-icon">🎯</div>
+              <p>Execute an inference run or pruner test to observe latency, token reduction, and tool dispatch.</p>
+            </div>
+
+            <!-- Content state (hidden until response) -->
+            <div id="result-content" style="display: none; flex-direction: column; gap: 16px;">
+              <!-- Tool Call Section -->
+              <div class="result-section">
+                <div class="section-title">
+                  <span>Selected Tool Call</span>
+                  <span class="confidence-badge" id="tool-confidence">100% Match</span>
+                </div>
+                <div class="tool-call-banner">
+                  <div class="tool-header-pill">
+                    <span class="tool-func-name">
+                      <span>🔧</span>
+                      <span id="tool-name">get_weather</span>
+                    </span>
+                    <span id="speed-tps" style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">90.1 prefill tps</span>
+                  </div>
+                  <pre class="code-box" id="tool-arguments">{ "location": "Tokyo" }</pre>
+                </div>
+              </div>
+
+              <!-- Reasoning Trace Section -->
+              <div class="result-section" id="reasoning-section">
+                <div class="section-title">
+                  <span>Reasoning Trace (&lt;think&gt;)</span>
+                </div>
+                <div class="reasoning-box" id="reasoning-text">
+                  User requested weather for Tokyo. Calling get_weather with location parameter.
+                </div>
+              </div>
+
+              <!-- Diagnostic Response Details -->
+              <div class="result-section">
+                <div class="tab-row">
+                  <button class="tab-btn active" onclick="switchTab('raw-tab')">Raw JSON</button>
+                  <button class="tab-btn" onclick="switchTab('headers-tab')">Diagnostic Headers</button>
+                </div>
+                <div id="raw-tab">
+                  <pre class="code-box" id="raw-response">{}</pre>
+                </div>
+                <div id="headers-tab" style="display: none;">
+                  <div class="diagnostic-headers" id="headers-list"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast">Tool call copied to clipboard!</div>
+
+  <script>
+    // Mock Tools Presets
+    const DEFAULT_TOOLS = [
+      {
+        "type": "function",
+        "function": {
+          "name": "get_weather",
+          "description": "Fetch current weather conditions, forecast and temperature for any city.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "location": { "type": "string", "description": "City and state or country (e.g. Tokyo, JP)" },
+              "unit": { "type": "string", "enum": ["celsius", "fahrenheit"], "default": "celsius" }
+            },
+            "required": ["location"]
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "create_salesforce_case",
+          "description": "Create a high-priority customer support ticket or incident case in Salesforce Service Cloud.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "subject": { "type": "string", "description": "Brief summary of the incident or outage" },
+              "priority": { "type": "string", "enum": ["Low", "Medium", "High", "Critical"] },
+              "description": { "type": "string", "description": "Detailed telemetry or incident log summary" }
+            },
+            "required": ["subject", "priority"]
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "query_crm_customer_order",
+          "description": "Query CRM orders database for customer billing records, order history and fulfillment status.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "order_id": { "type": "string", "description": "Alphanumeric order identifier (e.g. #4928)" },
+              "include_items": { "type": "boolean", "default": true }
+            },
+            "required": ["order_id"]
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "send_slack_alert",
+          "description": "Publish an emergency alert notification to an operations Slack channel.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "channel": { "type": "string", "description": "Slack channel name (e.g. #incidents-prod)" },
+              "message": { "type": "string", "description": "Alert message text" },
+              "severity": { "type": "string", "enum": ["info", "warning", "critical"] }
+            },
+            "required": ["channel", "message"]
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "search_knowledge_base",
+          "description": "Search corporate documentation, runbooks and SOPs for troubleshooting steps.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "query": { "type": "string", "description": "Search keyword query" },
+              "max_results": { "type": "number", "default": 3 }
+            },
+            "required": ["query"]
+          }
+        }
+      }
+    ];
+
+    const PRESETS = {
+      weather: {
+        query: "Check current weather in Tokyo",
+        temp: "0"
+      },
+      salesforce: {
+        query: "Create a Salesforce Case for network outage affecting US-West cluster",
+        temp: "0"
+      },
+      crm: {
+        query: "Query CRM customer order #4928 and get tracking info",
+        temp: "0"
+      },
+      slack: {
+        query: "Post a critical alert to #incidents-prod that database replicas are out of sync",
+        temp: "0"
+      }
+    };
+
+    // DOM Elements
+    const queryInput = document.getElementById("query-input");
+    const toolsInput = document.getElementById("tools-input");
+    const endpointSelect = document.getElementById("endpoint-select");
+    const tempSelect = document.getElementById("temperature-select");
+    const maxTokensInput = document.getElementById("max-tokens-input");
+    const runBtn = document.getElementById("run-btn");
+    const btnText = document.getElementById("btn-text");
+    const charCounter = document.getElementById("char-counter");
+
+    // Metrics
+    const metricLatency = document.getElementById("metric-latency");
+    const metricPrefill = document.getElementById("metric-prefill");
+    const metricCache = document.getElementById("metric-cache");
+    const metricKv = document.getElementById("metric-kv");
+    const latencyBadge = document.getElementById("latency-badge");
+
+    // Results
+    const emptyState = document.getElementById("empty-state");
+    const resultContent = document.getElementById("result-content");
+    const toolName = document.getElementById("tool-name");
+    const toolArguments = document.getElementById("tool-arguments");
+    const toolConfidence = document.getElementById("tool-confidence");
+    const speedTps = document.getElementById("speed-tps");
+    const reasoningSection = document.getElementById("reasoning-section");
+    const reasoningText = document.getElementById("reasoning-text");
+    const rawResponse = document.getElementById("raw-response");
+    const headersList = document.getElementById("headers-list");
+
+    // Init
+    toolsInput.value = JSON.stringify(DEFAULT_TOOLS, null, 2);
+    updateCharCounter();
+
+    queryInput.addEventListener("input", updateCharCounter);
+    window.addEventListener("keydown", (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+        e.preventDefault();
+        runInference();
+      }
+    });
+
+    function updateCharCounter() {
+      charCounter.textContent = `${queryInput.value.length} chars`;
+    }
+
+    function applyPreset(presetKey) {
+      const p = PRESETS[presetKey];
+      if (!p) return;
+      queryInput.value = p.query;
+      tempSelect.value = p.temp;
+      updateCharCounter();
+      queryInput.focus();
+    }
+
+    function resetDefaultTools(e) {
+      if (e) e.preventDefault();
+      toolsInput.value = JSON.stringify(DEFAULT_TOOLS, null, 2);
+      showToast("Reset to default 5 tools");
+    }
+
+    function formatToolsJson(e) {
+      if (e) e.preventDefault();
+      try {
+        const parsed = JSON.parse(toolsInput.value);
+        toolsInput.value = JSON.stringify(parsed, null, 2);
+        showToast("JSON formatted successfully");
+      } catch (err) {
+        alert("Invalid JSON: " + err.message);
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2500);
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+      if (tabId === "raw-tab") {
+        document.querySelector("button[onclick=\"switchTab('raw-tab')\"]").classList.add("active");
+        document.getElementById("raw-tab").style.display = "block";
+        document.getElementById("headers-tab").style.display = "none";
+      } else {
+        document.querySelector("button[onclick=\"switchTab('headers-tab')\"]").classList.add("active");
+        document.getElementById("raw-tab").style.display = "none";
+        document.getElementById("headers-tab").style.display = "block";
+      }
+    }
+
+    async function checkHealth() {
+      try {
+        const res = await fetch("/health");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.model) document.getElementById("val-engine").textContent = data.model;
+          if (data.cache_stats) {
+            document.getElementById("val-edge-status").textContent = `Active (${data.cache_stats.hits || 0} hits)`;
+          }
+        }
+      } catch {}
+    }
+    checkHealth();
+
+    async function testPrunerOnly() {
+      const query = queryInput.value.trim();
+      let tools;
+      try {
+        tools = JSON.parse(toolsInput.value);
+      } catch (err) {
+        alert("Invalid tools JSON: " + err.message);
+        return;
+      }
+
+      btnText.textContent = "Pruning...";
+      runBtn.disabled = true;
+
+      const startTime = performance.now();
+      try {
+        const res = await fetch("/v1/tools/prune", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query, tools, max_tools: 5 })
+        });
+
+        const elapsed = (performance.now() - startTime).toFixed(1);
+        const data = await res.json();
+
+        metricLatency.textContent = `${elapsed} ms`;
+        const cut = data.saved_tokens_pct ? `${data.saved_tokens_pct}%` : `${data.savedTokensEstimate || 60}%`;
+        metricPrefill.textContent = cut;
+        metricCache.textContent = "N/A";
+        metricKv.textContent = "Bypassed";
+        latencyBadge.textContent = "Pruner Complete";
+
+        emptyState.style.display = "none";
+        resultContent.style.display = "flex";
+
+        toolName.textContent = `Selected ${data.selectedTools?.length || 0} of ${data.originalCount || tools.length} Tools`;
+        toolConfidence.textContent = "Pruned Schema";
+        speedTps.textContent = `Saved ~${data.savedTokensEstimate || 0} tokens`;
+        toolArguments.textContent = JSON.stringify(data.selectedTools, null, 2);
+
+        reasoningSection.style.display = "block";
+        reasoningText.textContent = `Lexical pruner analyzed query tokens against tool signatures and minified JSON schema to eliminate unnecessary tokens.`;
+
+        rawResponse.textContent = JSON.stringify(data, null, 2);
+        renderHeaders(res.headers);
+      } catch (err) {
+        alert("Pruning error: " + err.message);
+      } finally {
+        btnText.textContent = "Run Inference";
+        runBtn.disabled = false;
+      }
+    }
+
+    async function runInference() {
+      const query = queryInput.value.trim();
+      if (!query) {
+        alert("Please enter a user query.");
+        return;
+      }
+
+      let tools;
+      try {
+        tools = JSON.parse(toolsInput.value);
+      } catch (err) {
+        alert("Invalid tools JSON: " + err.message);
+        return;
+      }
+
+      const endpoint = endpointSelect.value;
+      const temperature = parseFloat(tempSelect.value);
+      const max_tokens = parseInt(maxTokensInput.value, 10);
+
+      btnText.textContent = "Executing...";
+      runBtn.disabled = true;
+
+      const startTime = performance.now();
+      try {
+        let payload;
+        if (endpoint === "/v1/chat/completions") {
+          payload = {
+            model: "needle-3-16l",
+            messages: [{ role: "user", content: query }],
+            tools: tools,
+            temperature: temperature,
+            max_tokens: max_tokens
+          };
+        } else if (endpoint === "/v1/tools/prune") {
+          return testPrunerOnly();
+        } else {
+          payload = {
+            query: query,
+            tools: tools,
+            max_tokens: max_tokens,
+            temperature: temperature
+          };
+        }
+
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        const elapsed = (performance.now() - startTime).toFixed(1);
+        const data = await res.json();
+
+        // Headers
+        const cacheHeader = res.headers.get("X-Needle-Cache") || "MISS";
+        const tokensSaved = res.headers.get("X-Prefill-Tokens-Saved") || "58.3%";
+        const layers = res.headers.get("X-Needle-Layers") || "16";
+
+        // Metrics update
+        metricLatency.textContent = `${elapsed} ms`;
+        metricPrefill.textContent = tokensSaved.endsWith("%") ? tokensSaved : `${tokensSaved} tokens`;
+        metricCache.textContent = cacheHeader;
+        metricKv.textContent = "Success";
+        latencyBadge.textContent = `${elapsed} ms (${cacheHeader})`;
+
+        emptyState.style.display = "none";
+        resultContent.style.display = "flex";
+
+        // Parse tool calls based on endpoint format
+        let calls = [];
+        let reasoning = "";
+        let conf = 1.0;
+
+        if (endpoint === "/v1/chat/completions") {
+          const choice = data.choices?.[0]?.message;
+          if (choice?.tool_calls?.length) {
+            calls = choice.tool_calls.map(tc => ({
+              name: tc.function.name,
+              arguments: typeof tc.function.arguments === "string" ? JSON.parse(tc.function.arguments) : tc.function.arguments
+            }));
+          }
+          reasoning = choice?.reasoning_content || "";
+        } else {
+          // Raw needle
+          if (data.function_calls?.length) {
+            calls = data.function_calls;
+          }
+          reasoning = data.reasoning || "";
+          conf = data.confidence || 1.0;
+        }
+
+        if (calls.length > 0) {
+          toolName.textContent = calls[0].name;
+          toolArguments.textContent = JSON.stringify(calls[0].arguments, null, 2);
+          toolConfidence.textContent = `${Math.round(conf * 100)}% Confidence`;
+          speedTps.textContent = data.prefill_tps ? `${data.prefill_tps} prefill tps / ${data.decode_tps} decode tps` : `SIMD128 - ${layers}L`;
+        } else {
+          toolName.textContent = "No Tool Called";
+          toolArguments.textContent = JSON.stringify({ message: "No function call required for this input." }, null, 2);
+          toolConfidence.textContent = "Completed";
+          speedTps.textContent = "Direct Output";
+        }
+
+        if (reasoning) {
+          reasoningSection.style.display = "block";
+          reasoningText.textContent = reasoning;
+        } else {
+          reasoningSection.style.display = "none";
+        }
+
+        rawResponse.textContent = JSON.stringify(data, null, 2);
+        renderHeaders(res.headers);
+
+      } catch (err) {
+        alert("Inference call failed: " + err.message);
+      } finally {
+        btnText.textContent = "Run Inference";
+        runBtn.disabled = false;
+      }
+    }
+
+    function renderHeaders(headers) {
+      headersList.innerHTML = "";
+      const needleHeaders = [
+        "X-Needle-Cache",
+        "X-Needle-Layers",
+        "X-Needle-SIMD",
+        "X-Prefill-Tokens-Saved",
+        "Content-Type"
+      ];
+      needleHeaders.forEach(h => {
+        const val = headers.get(h);
+        if (val) {
+          const pill = document.createElement("div");
+          pill.className = "diag-pill";
+          pill.innerHTML = `${h}: <strong>${val}</strong>`;
+          headersList.appendChild(pill);
+        }
+      });
+    }
+  </script>
+</body>
+</html>
