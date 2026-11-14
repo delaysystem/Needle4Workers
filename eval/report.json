@@ -1,0 +1,5681 @@
+{
+  "model": "needle-3-20l",
+  "engine": "wasm-simd128",
+  "weightsSha": "18b13c30905b925392fd83c7774c4013344f42d6ca113cfd2bf9dc4996a212db",
+  "goldenSha": "2bd9823791994201a3db193ef45678ace8a8043e61d86fcb73982989657e693f",
+  "goldenVersion": 1,
+  "minHits": 0,
+  "summary": {
+    "total": 252,
+    "hits": 237,
+    "routingHits": 244,
+    "negatives": 42,
+    "negativeHits": 39,
+    "byLanguage": {
+      "en": {
+        "total": 36,
+        "hits": 33
+      },
+      "de": {
+        "total": 36,
+        "hits": 35
+      },
+      "fr": {
+        "total": 36,
+        "hits": 32
+      },
+      "es": {
+        "total": 35,
+        "hits": 35
+      },
+      "it": {
+        "total": 37,
+        "hits": 34
+      },
+      "nl": {
+        "total": 36,
+        "hits": 35
+      },
+      "pl": {
+        "total": 36,
+        "hits": 33
+      }
+    },
+    "byCategory": {
+      "explicit": {
+        "total": 42,
+        "hits": 40
+      },
+      "implicit": {
+        "total": 42,
+        "hits": 40
+      },
+      "sarcastic": {
+        "total": 42,
+        "hits": 40
+      },
+      "multisentence": {
+        "total": 42,
+        "hits": 36
+      },
+      "edge": {
+        "total": 42,
+        "hits": 42
+      },
+      "negative": {
+        "total": 42,
+        "hits": 39
+      }
+    }
+  },
+  "failures": {
+    "misses": 15,
+    "tags": {
+      "false-negative": 5,
+      "missing-reason": 1,
+      "span-pick": 2,
+      "false-positive": 3,
+      "extra-details": 2,
+      "missing-details": 2,
+      "spurious-reason": 1
+    },
+    "cases": {
+      "ev-00010": [
+        "false-negative"
+      ],
+      "ev-00020": [
+        "missing-reason"
+      ],
+      "ev-00023": [
+        "span-pick"
+      ],
+      "ev-00068": [
+        "false-positive"
+      ],
+      "ev-00074": [
+        "false-negative"
+      ],
+      "ev-00084": [
+        "extra-details"
+      ],
+      "ev-00090": [
+        "missing-details"
+      ],
+      "ev-00102": [
+        "false-positive"
+      ],
+      "ev-00149": [
+        "false-negative"
+      ],
+      "ev-00156": [
+        "extra-details"
+      ],
+      "ev-00165": [
+        "span-pick"
+      ],
+      "ev-00202": [
+        "spurious-reason",
+        "missing-details"
+      ],
+      "ev-00226": [
+        "false-negative"
+      ],
+      "ev-00237": [
+        "false-negative"
+      ],
+      "ev-00248": [
+        "false-positive"
+      ]
+    }
+  },
+  "cases": [
+    {
+      "id": "ev-00000",
+      "lang": "en",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 8357,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00001",
+      "lang": "en",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1588,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00002",
+      "lang": "en",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1578,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00003",
+      "lang": "en",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1325,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00004",
+      "lang": "en",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1389,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00005",
+      "lang": "en",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1356,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00006",
+      "lang": "en",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2374,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00007",
+      "lang": "en",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2040,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00008",
+      "lang": "en",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1653,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00009",
+      "lang": "en",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1623,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00010",
+      "lang": "en",
+      "category": "implicit",
+      "hit": false,
+      "routingHit": false,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 842,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00011",
+      "lang": "en",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2091,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00012",
+      "lang": "en",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1952,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00013",
+      "lang": "en",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1850,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00014",
+      "lang": "en",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1873,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00015",
+      "lang": "en",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2143,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00016",
+      "lang": "en",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2459,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00017",
+      "lang": "en",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1822,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00018",
+      "lang": "en",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "The confirmation never came and my card was charged."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "The confirmation never came and my card was charged."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2516,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00019",
+      "lang": "en",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Our office printer died this morning."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Our office printer died this morning."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3115,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00020",
+      "lang": "en",
+      "category": "multisentence",
+      "hit": false,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "My bills still go to the old address despite three updates.",
+            "reason": "billing"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "My bills still go to the old address despite three updates."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2639,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00021",
+      "lang": "en",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "The medicine I ordered is late."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "The medicine I ordered is late."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 4439,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00022",
+      "lang": "en",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "My car rental got cancelled without notice."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "My car rental got cancelled without notice."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3291,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00023",
+      "lang": "en",
+      "category": "multisentence",
+      "hit": false,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Every reply still comes from a bot."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "I paid for premium support."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3192,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00024",
+      "lang": "en",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 760,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00025",
+      "lang": "en",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1266,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00026",
+      "lang": "en",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1016,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00027",
+      "lang": "en",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1374,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00028",
+      "lang": "en",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1509,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00029",
+      "lang": "en",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1259,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00030",
+      "lang": "en",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 810,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00031",
+      "lang": "en",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 803,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00032",
+      "lang": "en",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 927,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00033",
+      "lang": "en",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 887,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00034",
+      "lang": "en",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 780,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00035",
+      "lang": "en",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 972,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00036",
+      "lang": "de",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1912,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00037",
+      "lang": "de",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1605,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00038",
+      "lang": "de",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1706,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00039",
+      "lang": "de",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1794,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00040",
+      "lang": "de",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1941,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00041",
+      "lang": "de",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2861,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00042",
+      "lang": "de",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2310,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00043",
+      "lang": "de",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2278,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00044",
+      "lang": "de",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 4119,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00045",
+      "lang": "de",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2358,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00046",
+      "lang": "de",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2157,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00047",
+      "lang": "de",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2722,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00048",
+      "lang": "de",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 4435,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00049",
+      "lang": "de",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2205,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00050",
+      "lang": "de",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2277,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00051",
+      "lang": "de",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2447,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00052",
+      "lang": "de",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2563,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00053",
+      "lang": "de",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2285,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00054",
+      "lang": "de",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Die Bestätigung kam nie und meine Karte wurde belastet."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Die Bestätigung kam nie und meine Karte wurde belastet."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 4052,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00055",
+      "lang": "de",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Unser Bürodrucker ist heute Morgen kaputtgegangen."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Unser Bürodrucker ist heute Morgen kaputtgegangen."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 4107,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00056",
+      "lang": "de",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Meine Rechnungen gehen trotz dreier Meldungen noch an die alte Adresse.",
+            "reason": "billing"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Meine Rechnungen gehen trotz dreier Meldungen noch an die alte Adresse.",
+            "reason": "billing"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 4451,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00057",
+      "lang": "de",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Mein bestelltes Medikament ist zu spät."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Mein bestelltes Medikament ist zu spät."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3397,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00058",
+      "lang": "de",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Meine Mietwagenbuchung wurde ohne Ankündigung storniert."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Meine Mietwagenbuchung wurde ohne Ankündigung storniert."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 4432,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00059",
+      "lang": "de",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Jede Antwort kommt trotzdem von einem Bot."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Jede Antwort kommt trotzdem von einem Bot."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 4737,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00060",
+      "lang": "de",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1000,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00061",
+      "lang": "de",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2204,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00062",
+      "lang": "de",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1083,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00063",
+      "lang": "de",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1416,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00064",
+      "lang": "de",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1354,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00065",
+      "lang": "de",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1714,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00066",
+      "lang": "de",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1308,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00067",
+      "lang": "de",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 911,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00068",
+      "lang": "de",
+      "category": "negative",
+      "hit": false,
+      "routingHit": false,
+      "expected": [],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2531,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00069",
+      "lang": "de",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1306,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00070",
+      "lang": "de",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1213,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00071",
+      "lang": "de",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1494,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00072",
+      "lang": "fr",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1598,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00073",
+      "lang": "fr",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1616,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00074",
+      "lang": "fr",
+      "category": "explicit",
+      "hit": false,
+      "routingHit": false,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1129,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00075",
+      "lang": "fr",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1481,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00076",
+      "lang": "fr",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1612,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00077",
+      "lang": "fr",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1993,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00078",
+      "lang": "fr",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2257,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00079",
+      "lang": "fr",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2190,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00080",
+      "lang": "fr",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2971,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00081",
+      "lang": "fr",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1911,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00082",
+      "lang": "fr",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1968,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00083",
+      "lang": "fr",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2132,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00084",
+      "lang": "fr",
+      "category": "sarcastic",
+      "hit": false,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Un robot. Juste ce qu'il fallait à mon chauffage en panne."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3817,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00085",
+      "lang": "fr",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3015,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00086",
+      "lang": "fr",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2035,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00087",
+      "lang": "fr",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3206,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00088",
+      "lang": "fr",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2619,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00089",
+      "lang": "fr",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2206,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00090",
+      "lang": "fr",
+      "category": "multisentence",
+      "hit": false,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "La confirmation n'est jamais venue et ma carte a été débitée."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 4570,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00091",
+      "lang": "fr",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Notre imprimante de bureau est tombée en panne ce matin."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Notre imprimante de bureau est tombée en panne ce matin."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3744,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00092",
+      "lang": "fr",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Mes factures partent toujours à l'ancienne adresse malgré trois signalements.",
+            "reason": "billing"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Mes factures partent toujours à l'ancienne adresse malgré trois signalements.",
+            "reason": "billing"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 5073,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00093",
+      "lang": "fr",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Le médicament commandé est en retard."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Le médicament commandé est en retard."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3528,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00094",
+      "lang": "fr",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Ma location de voiture a été annulée sans préavis."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Ma location de voiture a été annulée sans préavis."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3870,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00095",
+      "lang": "fr",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Chaque réponse vient pourtant d'un robot."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Chaque réponse vient pourtant d'un robot."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3132,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00096",
+      "lang": "fr",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 893,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00097",
+      "lang": "fr",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1592,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00098",
+      "lang": "fr",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1069,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00099",
+      "lang": "fr",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1765,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00100",
+      "lang": "fr",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1478,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00101",
+      "lang": "fr",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1210,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00102",
+      "lang": "fr",
+      "category": "negative",
+      "hit": false,
+      "routingHit": false,
+      "expected": [],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1248,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00103",
+      "lang": "fr",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1077,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00104",
+      "lang": "fr",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1462,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00105",
+      "lang": "fr",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1169,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00106",
+      "lang": "fr",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1056,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00107",
+      "lang": "fr",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1014,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00108",
+      "lang": "es",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1416,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00109",
+      "lang": "es",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1569,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00110",
+      "lang": "es",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1665,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00111",
+      "lang": "es",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2087,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00112",
+      "lang": "es",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1690,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00113",
+      "lang": "es",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1504,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00114",
+      "lang": "es",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1911,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00115",
+      "lang": "es",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1947,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00116",
+      "lang": "es",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1650,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00117",
+      "lang": "es",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1783,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00118",
+      "lang": "es",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1754,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00119",
+      "lang": "es",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2236,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00120",
+      "lang": "es",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2960,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00121",
+      "lang": "es",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2790,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00122",
+      "lang": "es",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1900,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00123",
+      "lang": "es",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2300,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00124",
+      "lang": "es",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2564,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00125",
+      "lang": "es",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2138,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00126",
+      "lang": "es",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "La confirmación nunca llegó y me cobraron en la tarjeta."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "La confirmación nunca llegó y me cobraron en la tarjeta."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3962,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00127",
+      "lang": "es",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "La impresora de la oficina murió esta mañana."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "La impresora de la oficina murió esta mañana."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3292,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00128",
+      "lang": "es",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Mis facturas siguen yendo a la dirección vieja pese a tres avisos.",
+            "reason": "billing"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Mis facturas siguen yendo a la dirección vieja pese a tres avisos.",
+            "reason": "billing"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 4405,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00129",
+      "lang": "es",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "El medicamento que pedí va tarde."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "El medicamento que pedí va tarde."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2710,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00130",
+      "lang": "es",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Mi alquiler de coche se canceló sin aviso."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Mi alquiler de coche se canceló sin aviso."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3009,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00131",
+      "lang": "es",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Cada respuesta sigue viniendo de un robot."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Cada respuesta sigue viniendo de un robot."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2673,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00132",
+      "lang": "it",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1127,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00133",
+      "lang": "es",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1533,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00134",
+      "lang": "es",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1192,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00135",
+      "lang": "es",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2229,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00136",
+      "lang": "es",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1943,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00137",
+      "lang": "es",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1622,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00138",
+      "lang": "es",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1003,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00139",
+      "lang": "es",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 978,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00140",
+      "lang": "es",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1184,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00141",
+      "lang": "es",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1133,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00142",
+      "lang": "es",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1009,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00143",
+      "lang": "es",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1122,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00144",
+      "lang": "it",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1425,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00145",
+      "lang": "it",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2068,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00146",
+      "lang": "it",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2118,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00147",
+      "lang": "it",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1867,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00148",
+      "lang": "it",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1623,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00149",
+      "lang": "it",
+      "category": "explicit",
+      "hit": false,
+      "routingHit": false,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 981,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00150",
+      "lang": "it",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2007,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00151",
+      "lang": "it",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2010,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00152",
+      "lang": "it",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1929,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00153",
+      "lang": "it",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1933,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00154",
+      "lang": "it",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1646,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00155",
+      "lang": "it",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1998,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00156",
+      "lang": "it",
+      "category": "sarcastic",
+      "hit": false,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Un robot. Proprio ciò che serviva alla mia caldaia rotta."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3007,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00157",
+      "lang": "it",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2242,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00158",
+      "lang": "it",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1986,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00159",
+      "lang": "it",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2674,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00160",
+      "lang": "it",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2836,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00161",
+      "lang": "it",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1747,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00162",
+      "lang": "it",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "La conferma non è mai arrivata e la carta è stata addebitata."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "La conferma non è mai arrivata e la carta è stata addebitata."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 4333,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00163",
+      "lang": "it",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "La stampante dell'ufficio è morta stamattina."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "La stampante dell'ufficio è morta stamattina."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3622,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00164",
+      "lang": "it",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Le bollette vanno ancora al vecchio indirizzo nonostante tre segnalazioni.",
+            "reason": "billing"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Le bollette vanno ancora al vecchio indirizzo nonostante tre segnalazioni.",
+            "reason": "billing"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 4445,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00165",
+      "lang": "it",
+      "category": "multisentence",
+      "hit": false,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Il farmaco ordinato è in ritardo."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "La farmacia dice che la ricetta è a posto."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3536,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00166",
+      "lang": "it",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Il mio noleggio auto è stato cancellato senza preavviso."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Il mio noleggio auto è stato cancellato senza preavviso."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3040,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00167",
+      "lang": "it",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Ogni risposta arriva ancora da un bot."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Ogni risposta arriva ancora da un bot."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 4024,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00168",
+      "lang": "it",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 887,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00169",
+      "lang": "it",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1228,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00170",
+      "lang": "it",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1043,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00171",
+      "lang": "it",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1612,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00172",
+      "lang": "it",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1338,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00173",
+      "lang": "it",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1360,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00174",
+      "lang": "it",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1169,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00175",
+      "lang": "it",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 891,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00176",
+      "lang": "it",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1226,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00177",
+      "lang": "it",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1112,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00178",
+      "lang": "it",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1185,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00179",
+      "lang": "it",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1125,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00180",
+      "lang": "nl",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1454,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00181",
+      "lang": "nl",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2211,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00182",
+      "lang": "nl",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1926,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00183",
+      "lang": "nl",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1372,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00184",
+      "lang": "nl",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1610,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00185",
+      "lang": "nl",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2009,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00186",
+      "lang": "nl",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1938,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00187",
+      "lang": "nl",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1501,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00188",
+      "lang": "nl",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1328,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00189",
+      "lang": "nl",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1573,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00190",
+      "lang": "nl",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1368,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00191",
+      "lang": "nl",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1657,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00192",
+      "lang": "nl",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2442,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00193",
+      "lang": "nl",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2302,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00194",
+      "lang": "nl",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1853,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00195",
+      "lang": "nl",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2363,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00196",
+      "lang": "nl",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2740,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00197",
+      "lang": "nl",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2204,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00198",
+      "lang": "nl",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "De bevestiging kwam nooit en mijn kaart is belast."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "De bevestiging kwam nooit en mijn kaart is belast."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2971,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00199",
+      "lang": "nl",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Onze kantoorprinter begaf het vanochtend."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Onze kantoorprinter begaf het vanochtend."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3293,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00200",
+      "lang": "nl",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Mijn rekeningen gaan ondanks drie meldingen nog naar het oude adres.",
+            "reason": "billing"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Mijn rekeningen gaan ondanks drie meldingen nog naar het oude adres.",
+            "reason": "billing"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2946,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00201",
+      "lang": "nl",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Mijn bestelde medicijn is te laat."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Mijn bestelde medicijn is te laat."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3503,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00202",
+      "lang": "nl",
+      "category": "multisentence",
+      "hit": false,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Mijn huurauto is zonder bericht geannuleerd."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "billing"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2922,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00203",
+      "lang": "nl",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Toch komt elk antwoord van een bot."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Toch komt elk antwoord van een bot."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2234,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00204",
+      "lang": "nl",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 868,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00205",
+      "lang": "nl",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1290,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00206",
+      "lang": "nl",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 982,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00207",
+      "lang": "nl",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1289,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00208",
+      "lang": "nl",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1343,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00209",
+      "lang": "nl",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1044,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00210",
+      "lang": "nl",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 886,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00211",
+      "lang": "nl",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 953,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00212",
+      "lang": "nl",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1185,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00213",
+      "lang": "nl",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1058,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00214",
+      "lang": "nl",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1034,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00215",
+      "lang": "nl",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 951,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00216",
+      "lang": "pl",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1742,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00217",
+      "lang": "pl",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2026,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00218",
+      "lang": "pl",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2683,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00219",
+      "lang": "pl",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1800,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00220",
+      "lang": "pl",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1951,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00221",
+      "lang": "pl",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2443,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00222",
+      "lang": "pl",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3194,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00223",
+      "lang": "pl",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2450,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00224",
+      "lang": "pl",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3163,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00225",
+      "lang": "pl",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2602,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00226",
+      "lang": "pl",
+      "category": "implicit",
+      "hit": false,
+      "routingHit": false,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1072,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00227",
+      "lang": "pl",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1994,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00228",
+      "lang": "pl",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3012,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00229",
+      "lang": "pl",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3478,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00230",
+      "lang": "pl",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2119,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00231",
+      "lang": "pl",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2648,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00232",
+      "lang": "pl",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2725,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00233",
+      "lang": "pl",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3717,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00234",
+      "lang": "pl",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Potwierdzenie nigdy nie przyszło, a z karty pobrano pieniądze."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Potwierdzenie nigdy nie przyszło, a z karty pobrano pieniądze."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 4600,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00235",
+      "lang": "pl",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Nasza biurowa drukarka padła dziś rano."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Nasza biurowa drukarka padła dziś rano."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3939,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00236",
+      "lang": "pl",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Rachunki mimo trzech zgłoszeń wciąż idą na stary adres.",
+            "reason": "billing"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Rachunki mimo trzech zgłoszeń wciąż idą na stary adres.",
+            "reason": "billing"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 4255,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00237",
+      "lang": "pl",
+      "category": "multisentence",
+      "hit": false,
+      "routingHit": false,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Zamówiony lek się spóźnia."
+          }
+        }
+      ],
+      "actual": [],
+      "status": 500,
+      "error": "tool call truncated: token budget exhausted",
+      "latencyMs": 5823,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00238",
+      "lang": "pl",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Mój wynajem auta anulowano bez uprzedzenia."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Mój wynajem auta anulowano bez uprzedzenia."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3598,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00239",
+      "lang": "pl",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Każda odpowiedź wciąż przychodzi od bota."
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "details": "Każda odpowiedź wciąż przychodzi od bota."
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 4833,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00240",
+      "lang": "pl",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1346,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00241",
+      "lang": "pl",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1826,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00242",
+      "lang": "pl",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1285,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00243",
+      "lang": "pl",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1874,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00244",
+      "lang": "pl",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2761,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00245",
+      "lang": "pl",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1480,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00246",
+      "lang": "pl",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1124,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00247",
+      "lang": "pl",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1644,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00248",
+      "lang": "pl",
+      "category": "negative",
+      "hit": false,
+      "routingHit": false,
+      "expected": [],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {}
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 5291,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00249",
+      "lang": "pl",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 5068,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00250",
+      "lang": "pl",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2559,
+      "timedOut": false
+    },
+    {
+      "id": "ev-00251",
+      "lang": "pl",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1446,
+      "timedOut": false
+    }
+  ],
+  "createdAt": "2026-11-14T01:39:43.227Z"
+}

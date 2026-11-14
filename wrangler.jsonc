@@ -1,25 +1,29 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "tubot-needle",
-	// Needle RPC disabled: "main": "src/worker.ts",
+	"name": "needle",
 	"main": "src/index.ts",
 	"compatibility_date": "2026-09-21",
-	"assets": {
-		"directory": "./public"
-	},
-	"kv_namespaces": [
+	"rules": [
 		{
-			"binding": "DETERMINISTIC_CACHE",
-			"id": "tubot-needle-cache"
+			"type": "CompiledWasm",
+			"globs": ["**/*.wasm"],
+			"fallthrough": true
 		}
 	],
+	"assets": {
+		"directory": "./weights",
+		"binding": "ASSETS"
+	},
 	"vars": {
-		"NEEDLE_LAYERS": "16",
-		"MAX_PRUNED_TOOLS": "5",
-		"WEIGHTS_URL": "/weights/needle3-16l.cact"
+		"NEEDLE_LAYERS": "20",
+		"WEIGHTS_CHUNKS": "/needle3-20l-handoff.cact.aa,/needle3-20l-handoff.cact.ab,/needle3-20l-handoff.cact.ac",
+		"BACKBLAZE_BUCKET_NAME": "example-encrypted",
+		"B2_WEIGHTS_PREFIX": "needle"
 	},
 	"observability": {
-		"enabled": true
+		"enabled": true,
+		"logs": { "enabled": false, "invocation_logs": false },
+		"traces": { "enabled": false }
 	},
 	"upload_source_maps": true
 }

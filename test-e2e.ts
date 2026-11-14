@@ -1,31 +1,42 @@
 import worker from "./src/index";
+import fs from "node:fs";
+import path from "node:path";
+import crypto from "node:crypto";
+
+const EXPECTED_WEIGHTS_SHA256 = "18b13c30905b925392fd83c7774c4013344f42d6ca113cfd2bf9dc4996a212db";
+
+function resolveRepoFile(basename: string): string {
+  const candidates = [
+    path.resolve(process.cwd(), "weights", basename),
+    path.resolve(process.cwd(), "tubot-needle", "weights", basename),
+  ];
+  for (const cand of candidates) {
+    if (fs.existsSync(cand)) return cand;
+  }
+  throw new Error(`Missing weights file: ${basename}`);
+}
 
 async function main() {
-  console.log("=== TuBot-Needle End-to-End Verification ===");
-  
+  console.log("=== TuBot-Needle End-to-End Verification (chunked weights, OpenAI-only) ===");
+
   const mockEnv: any = {
-    NEEDLE_LAYERS: "16",
-    MAX_PRUNED_TOOLS: "5",
-    WEIGHTS_URL: "/weights/needle3-16l.cact",
+    NEEDLE_LAYERS: "20",
+    WEIGHTS_CHUNKS: "/needle3-20l-handoff.cact.aa,/needle3-20l-handoff.cact.ab,/needle3-20l-handoff.cact.ac",
   };
-  
-  const mockCtx: any = {
-    waitUntil: (promise: Promise<any>) => {
-      promise.catch((err) => console.error("ctx.waitUntil error:", err));
+
+  const mockCtx = {} as any; // worker.fetch ignores ctx
+
+  // ASSETS-style fetcher serving real chunk bytes from disk (stands in for the platform pipeline).
+  const assetsEnv: any = {
+    ...mockEnv,
+    ASSETS: {
+      fetch: async (req: Request) => {
+        const basename = new URL(req.url).pathname.split("/").pop() as string;
+        return new Response(fs.readFileSync(resolveRepoFile(basename)), { headers: { "Content-Type": "application/octet-stream" } });
+      },
     },
   };
 
-  // Test 1: Health check
-  console.log("\n[Test 1] GET /health");
-  const resHealth = await worker.fetch(new Request("http://localhost:8787/health"), mockEnv, mockCtx);
-  const healthJson = await resHealth.json();
-  console.log("Health Status:", resHealth.status, healthJson);
-  if (healthJson.model !== "Needle 3 16L" || healthJson.layer_count !== 16 || healthJson.simd !== 128) {
-    throw new Error("Invalid health check response");
-  }
-
-  // Test 2: Tool Pruning & Schema Minification
-  console.log("\n[Test 2] POST /v1/tools/prune");
   const tools = [
     {
       type: "function",
@@ -33,15 +44,12 @@ async function main() {
         name: "get_weather",
         description: "Get the current weather for a given city location",
         parameters: {
-          $schema: "http://json-schema.org/draft-07/schema#",
-          title: "GetWeatherParameters",
           type: "object",
           properties: {
-            city: { type: "string", description: "The name of the city, e.g. San Francisco or Tokyo" },
-            units: { type: "string", default: "celsius", description: "Units of temperature measurement" }
+            city: { type: "string" },
+            units: { type: "string" }
           },
-          required: ["city"],
-          additionalProperties: false
+          required: ["city"]
         }
       }
     },
@@ -65,132 +73,135 @@ async function main() {
     }
   ];
 
-  const resPrune = await worker.fetch(
-    new Request("http://localhost:8787/v1/tools/prune", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query: "What is the temperature in Tokyo right now?", tools, max_tools: 1 })
-    }),
-    mockEnv,
-    mockCtx
-  );
-  const pruneJson = await resPrune.json();
-  console.log("Prune Result:", pruneJson);
-  if (pruneJson.selectedTools.length !== 1 || pruneJson.selectedTools[0].name !== "get_weather") {
-    throw new Error("Tool pruning failed to prioritize get_weather");
-  }
-
-  // Test 3: OpenAI-compatible Chat Completion (Inference turn 1)
-  console.log("\n[Test 3] POST /v1/chat/completions (Deterministic Cache MISS)");
-  const chatPayload = {
-    messages: [
-      { role: "user", content: "What is the weather in Tokyo?" }
-    ],
+  const chatPayload = (content: string, temperature = 0.0) => ({
+    messages: [{ role: "user", content }],
     tools,
-    temperature: 0.0
-  };
-
-  const t0 = performance.now();
-  const resChat1 = await worker.fetch(
-    new Request("http://localhost:8787/v1/chat/completions", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(chatPayload)
-    }),
-    mockEnv,
-    mockCtx
-  );
-  const latency1 = performance.now() - t0;
-  const chatJson1 = await resChat1.json();
-  console.log(`Chat Turn 1 Response (${latency1.toFixed(2)}ms):`, JSON.stringify(chatJson1, null, 2));
-  console.log("Headers:", {
-    "X-Needle-Cache": resChat1.headers.get("X-Needle-Cache"),
-    "X-Needle-Layers": resChat1.headers.get("X-Needle-Layers"),
-    "X-Needle-SIMD": resChat1.headers.get("X-Needle-SIMD"),
-    "X-Prefill-Tokens-Saved": resChat1.headers.get("X-Prefill-Tokens-Saved"),
+    temperature,
   });
-  if (resChat1.headers.get("X-Needle-Cache") !== "MISS") {
-    throw new Error("Expected cache MISS on first turn");
+
+  async function callWorker(env: any, pathname: string, method = "GET", body?: unknown): Promise<{ res: Response; json: any }> {
+    const res = await worker.fetch(
+      new Request(`http://localhost:8787${pathname}`, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: body === undefined ? undefined : JSON.stringify(body),
+      }),
+      env,
+      mockCtx
+    );
+    return { res, json: ((await res.json().catch(() => null)) as any) };
   }
-  const toolCall1 = chatJson1.choices[0]?.message?.tool_calls?.[0];
-  if (!toolCall1 || toolCall1.function.name !== "get_weather") {
+
+  const postChat = (env: any, payload: unknown) => callWorker(env, "/v1/chat/completions", "POST", payload);
+
+  const firstCall = (json: any) => json.choices?.[0]?.message?.tool_calls?.[0];
+  const callName = (json: any) => firstCall(json)?.function?.name;
+
+  // Test 1: Health check
+  console.log("\n[Test 1] GET /health");
+  const { res: resHealth, json: healthJson } = await callWorker(mockEnv, "/health");
+  console.log("Health Status:", resHealth.status, healthJson);
+  if (healthJson.model !== "Needle 3 20L" || healthJson.layer_count !== 20 || healthJson.simd !== 128) {
+    throw new Error("Invalid health check response");
+  }
+  if (healthJson.b2_fallback !== false) {
+    throw new Error("Health must report b2_fallback=false without B2 secrets configured");
+  }
+
+  // Test 2: Chunk files on disk reassemble to the exact original weights
+  console.log("\n[Test 2] Chunk integrity (sha256 of concatenated chunks)");
+  const chunkPaths = mockEnv.WEIGHTS_CHUNKS.split(",").map((p: string) => resolveRepoFile(path.basename(p)));
+  const chunkSizes = chunkPaths.map((p: string) => fs.statSync(p).size);
+  console.log("Chunk sizes:", chunkSizes);
+  for (const size of chunkSizes) {
+    if (size > 25 * 1024 * 1024) {
+      throw new Error(`Chunk exceeds 25 MiB static asset limit: ${size} bytes`);
+    }
+  }
+  const hash = crypto.createHash("sha256");
+  for (const p of chunkPaths) hash.update(fs.readFileSync(p));
+  const digest = hash.digest("hex");
+  console.log("Reassembled sha256:", digest);
+  if (digest !== EXPECTED_WEIGHTS_SHA256) {
+    throw new Error("Chunk files do not reassemble to the original weights");
+  }
+
+  // Test 3: Loader failure modes, before the first successful load.
+  console.log("\n[Test 3] Loader failure modes (no source, then bogus B2 creds)");
+  const failPayload = chatPayload("What is the weather in Tokyo?");
+  const noSource = await postChat(mockEnv, failPayload);
+  console.log("No-source status:", noSource.res.status, "error:", noSource.json.error);
+  if (noSource.res.status !== 500 || !/static assets/i.test(noSource.json.error || "")) {
+    throw new Error("Expected 500 naming static assets when no weights source exists");
+  }
+  const bogus = await postChat({ ...mockEnv, BACKBLAZE_KEY_ID: "bogus", BACKBLAZE_APPLICATION_KEY: "bogus", BACKBLAZE_BUCKET_NAME: "bogus" }, failPayload);
+  console.log("Bogus-B2 status:", bogus.res.status, "error:", String(bogus.json.error).slice(0, 100));
+  if (bogus.res.status !== 500 || !/B2 authorize failed \(401\)/.test(bogus.json.error || "")) {
+    throw new Error("Expected 500 surfacing the real B2 401 for bogus credentials");
+  }
+
+  // Test 4: First successful load, through the ASSETS chunk branch.
+  console.log("\n[Test 4] POST /v1/chat/completions via ASSETS chunks");
+  const t0 = performance.now();
+  const turn1 = await postChat(assetsEnv, chatPayload("What is the weather in Tokyo?"));
+  console.log(`Chat Turn 1 (${(performance.now() - t0).toFixed(2)}ms):`, turn1.res.status, "selected:", callName(turn1.json));
+  for (const h of ["X-Needle-Cache", "X-Prefill-Tokens-Saved", "X-Needle-Runtime"]) {
+    if (turn1.res.headers.get(h) !== null) {
+      throw new Error(`${h} header must be gone: its system was removed`);
+    }
+  }
+  if (callName(turn1.json) !== "get_weather") {
     throw new Error("Expected get_weather tool call in response");
   }
 
-  // Test 4: Deterministic Edge Cache Instant Return (Inference turn 2)
-  console.log("\n[Test 4] POST /v1/chat/completions (Deterministic Cache HIT)");
-  const t1 = performance.now();
-  const resChat2 = await worker.fetch(
-    new Request("http://localhost:8787/v1/chat/completions", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(chatPayload)
-    }),
-    mockEnv,
-    mockCtx
-  );
-  const latency2 = performance.now() - t1;
-  const chatJson2 = await resChat2.json();
-  console.log(`Chat Turn 2 Instant Return (${latency2.toFixed(2)}ms):`);
-  console.log("X-Needle-Cache:", resChat2.headers.get("X-Needle-Cache"));
-  console.log("Latency header:", resChat2.headers.get("X-Needle-Latency-Ms"));
-  if (resChat2.headers.get("X-Needle-Cache") !== "HIT") {
-    throw new Error("Expected cache HIT on repeated turn");
+  // Test 5: Repeat identical request re-runs inference (no HIT possible)
+  console.log("\n[Test 5] POST /v1/chat/completions (repeat: still 200, still no cache headers)");
+  const turn2 = await postChat(assetsEnv, chatPayload("What is the weather in Tokyo?"));
+  console.log("Repeat status:", turn2.res.status, "X-Needle-Cache:", turn2.res.headers.get("X-Needle-Cache"));
+  if (turn2.res.status !== 200) {
+    throw new Error(`Expected 200 on repeated turn, got ${turn2.res.status}`);
   }
-  if (latency2 > 50) {
-    console.warn("Latency was higher than expected for edge cache hit:", latency2);
+  if (turn2.res.headers.get("X-Needle-Cache") !== null) {
+    throw new Error("Repeat must not return X-Needle-Cache: KV cache was removed");
+  }
+  if (callName(turn2.json) !== "get_weather") {
+    throw new Error("Expected get_weather tool call on repeated turn");
   }
 
-  // Test 5: Direct Needle Completion with different tool (Verifying KV Cache was reset cleanly)
-  console.log("\n[Test 5] POST /v1/tools/complete (Direct Needle endpoint with clean KV cache)");
-  const directPayload = {
-    input: "Turn on the lights in the living room",
-    tools,
-    temperature: 0.0
-  };
-  const resDirect = await worker.fetch(
-    new Request("http://localhost:8787/v1/tools/complete", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(directPayload)
-    }),
-    mockEnv,
-    mockCtx
-  );
-  const directJson = await resDirect.json();
-  const directCalls = directJson.needle_output?.function_calls || directJson.function_calls;
-  if (!directCalls || directCalls[0]?.name !== "control_smart_home") {
-    throw new Error("Expected control_smart_home tool call; check KV cache reset isolation");
+  // Test 6: Chat completion with different tool (WASM state reset isolation)
+  console.log("\n[Test 6] POST /v1/chat/completions (different tool, clean WASM state)");
+  const direct = await postChat(assetsEnv, chatPayload("Turn on the lights in the living room"));
+  if (callName(direct.json) !== "control_smart_home") {
+    throw new Error("Expected control_smart_home tool call; check WASM cache reset isolation");
   }
 
-  // Test 6: Async Mutex Serialization (3 parallel concurrent requests)
-  console.log("\n[Test 6] Concurrent request handling with Async Mutex");
+  // Test 7: Async Mutex Serialization (3 parallel concurrent requests)
+  console.log("\n[Test 7] Concurrent request handling with Async Mutex");
   const queries = [
     "What is the weather in Paris?",
     "Book a flight to London",
     "Turn off bedroom lights"
   ];
-  const promises = queries.map((q) =>
-    worker.fetch(
-      new Request("http://localhost:8787/v1/tools/complete", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ input: q, tools, temperature: 0.5 })
-      }),
-      mockEnv,
-      mockCtx
-    )
+  const expected = ["get_weather", "book_flight", "control_smart_home"];
+  const results = await Promise.all(
+    queries.map((q) => postChat(assetsEnv, chatPayload(q, 0.5)))
   );
-  const results = await Promise.all(promises);
   for (let i = 0; i < results.length; i++) {
-    const res = results[i];
-    const data = await res.json();
-    const calls = data.function_calls || data.needle_output?.function_calls;
-    console.log(`Concurrent request ${i + 1} status:`, res.status, "selected:", calls?.[0]?.name);
+    const { res, json } = results[i];
+    console.log(`Concurrent request ${i + 1} status:`, res.status, "selected:", callName(json));
     if (res.status !== 200) throw new Error(`Concurrent request ${i + 1} failed`);
+    if (callName(json) !== expected[i]) throw new Error(`Expected ${expected[i]}, got ${callName(json)}`);
   }
 
-  console.log("\n✅ ALL 6 END-TO-END VERIFICATION TESTS PASSED SUCCESSFULLY!");
+  // Test 8: Token-budget truncation surfaces as 500, never as fake content
+  console.log("\n[Test 8] Truncated inference -> 500 with engine error");
+  const trunc = await postChat(assetsEnv, { ...chatPayload("What is the weather in Tokyo?"), max_tokens: 8 });
+  console.log("Truncate status:", trunc.res.status, "error:", trunc.json.error);
+  if (trunc.res.status !== 500 || !/truncated/i.test(trunc.json.error || "")) {
+    throw new Error("Expected 500 naming truncation for exhausted token budget");
+  }
+
+  console.log("\n✅ ALL 8 END-TO-END VERIFICATION TESTS PASSED SUCCESSFULLY!");
 }
 
 main().catch((err) => {
