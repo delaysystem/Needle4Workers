@@ -6,7 +6,7 @@
 		"deploy": "wrangler deploy",
 		"dev": "wrangler dev",
 		"start": "wrangler dev",
-		"test": "bun test-e2e.ts",
+		"test": "bun test test/ && bun test-e2e.ts",
 		"cf-typegen": "wrangler types"
 	},
 	"devDependencies": {

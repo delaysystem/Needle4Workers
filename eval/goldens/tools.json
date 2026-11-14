@@ -1,0 +1,22 @@
+[
+  {
+    "name": "request_human_handoff",
+    "description": "Hand the conversation to a human support agent. Use when the user asks for a person, an agent, support staff, or a manager, says the bot is not helping, or is frustrated and wants escalation. Words for this in the supported languages: human, person, agent, representative, Mensch, Mitarbeiter, humain, personne, agent, humano, persona, agente, umano, persona, agente, mens, medewerker, czlowiek, konsultant, agent.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "enum": ["billing", "technical", "account", "complaint"],
+          "description": "Why the user wants a human: billing for charges and invoices, technical for broken products and errors, account for login and profile problems, complaint for formal complaints. Omit when the request states no reason."
+        },
+        "details": {
+          "type": "string",
+          "description": "Verbatim issue description copied from the request, at most one short sentence.",
+          "maxLength": 200
+        }
+      },
+      "required": []
+    }
+  }
+]

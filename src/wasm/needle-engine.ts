@@ -1,5 +1,24 @@
+// Pre-compiled via CompiledWasm in prod (instantiate-only); a file path in bun dev.
 // @ts-ignore
-import createNeedle from "./needle.js";
+import needleWasmModule from "./needle.wasm";
+
+// Workerd exposes process.versions.node, which makes the Emscripten glue take
+// its Node branch (require/node:fs/__dirname) and crash. The glue detects the
+// environment once at module evaluation, so this must run before needle.js is
+// first imported.
+function hideNodeFromEmscripten(): void {
+  const proc = (globalThis as any).process;
+  if (!proc?.versions || typeof proc.versions !== "object" || !("node" in proc.versions)) {
+    return;
+  }
+  try {
+    const versions = { ...(proc.versions as Record<string, string>) };
+    delete versions.node;
+    Object.defineProperty(proc, "versions", { value: versions, configurable: true, writable: true });
+  } catch {
+    // versions is immutable; the glue keeps its (broken here) Node branch.
+  }
+}
 
 export interface NeedleFunctionCall {
   name: string;
@@ -10,130 +29,52 @@ export interface NeedleCompletionResult {
   type: string;
   success: boolean;
   function_calls: NeedleFunctionCall[];
-  reasoning: string;
+  reasoning: string | null;
   confidence: number;
   prefill_tps: number;
   decode_tps: number;
   raw_output: string;
   error?: string | null;
-  error_code?: string | null;
-  reason?: string | null;
-  suppressed_calls?: any[];
-  peak_ram_mb?: number;
-  validation?: {
-    ungrounded?: any[];
-    negation?: boolean;
-    [key: string]: any;
-  };
   [key: string]: any;
-}
-
-export interface NeedleEngineOptions {
-  wasmBinary?: ArrayBuffer | Uint8Array;
-  wasmModule?: any;
 }
 
 export class NeedleEngine {
   private mod: any = null;
   private loaded: boolean = false;
-  private weightsPtr: number | null = null;
   private encoder: TextEncoder = new TextEncoder();
   private decoder: TextDecoder = new TextDecoder();
-  private initPromise: Promise<void> | null = null;
 
-  constructor(optionsOrBinaryOrModule?: ArrayBuffer | Uint8Array | NeedleEngineOptions | any) {
-    if (optionsOrBinaryOrModule) {
-      if (typeof optionsOrBinaryOrModule._malloc === "function") {
-        this.mod = optionsOrBinaryOrModule;
-      } else if (
-        optionsOrBinaryOrModule instanceof Uint8Array ||
-        optionsOrBinaryOrModule instanceof ArrayBuffer
-      ) {
-        this.initPromise = this.initWasm(optionsOrBinaryOrModule).then(() => {});
-      } else if (typeof optionsOrBinaryOrModule === "object") {
-        if (optionsOrBinaryOrModule.wasmModule && typeof optionsOrBinaryOrModule.wasmModule._malloc === "function") {
-          this.mod = optionsOrBinaryOrModule.wasmModule;
-        } else if (optionsOrBinaryOrModule.wasmBinary) {
-          this.initPromise = this.initWasm(optionsOrBinaryOrModule.wasmBinary).then(() => {});
-        }
-      }
-    }
-  }
-
-  /**
-   * Static factory to instantiate NeedleEngine asynchronously.
-   */
-  static async create(
-    wasmBinaryOrOptions?: ArrayBuffer | Uint8Array | NeedleEngineOptions
-  ): Promise<NeedleEngine> {
-    const engine = new NeedleEngine();
-    await engine.initWasm(wasmBinaryOrOptions);
-    return engine;
-  }
-
-  /**
-   * Initialize WASM module using needle.js factory.
-   */
-  async initWasm(
-    wasmBinaryOrOptions?: ArrayBuffer | Uint8Array | NeedleEngineOptions
-  ): Promise<this> {
+  /** Initialize the WASM module using the needle.js factory. */
+  async initWasm(): Promise<this> {
     if (this.mod) {
       return this;
     }
 
-    let wasmBinary: ArrayBuffer | Uint8Array | undefined;
-    if (
-      wasmBinaryOrOptions instanceof Uint8Array ||
-      wasmBinaryOrOptions instanceof ArrayBuffer
-    ) {
-      wasmBinary = wasmBinaryOrOptions;
-    } else if (wasmBinaryOrOptions && typeof wasmBinaryOrOptions === "object") {
-      if (wasmBinaryOrOptions.wasmModule) {
-        this.mod = wasmBinaryOrOptions.wasmModule;
-        return this;
-      }
-      wasmBinary = wasmBinaryOrOptions.wasmBinary;
-    }
-
-    const factory =
-      typeof createNeedle === "function"
-        ? createNeedle
-        : (createNeedle as any)?.default;
-
+    hideNodeFromEmscripten();
+    // @ts-ignore
+    const needleModule = await import("./needle.js");
+    const factory = typeof needleModule === "function" ? needleModule : (needleModule as any)?.default;
     if (!factory) {
       throw new Error("Unable to locate createNeedle factory from needle.js");
     }
 
     const moduleArg: Record<string, any> = {};
-    if (wasmBinary) {
-      moduleArg.wasmBinary = wasmBinary;
+    if (needleWasmModule instanceof WebAssembly.Module) {
+      const compiled = needleWasmModule as WebAssembly.Module;
+      moduleArg.instantiateWasm = (imports: WebAssembly.Imports) => new WebAssembly.Instance(compiled, imports);
+    } else if (typeof needleWasmModule === "string") {
+      // Bun/dev: the import is the file path; runtime compile is allowed here.
+      const fs = await import("node:fs");
+      moduleArg.wasmBinary = new Uint8Array(fs.readFileSync(needleWasmModule));
+    } else {
+      throw new Error("Needle WASM import is neither a pre-compiled Module nor a file path");
     }
 
     this.mod = await factory(moduleArg);
     return this;
   }
 
-  /**
-   * Linear memory buffer HEAPU8 view.
-   * Accesses the active buffer dynamically in case memory was resized.
-   */
-  get HEAPU8(): Uint8Array {
-    if (!this.mod) {
-      throw new Error("Needle WASM module is not initialized");
-    }
-    return this.mod.HEAPU8;
-  }
-
-  /**
-   * Low-level Emscripten Module instance.
-   */
-  get module(): any {
-    return this.mod;
-  }
-
-  /**
-   * Writes a null-terminated UTF-8 string to the WASM heap.
-   */
+  /** Writes a null-terminated UTF-8 string to the WASM heap. */
   private writeCString(str: string): number {
     const bytes = this.encoder.encode(str + "\0");
     const ptr = this.mod._malloc(bytes.length);
@@ -144,9 +85,7 @@ export class NeedleEngine {
     return ptr;
   }
 
-  /**
-   * Reads a null-terminated UTF-8 string from the WASM heap.
-   */
+  /** Reads a null-terminated UTF-8 string from the WASM heap. */
   private readCString(ptr: number, maxBytes: number = 4096): string {
     const heap = this.mod.HEAPU8 as Uint8Array;
     let end = ptr;
@@ -157,33 +96,23 @@ export class NeedleEngine {
     return this.decoder.decode(heap.subarray(ptr, end));
   }
 
-  /**
-   * Allocates memory with _malloc, copies weights, and calls _needle_load(ptr, BigInt(bytes.length)).
-   * Returns 0 on success.
-   */
-  loadWeights(bytes: Uint8Array | ArrayBuffer): number {
+  /** Copies weights into the heap and calls _needle_load. Single-load only. Returns 0 on success. */
+  loadWeights(bytes: Uint8Array): number {
     if (!this.mod) {
-      throw new Error("Needle WASM module is not initialized. Await initWasm() or use NeedleEngine.create().");
+      throw new Error("Needle WASM module is not initialized. Await initWasm().");
     }
-    const u8 = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
-    const size = u8.byteLength;
-    const ptr = this.mod._malloc(size);
+    if (this.loaded) {
+      throw new Error("Weights already loaded.");
+    }
+    const ptr = this.mod._malloc(bytes.byteLength);
     if (!ptr) {
-      throw new Error(`Failed to allocate ${size} bytes for weights in WASM heap`);
+      throw new Error(`Failed to allocate ${bytes.byteLength} bytes for weights in WASM heap`);
     }
 
-    this.mod.HEAPU8.set(u8, ptr);
-    const ret = this.mod._needle_load(ptr, BigInt(size));
+    this.mod.HEAPU8.set(bytes, ptr);
+    const ret = this.mod._needle_load(ptr, BigInt(bytes.byteLength));
 
     if (ret === 0) {
-      if (this.weightsPtr !== null && this.weightsPtr !== ptr) {
-        try {
-          this.mod._free(this.weightsPtr);
-        } catch {
-          // Ignore free errors on older buffers
-        }
-      }
-      this.weightsPtr = ptr;
       this.loaded = true;
     } else {
       this.mod._free(ptr);
@@ -193,36 +122,26 @@ export class NeedleEngine {
     return ret;
   }
 
-  /**
-   * Writes null-terminated systemPrompt and toolsJson to heap with _malloc,
-   * calls _needle_init(sysPtr, toolsPtr, 0).
-   * Returns tokenized prefix length. Frees input strings with _free.
-   */
+  /** Initializes a turn with the system prompt and tools JSON. Returns tokenized prefix length. */
   init(systemPrompt: string, toolsJson: string): number {
     if (!this.mod) {
-      throw new Error("Needle WASM module is not initialized. Await initWasm() or use NeedleEngine.create().");
+      throw new Error("Needle WASM module is not initialized. Await initWasm().");
     }
     const sysPtr = this.writeCString(systemPrompt);
     const toolsPtr = this.writeCString(toolsJson);
 
     try {
-      const prefixLen = this.mod._needle_init(sysPtr, toolsPtr, 0);
-      return prefixLen;
+      return this.mod._needle_init(sysPtr, toolsPtr, 0);
     } finally {
       this.mod._free(sysPtr);
       this.mod._free(toolsPtr);
     }
   }
 
-  /**
-   * Writes input to heap, allocates out buffer, calls _needle_complete(inputPtr, maxTokens, outPtr, outCapacity).
-   * Decodes output string via TextDecoder. Frees inputPtr and outPtr.
-   * Calls reset() after completion to reset the KV cache ring and prevent context leakage.
-   * Returns parsed result object: { type, success, function_calls, reasoning, confidence, prefill_tps, decode_tps, raw_output }.
-   */
+  /** Runs one completion, resets the KV cache ring, and returns the parsed result. */
   complete(input: string, maxTokens: number = 128): NeedleCompletionResult {
     if (!this.mod) {
-      throw new Error("Needle WASM module is not initialized. Await initWasm() or use NeedleEngine.create().");
+      throw new Error("Needle WASM module is not initialized. Await initWasm().");
     }
     const outCapacity = 4096;
     const outPtr = this.mod._malloc(outCapacity);
@@ -246,13 +165,13 @@ export class NeedleEngine {
     try {
       const parsed = JSON.parse(outStr);
       return {
-        type: parsed.type ?? "call",
-        success: parsed.success ?? true,
-        function_calls: parsed.function_calls ?? [],
-        reasoning: parsed.reasoning ?? "",
-        confidence: typeof parsed.confidence === "number" ? parsed.confidence : 1.0,
-        prefill_tps: typeof parsed.prefill_tps === "number" ? parsed.prefill_tps : 0,
-        decode_tps: typeof parsed.decode_tps === "number" ? parsed.decode_tps : 0,
+        type: "call",
+        success: true,
+        function_calls: [],
+        reasoning: "",
+        confidence: 1,
+        prefill_tps: 0,
+        decode_tps: 0,
         ...parsed,
         raw_output: outStr,
       };
@@ -271,48 +190,14 @@ export class NeedleEngine {
     }
   }
 
-  /**
-   * Calls _needle_reset(). MUST be called after every completion to reset the KV cache ring
-   * and prevent context leakage.
-   */
+  /** Resets the KV cache ring. MUST run after every completion to prevent context leakage. */
   reset(): void {
     if (this.mod && typeof this.mod._needle_reset === "function") {
       this.mod._needle_reset();
     }
   }
 
-  /**
-   * Optional vector embedding call if supported.
-   * Allocates buffer, calls _needle_embed, and returns Float32Array embedding or null.
-   */
-  embed(text: string): Float32Array | null {
-    if (!this.mod || typeof this.mod._needle_embed !== "function") {
-      return null;
-    }
-    const textPtr = this.writeCString(text);
-    const outCapacity = 16384; // 4096 float32s
-    const outPtr = this.mod._malloc(outCapacity);
-    if (!outPtr) {
-      this.mod._free(textPtr);
-      return null;
-    }
-
-    try {
-      const bytesWritten = this.mod._needle_embed(textPtr, outPtr, outCapacity);
-      if (bytesWritten > 0) {
-        const floatCount = bytesWritten / 4;
-        return new Float32Array(this.mod.HEAPU8.buffer, outPtr, floatCount).slice();
-      }
-      return null;
-    } finally {
-      this.mod._free(textPtr);
-      this.mod._free(outPtr);
-    }
-  }
-
-  /**
-   * Boolean indicating if weights are loaded.
-   */
+  /** Boolean indicating if weights are loaded. */
   isLoaded(): boolean {
     return this.loaded;
   }
