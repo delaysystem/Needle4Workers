@@ -28,7 +28,7 @@ describe("validateChatBody", () => {
     expect(validateChatBody({ ...msg("hi"), tools: HANDOFF })).toEqual({
       query: "hi",
       tools: HANDOFF,
-      maxTokens: 48,
+      maxTokens: 128,
     });
   });
   test("uses the latest user message and caps max_tokens", () => {
@@ -112,10 +112,52 @@ describe("isTransientInferenceError", () => {
 describe("EngineHealth", () => {
   test("trips at the threshold, resets on success", () => {
     const health = new EngineHealth(2);
+    expect(health.isHealthy()).toBe(true);
     expect(health.noteThrown()).toBe(false);
     expect(health.noteThrown()).toBe(true);
+    expect(health.isHealthy()).toBe(false);
     health.noteSuccess();
     expect(health.consecutiveThrown).toBe(0);
-    expect(health.noteThrown()).toBe(false);
+    expect(health.isHealthy()).toBe(true);
+  });
+});
+
+describe("isSaturated", () => {
+  test("either counter at the cap trips", async () => {
+    const { isSaturated } = await import("../src/lib/guardrails");
+    expect(isSaturated(0, 0)).toBe(false);
+    expect(isSaturated(7, 0)).toBe(false);
+    expect(isSaturated(8, 0)).toBe(true);
+    expect(isSaturated(0, 8)).toBe(true);
+    expect(isSaturated(3, 12)).toBe(true);
+  });
+});
+
+describe("validateToolCalls types and required", () => {
+  const typed = [
+    {
+      name: "book",
+      parameters: {
+        type: "object",
+        properties: {
+          city: { type: "string" },
+          seats: { type: "integer" },
+          price: { type: "number" },
+          round: { type: "boolean" },
+        },
+        required: ["city"],
+      },
+    },
+  ];
+  test("accepts matching types, rejects mismatches and missing required", () => {
+    expect(validateToolCalls(
+      [{ name: "book", arguments: { city: "Oslo", seats: 2, price: 9.5, round: true } }],
+      typed)).toEqual([]);
+    expect(validateToolCalls([{ name: "book", arguments: { city: "Oslo", seats: 2.5 } }], typed))
+      .toHaveLength(1);
+    expect(validateToolCalls([{ name: "book", arguments: { city: 7 } }], typed))
+      .toHaveLength(1);
+    expect(validateToolCalls([{ name: "book", arguments: { seats: 2 } }], typed))
+      .toEqual(["book: missing required argument city"]);
   });
 });

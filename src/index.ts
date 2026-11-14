@@ -4,12 +4,12 @@ import {
   HttpError,
   IDEMPOTENCY_CAP,
   IdempotencyCache,
-  MAX_QUEUE_LENGTH,
+  isSaturated,
   isTransientInferenceError,
   validateChatBody,
   validateToolCalls,
 } from "./lib/guardrails";
-import { Metrics, logRequest } from "./lib/metrics";
+import { Metrics, estimateTokens, logRequest } from "./lib/metrics";
 import { b2ConfigFromEnv, getOrFetchWeights } from "./lib/weights";
 import { NeedleEngine } from "./wasm/needle-engine";
 
@@ -25,6 +25,31 @@ const metrics = new Metrics();
 function dropEngine(): void {
   engineInstance = null;
   engineInitPromise = null;
+}
+
+/** Test-only: reset engine + health so cold-start tests are order-independent. */
+export function __resetEngineForTests(): void {
+  dropEngine();
+  engineHealth.noteSuccess();
+}
+
+/** Requests currently parked on an in-flight cold engine init. */
+let initWaiters = 0;
+
+/** CORS origin: locked to ALLOWED_ORIGIN when set, else open (demo posture). */
+function corsOrigin(env: Env): string {
+  return (env as any).ALLOWED_ORIGIN || "*";
+}
+
+/** 401 unless AUTH_TOKEN is unset (open dev posture) or the bearer matches. */
+function requireAuth(request: Request, env: Env): Response | null {
+  const token = (env as any).AUTH_TOKEN as string | undefined;
+  if (!token) return null;
+  if (request.headers.get("Authorization") === `Bearer ${token}`) return null;
+  return new Response(JSON.stringify({ error: "Unauthorized" }), {
+    status: 401,
+    headers: { "Content-Type": "application/json" },
+  });
 }
 
 /** Rejects tools payloads big enough to stall prefill (measured: 2KB ≈ 2.7s init). */
@@ -56,14 +81,18 @@ async function initFreshEngine(env: Env, baseUrl: string): Promise<NeedleEngine>
     .filter(Boolean);
   const fresh = new NeedleEngine();
   await fresh.initWasm();
-  fresh.loadWeights(
+  const rc = fresh.loadWeights(
     await getOrFetchWeights({
       chunks,
       baseUrl,
       assetsFetcher: env.ASSETS ?? null,
       b2: b2ConfigFromEnv(env),
+      expectedSha: (env as any).WEIGHTS_SHA ?? null,
     })
   );
+  if (rc !== 0) {
+    throw new Error(`_needle_load failed with code ${rc}: refusing a corrupt engine`);
+  }
   return fresh;
 }
 
@@ -80,9 +109,9 @@ export default {
       return new Response(null, {
         status: 204,
         headers: {
-          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Origin": corsOrigin(env),
           "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-          "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Needle-Layers",
+          "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Needle-Layers, X-Request-Id",
           "Access-Control-Max-Age": "86400",
         },
       });
@@ -107,7 +136,7 @@ export default {
           status: 200,
           headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": corsOrigin(env),
           },
         }
       );
@@ -115,13 +144,38 @@ export default {
 
     // 2. GET /v1/metrics: isolate-local counters and latency quantiles.
     if (request.method === "GET" && url.pathname === "/v1/metrics") {
+      const authed = requireAuth(request, env);
+      if (authed) return authed;
       return new Response(JSON.stringify(metrics.snapshot()), {
         status: 200,
         headers: {
           "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Origin": corsOrigin(env),
         },
       });
+    }
+
+    // 3. GET /ready: readiness for load balancers (liveness stays on /health).
+    if (request.method === "GET" && url.pathname === "/ready") {
+      const loaded = engineInstance ? engineInstance.isLoaded() : false;
+      const healthy = engineHealth.isHealthy();
+      const ready = loaded && healthy;
+      return new Response(
+        JSON.stringify({
+          ready,
+          ...(!ready
+            ? { reason: !loaded ? "engine not loaded" : "engine health tripped",
+                consecutive_thrown: engineHealth.consecutiveThrown }
+            : {}),
+        }),
+        {
+          status: ready ? 200 : 503,
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": corsOrigin(env),
+          },
+        }
+      );
     }
 
     // 3. POST /v1/chat/completions: OpenAI compatible tool calling endpoint.
@@ -136,7 +190,10 @@ export default {
         status: number,
         body: string,
         extra: Record<string, string> = {},
-        outcome: { retried?: boolean; replayed?: boolean; saturated?: boolean } = {}
+        outcome: {
+          retried?: boolean; replayed?: boolean; saturated?: boolean;
+          decodeTps?: number; promptChars?: number; outputChars?: number;
+        } = {}
       ): Response => {
         const latencyMs = Date.now() - t0;
         metrics.record({ status, latencyMs, ...outcome });
@@ -155,6 +212,8 @@ export default {
           },
         });
       };
+      const earlyAuth = requireAuth(request, env);
+      if (earlyAuth) return earlyAuth;
       try {
         const body: any = await request.json().catch(() => ({}));
         const { query, tools, maxTokens } = validateChatBody(body);
@@ -173,17 +232,31 @@ export default {
             return finish(replay.status, replay.body, { "X-Needle-Replayed": "1" }, { replayed: true });
           }
         }
-        if (mutex.queueLength >= MAX_QUEUE_LENGTH) {
+        // The cap also bounds worst-case queue wait (~cap × p95 latency);
+        // a wait timeout that cannot preempt sync WASM would only waste work.
+        // Note: warm inference never yields, so only the init-waiter half
+        // is observable live (cold weight fetch is async); the mutex half
+        // stands ready for streaming/async engines.
+        if (isSaturated(mutex.queueLength, initWaiters)) {
           return finish(
             429,
             JSON.stringify({ error: "Server busy, retry later" }),
-            {},
+            { "Retry-After": "5" },
             { saturated: true }
           );
         }
 
         // Run inside mutex.runExclusive, with one reset-and-retry on thrown errors.
-        const engine = await getOrInitEngine(env, request.url);
+        // Count everyone not yet served by a loaded engine, including the
+        // request that triggers the init (it parks on it too).
+        const needsInit = !engineInstance;
+        if (needsInit) initWaiters++;
+        let engine;
+        try {
+          engine = await getOrInitEngine(env, request.url);
+        } finally {
+          if (needsInit) initWaiters--;
+        }
         let retried = false;
         const runOnce = () =>
           mutex.runExclusive(async () => {
@@ -201,15 +274,22 @@ export default {
         } catch (err) {
           if (!isTransientInferenceError(err)) throw err;
           retried = true;
-          engine.reset();
+          // No reset here: runOnce's finally already reset, and a reset
+          // outside the mutex could wipe KV state another request holds.
           rawResult = await runOnce();
         }
         engineHealth.noteSuccess();
 
+        // Measured compute for this inference (tps from the engine, sizes exact).
+        const compute = {
+          decodeTps: typeof rawResult.decode_tps === "number" ? rawResult.decode_tps : undefined,
+          promptChars: query.length,
+          outputChars: (rawResult.raw_output || "").length,
+        };
         if (rawResult.success === false) {
           const message =
             rawResult.error || (rawResult as any).error_code || "Inference failed";
-          return finish(500, JSON.stringify({ error: message }), {}, { retried });
+          return finish(500, JSON.stringify({ error: message }), {}, { retried, ...compute });
         }
         const callErrors = validateToolCalls(rawResult.function_calls || [], tools);
         if (callErrors.length > 0) {
@@ -217,7 +297,7 @@ export default {
             502,
             JSON.stringify({ error: "Model output failed schema validation", details: callErrors }),
             {},
-            { retried }
+            { retried, ...compute }
           );
         }
 
@@ -251,7 +331,18 @@ export default {
               finish_reason: hasToolCalls ? "tool_calls" : "stop",
             },
           ],
-          usage: { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 },
+          usage: {
+            prompt_tokens: estimateTokens(query.length),
+            completion_tokens: estimateTokens((rawResult.raw_output || "").length),
+            total_tokens: estimateTokens(query.length + (rawResult.raw_output || "").length),
+          },
+          usage_estimated: true,
+          usage_details: {
+            prompt_chars: query.length,
+            completion_chars: (rawResult.raw_output || "").length,
+            prefill_tps: rawResult.prefill_tps ?? 0,
+            decode_tps: rawResult.decode_tps ?? 0,
+          },
         };
 
         const responseBody = JSON.stringify(chatResponse);
@@ -260,12 +351,12 @@ export default {
           200,
           responseBody,
           {
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": corsOrigin(env),
             "X-Needle-Layers": env.NEEDLE_LAYERS || "20",
             "X-Needle-SIMD": "128",
             ...(retried ? { "X-Needle-Retried": "1" } : {}),
           },
-          { retried }
+          { retried, ...compute }
         );
       } catch (err: any) {
         if (err instanceof HttpError) {

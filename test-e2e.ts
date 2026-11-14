@@ -8,7 +8,7 @@ const EXPECTED_WEIGHTS_SHA256 = "18b13c30905b925392fd83c7774c4013344f42d6ca113cf
 function resolveRepoFile(basename: string): string {
   const candidates = [
     path.resolve(process.cwd(), "weights", basename),
-    path.resolve(process.cwd(), "tubot-needle", "weights", basename),
+    path.resolve(process.cwd(), "Needle4Workers", "weights", basename),
   ];
   for (const cand of candidates) {
     if (fs.existsSync(cand)) return cand;

@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import worker from "../src/index";
-import { Metrics, logRequest, percentile } from "../src/lib/metrics";
+import { Metrics, estimateTokens, logRequest, percentile } from "../src/lib/metrics";
 
 describe("percentile", () => {
   test("empty, edges, and interior ranks", () => {
@@ -39,6 +39,25 @@ describe("Metrics", () => {
     const m = new Metrics();
     for (let i = 0; i < 600; i++) m.record({ status: 200, latencyMs: i });
     expect((m.snapshot() as any).latency_ms.count).toBe(512);
+  });
+});
+
+describe("compute accounting", () => {
+  test("tps average, char totals, and labeled token estimates", () => {
+    expect(estimateTokens(0)).toBe(0);
+    expect(estimateTokens(157)).toBe(40);
+    const m = new Metrics();
+    m.record({ status: 200, latencyMs: 10, decodeTps: 20, promptChars: 100, outputChars: 60 });
+    m.record({ status: 200, latencyMs: 20, decodeTps: 30, promptChars: 100, outputChars: 60 });
+    m.record({ status: 400, latencyMs: 1 });
+    const snap: any = m.snapshot();
+    expect(snap.compute.inference_runs).toBe(2);
+    expect(snap.compute.avg_decode_tps).toBe(25);
+    expect(snap.compute.prompt_chars_total).toBe(200);
+    expect(snap.compute.output_chars_total).toBe(120);
+    expect(snap.compute.est_tokens_total).toBe(80);
+    expect(snap.compute.est_tokens_note).toMatch(/estimates/);
+    expect(typeof snap.uptime_s).toBe("number");
   });
 });
 

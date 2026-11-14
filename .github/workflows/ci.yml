@@ -1,0 +1,30 @@
+name: ci
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.4
+      - run: bun install --frozen-lockfile
+      - run: bun run cf-typegen
+      - run: bunx --bun tsc --noEmit
+      - run: bun test test/
+      - run: bun test-e2e.ts
+  # Release gate: full golden eval. Floor is the measured 237/252, not the
+  # 250 campaign target — it fails on regressions, not on round-6's job.
+  # Raise --min-hits when a new weights cut lands a higher verified score.
+  eval-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.4
+      - run: bun install --frozen-lockfile
+      - run: bun eval/run.ts --min-hits 237 --compare eval/report.json --out eval/report.ci.json

@@ -2,3 +2,6 @@ BACKBLAZE_APPLICATION_KEY=
 BACKBLAZE_KEY_ID=
 BACKBLAZE_BUCKET_ID=
 BACKBLAZE_ENDPOINT=s3.us-west-004.backblazeb2.com
+# Optional hardening (unset = open demo posture):
+# AUTH_TOKEN=dev-secret-here
+# ALLOWED_ORIGIN=https://your.app

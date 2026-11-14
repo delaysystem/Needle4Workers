@@ -19,6 +19,11 @@ export interface ValidChatBody {
 export const MAX_QUERY_CHARS = 4000;
 export const MAX_TOKENS_CAP = 512;
 export const MAX_QUEUE_LENGTH = 8;
+
+/** Saturation predicate: mutex queue or cold-init parkers past the cap. */
+export function isSaturated(queueLength: number, initWaiters: number): boolean {
+  return queueLength >= MAX_QUEUE_LENGTH || initWaiters >= MAX_QUEUE_LENGTH;
+}
 export const IDEMPOTENCY_CAP = 200;
 export const ENGINE_RELOAD_AFTER_THROWN = 3;
 
@@ -59,7 +64,9 @@ export function validateChatBody(body: unknown): ValidChatBody {
     }
   }
   const rawMax = (body as any).max_tokens;
-  let maxTokens = 48;
+  // 128, not 48: a handoff call (200-char details + JSON) needs ~60 tokens;
+  // the old 48 default truncated 43 golden cases (194/252, measured 2026-11-13).
+  let maxTokens = 128;
   if (rawMax !== undefined) {
     if (typeof rawMax !== "number" || !Number.isInteger(rawMax) || rawMax < 1) {
       throw new HttpError(400, "'max_tokens' must be a positive integer");
@@ -89,9 +96,19 @@ function toolSchemas(tools: any[]): Map<string, any> {
 
 function checkValue(schema: any, value: any, path: string, errors: string[]): void {
   if (!schema || typeof schema !== "object") return;
-  if (schema.type === "string" && typeof value !== "string") {
-    errors.push(`${path}: want string, got ${typeof value}`);
-    return;
+  if (typeof schema.type === "string") {
+    const want = schema.type;
+    const ok =
+      (want === "string" && typeof value === "string") ||
+      (want === "number" && typeof value === "number") ||
+      (want === "boolean" && typeof value === "boolean") ||
+      (want === "integer" && typeof value === "number" && Number.isInteger(value)) ||
+      (want === "array" && Array.isArray(value)) ||
+      (want === "object" && typeof value === "object" && value !== null && !Array.isArray(value));
+    if (!ok) {
+      errors.push(`${path}: want ${want}, got ${Array.isArray(value) ? "array" : typeof value}`);
+      return;
+    }
   }
   if (typeof value === "string" && typeof schema.maxLength === "number" &&
       value.length > schema.maxLength) {
@@ -121,9 +138,15 @@ export function validateToolCalls(calls: any[], tools: any[]): string[] {
       errors.push(`${call.name}: arguments must be an object`);
       continue;
     }
-    const props = schemas.get(call.name)?.properties ?? {};
+    const schema = schemas.get(call.name) ?? {};
+    const props = schema.properties ?? {};
     for (const [key, value] of Object.entries(args)) {
       checkValue(props[key], value, `${call.name}.${key}`, errors);
+    }
+    for (const required of schema.required ?? []) {
+      if (!(required in args)) {
+        errors.push(`${call.name}: missing required argument ${required}`);
+      }
     }
   }
   return errors;
@@ -169,5 +192,8 @@ export class EngineHealth {
   }
   get consecutiveThrown(): number {
     return this.thrown;
+  }
+  isHealthy(): boolean {
+    return this.thrown < this.threshold;
   }
 }

@@ -41,6 +41,34 @@ and both engines are self-consistent run to run. Always compare
 worker-report to worker-report; the `--compare` gate enforces the shared
 golden, and reports record the engine for provenance.
 
+## Operational numbers (measured 2026-11-13, in-process bun)
+
+Single request (representative handoff query, 128 max tokens):
+
+- p50 latency 2.0s, p95 2.4s; engine decode ~39 tok/s
+- ~135 estimated tokens per execution (chars/4; exact counts in
+  `usage_details`, estimates flagged `usage_estimated`)
+
+Throughput (`eval/bench.json`, mutex-serialized engine, one isolate):
+
+- ceiling ~0.48 req/s regardless of concurrency; extra concurrency only
+  queues (c=4 p95 9.1s, c=8 p95 17.6s)
+- scale by isolates: sustained R req/s needs ~R/0.48 warm isolates
+
+Cost per execution (single-threaded WASM, so CPU ms ≈ wall ms):
+
+- meters per request: 1 request + ~2050 CPU-ms + ~135 est tokens
+- cost/req = R_req + R_cpu_ms × 2050, with R_* from the Cloudflare plan
+  dashboard (deliberately no rates quoted here; they change)
+
+Uptime: `/health` plus `started_at`/`uptime_s` in `/v1/metrics` are the
+probing surface; true availability % needs an external prober hitting
+`/health` (not shipped here — one cron line wherever you monitor).
+
+Serving default: `max_tokens` defaults to 128. The old 48 truncated
+43/252 golden tool calls (194/252 at 48 vs 237 at 128); a handoff call
+with 200-char details plus JSON needs ~60 tokens.
+
 ## Metrics vs eval
 
 `GET /v1/metrics` and the `needle.request` log lines cover live traffic per

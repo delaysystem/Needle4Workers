@@ -165,3 +165,7 @@ dist
 .env*
 !.env.example
 .wrangler/
+
+# Generated eval outputs (baseline report.json + goldens stay committed)
+/eval/report.ci.json
+/eval/report.prev*.json

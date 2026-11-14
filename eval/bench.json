@@ -1,0 +1,52 @@
+{
+  "query_chars": 77,
+  "max_tokens": 128,
+  "environment": {
+    "runtime": "bun 1.4.4",
+    "platform": "linux x64",
+    "cpus": 4,
+    "note": "in-process numbers, not edge-isolate numbers"
+  },
+  "levels": [
+    {
+      "concurrency": 1,
+      "requests": 32,
+      "errors": 0,
+      "wall_s": 66.9,
+      "rps": 0.48,
+      "p50_ms": 2046,
+      "p95_ms": 2423,
+      "max_ms": 2455,
+      "avg_decode_tps": 38.9,
+      "avg_out_chars": 461,
+      "avg_est_tokens": 135
+    },
+    {
+      "concurrency": 4,
+      "requests": 32,
+      "errors": 0,
+      "wall_s": 66.6,
+      "rps": 0.48,
+      "p50_ms": 8098,
+      "p95_ms": 9107,
+      "max_ms": 10535,
+      "avg_decode_tps": 39,
+      "avg_out_chars": 461,
+      "avg_est_tokens": 135
+    },
+    {
+      "concurrency": 8,
+      "requests": 32,
+      "errors": 0,
+      "wall_s": 67.7,
+      "rps": 0.47,
+      "p50_ms": 14467,
+      "p95_ms": 17621,
+      "max_ms": 19578,
+      "avg_decode_tps": 38.7,
+      "avg_out_chars": 461,
+      "avg_est_tokens": 135
+    }
+  ],
+  "createdAt": "2026-11-14T02:57:01.517Z"
+}
