@@ -27,6 +27,47 @@ export function isSaturated(queueLength: number, initWaiters: number): boolean {
 export const IDEMPOTENCY_CAP = 200;
 export const ENGINE_RELOAD_AFTER_THROWN = 3;
 
+/** Canonical tools key for mutex affinity scheduling: object keys sorted so
+ *  formatting/ordering differences map to one class (the engine normalizes
+ *  further, so a key miss only ever costs an optimization, never correctness).
+ *  Array order is significant — tool order is part of the engine prefix. */
+export function stableToolsKey(tools: unknown): string {
+  return JSON.stringify(stabilize(tools));
+}
+
+function stabilize(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(stabilize);
+  if (value !== null && typeof value === "object") {
+    const out: Record<string, unknown> = {};
+    for (const k of Object.keys(value).sort()) {
+      out[k] = stabilize((value as Record<string, unknown>)[k]);
+    }
+    return out;
+  }
+  return value;
+}
+
+/** Deep-copy of tools with every `required` key removed.
+ *
+ * The Needle engine's call validator suppresses ALL tool calls when the
+ * tools it was initialized with contain a non-empty `required` key
+ * (measured: v7b scored 64/252 with it, 224 without). The model was
+ * trained to always emit the reason anyway, so strip before init and
+ * keep validating outputs against the caller's raw schema.
+ */
+export function stripRequiredKeys(value: unknown): unknown {
+  if (Array.isArray(value)) return value.map(stripRequiredKeys);
+  if (value !== null && typeof value === "object") {
+    const out: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(value)) {
+      if (k === "required") continue;
+      out[k] = stripRequiredKeys(v);
+    }
+    return out;
+  }
+  return value;
+}
+
 export function validateChatBody(body: unknown): ValidChatBody {
   if (typeof body !== "object" || body === null || Array.isArray(body)) {
     throw new HttpError(400, "Request body must be a JSON object");

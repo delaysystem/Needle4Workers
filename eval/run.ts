@@ -5,6 +5,7 @@
  *
  * Usage: bun eval/run.ts [--goldens DIR] [--min-hits N] [--compare R.json]
  *   [--out R.json] [--limit N] [--max-tokens N] [--chunks a,b,c]
+ *   [--tools-file F.json] [--layers N]
  */
 import worker from "../src/index";
 import { createHash } from "node:crypto";
@@ -50,9 +51,9 @@ function loadGoldens(dir: string): { rows: any[]; tools: any[]; meta: Map<string
   return { rows, tools, meta, manifest };
 }
 
-function harnessEnv(weightsDir: string, chunks: string): any {
+function harnessEnv(weightsDir: string, chunks: string, layers: string): any {
   return {
-    NEEDLE_LAYERS: "20",
+    NEEDLE_LAYERS: layers,
     WEIGHTS_CHUNKS: chunks.split(",").map((c) => "/" + c).join(","),
     ASSETS: {
       fetch: async (req: Request) => {
@@ -85,9 +86,15 @@ async function main(): Promise<number> {
   const maxTokens = parseInt(arg("--max-tokens", "128"), 10);
   const weightsDir = path.resolve(root, arg("--weights-dir", "weights"));
   const chunks = arg("--chunks", DEFAULT_CHUNKS);
+  const layers = arg("--layers", "20");
 
-  const { rows, tools, meta, manifest } = loadGoldens(goldensDir);
-  const env = harnessEnv(weightsDir, chunks);
+  const { rows, tools: goldenTools, meta, manifest } = loadGoldens(goldensDir);
+  const env = harnessEnv(weightsDir, chunks, layers);
+  const toolsFile = arg("--tools-file", "");
+  const tools = toolsFile
+    ? JSON.parse(fs.readFileSync(path.resolve(root, toolsFile), "utf-8"))
+    : goldenTools;
+  if (toolsFile) console.log(`tools override: ${toolsFile} (${JSON.stringify(tools).length} chars)`);
   const ctx = {} as any;
   const selected = limit > 0 ? rows.slice(0, limit) : rows;
   console.log(`golden v${manifest.version} (${manifest.eval_sha256.slice(0, 12)}), ${selected.length}/${rows.length} cases, min-hits ${minHits}`);
@@ -100,6 +107,8 @@ async function main(): Promise<number> {
     let actual: any[] = [];
     let status = 0;
     let error: string | null = null;
+    let fastpath = false;
+    let completionChars = 0;
     try {
       const res = await worker.fetch(
         new Request("http://localhost:8787/v1/chat/completions", {
@@ -115,7 +124,9 @@ async function main(): Promise<number> {
         ctx
       );
       status = res.status;
+      fastpath = res.headers.get("X-Needle-Fastpath") === "1";
       const payload: any = await res.json().catch(() => ({}));
+      completionChars = payload?.usage_details?.completion_chars ?? 0;
       if (status === 200) {
         const calls = payload?.choices?.[0]?.message?.tool_calls ?? [];
         actual = calls.map((c: any) => ({
@@ -142,6 +153,8 @@ async function main(): Promise<number> {
       error,
       latencyMs,
       timedOut: latencyMs > CASE_TIMEOUT_S * 1000,
+      fastpath,
+      completionChars,
     });
     if ((i + 1) % 25 === 0 || i + 1 === selected.length) {
       const soFar = cases.filter((c) => c.hit).length;
@@ -152,7 +165,7 @@ async function main(): Promise<number> {
   const summary = summarize(cases);
   const failures = summarizeFailures(cases.filter((c) => !c.hit));
   const report = {
-    model: "needle-3-20l",
+    model: `needle-3-${layers}l`,
     engine: "wasm-simd128",
     weightsSha: weightsSha(weightsDir, chunks),
     goldenSha: manifest.eval_sha256,
@@ -165,7 +178,8 @@ async function main(): Promise<number> {
   };
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   fs.writeFileSync(outPath, JSON.stringify(report, null, 2));
-  console.log(`hits ${summary.hits}/${summary.total} (routing ${summary.routingHits}), wrote ${outPath}`);
+  const fastpathHits = cases.filter((c) => c.fastpath).length;
+  console.log(`hits ${summary.hits}/${summary.total} (routing ${summary.routingHits}, fastpath ${fastpathHits}), wrote ${outPath}`);
   if (failures.misses > 0) {
     console.log(`failures: ${JSON.stringify(failures.tags)}`);
   }

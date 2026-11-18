@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 
-const EXPECTED_WEIGHTS_SHA256 = "18b13c30905b925392fd83c7774c4013344f42d6ca113cfd2bf9dc4996a212db";
+const EXPECTED_WEIGHTS_SHA256 = "eb33420b643d9eae311dd712504ef448735bcf08a9cca3fa11494dd3da170de7";
 
 function resolveRepoFile(basename: string): string {
   const candidates = [

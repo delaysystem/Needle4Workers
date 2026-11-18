@@ -1,3 +1,5 @@
+import { createHash } from "node:crypto";
+
 export interface B2WeightsConfig {
   keyId: string;
   applicationKey: string;
@@ -22,22 +24,29 @@ export interface WeightsLoadOptions {
   expectedSha?: string | null;
 }
 
+/**
+ * Sink the engine exposes for a chunked weights load (implemented by
+ * NeedleEngine). Chunks stream straight into one heap allocation: at no
+ * point do JS-side copies of the full archive exist, which is what keeps
+ * a 63MB load inside the 128MB edge-isolate budget.
+ */
+export interface EngineWeightsSink {
+  /** malloc(totalLength) heap bytes for the reassembled archive. */
+  allocWeights(totalLength: number): number;
+  /** Copy one chunk into the allocation at the byte offset. */
+  writeWeightsChunk(ptr: number, offset: number, chunk: Uint8Array): void;
+  /**
+   * Run _needle_load over the filled allocation. Frees ptr unless rc is 0
+   * (on success the engine owns the input buffer in place). Returns rc.
+   */
+  finishWeightsLoad(ptr: number, totalLength: number): number;
+  /** Free a ptr whose load was abandoned before finish (fetch/sha failure). */
+  discardWeights(ptr: number): void;
+}
+
 /** Per-fetch timeouts: authorize is small, chunks are tens of MB. */
 export const AUTHORIZE_TIMEOUT_MS = 30_000;
 export const CHUNK_TIMEOUT_MS = 120_000;
-
-/** Module-scope bytes cache: EngineHealth rebuilds must not re-download 63MB. */
-let bytesCache: { key: string; bytes: Uint8Array } | null = null;
-
-/** Test seam: drop the cached bytes. */
-export function clearWeightsCache(): void {
-  bytesCache = null;
-}
-
-async function sha256Hex(bytes: Uint8Array): Promise<string> {
-  const digest = await crypto.subtle.digest("SHA-256", bytes as BufferSource);
-  return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("");
-}
 
 function withTimeout<T>(promise: Promise<T>, ms: number, what: string): Promise<T> {
   let timer: ReturnType<typeof setTimeout> | undefined;
@@ -66,18 +75,21 @@ function concatParts(parts: Uint8Array[]): Uint8Array {
   return out;
 }
 
-async function readOkResponses(
-  responses: Response[],
-  describe: (i: number) => string
-): Promise<Uint8Array> {
-  for (let i = 0; i < responses.length; i++) {
-    if (!responses[i].ok) {
-      const body = await responses[i].text().catch(() => "");
-      throw new Error(`${describe(i)} (${responses[i].status}): ${body}`);
-    }
+function assertShaHex(actual: string, expected?: string | null): void {
+  if (!expected) return;
+  if (actual !== expected.toLowerCase()) {
+    throw new Error(
+      `Weights sha256 mismatch: want ${expected.slice(0, 16)}…, got ${actual.slice(0, 16)}… — refusing to load`
+    );
   }
-  const buffers = await Promise.all(responses.map((r) => r.arrayBuffer()));
-  return concatParts(buffers.map((b) => new Uint8Array(b)));
+}
+
+/** Parsed Content-Length, or null when the server did not send a usable one. */
+function responseLength(res: Response): number | null {
+  const raw = res.headers.get("content-length");
+  if (raw === null) return null;
+  const n = Number(raw);
+  return Number.isInteger(n) && n >= 0 ? n : null;
 }
 
 async function b2Authorize(
@@ -101,17 +113,71 @@ async function b2Authorize(
 }
 
 /**
+ * Fill the engine's heap allocation from fetched chunk responses: lengths
+ * come from headers (no bodies held), then each body streams through the
+ * running sha into its heap slot and is released. Peak JS-side cost is one
+ * chunk, not the archive. Servers without Content-Length fall back to the
+ * old accumulate-then-write path.
+ */
+async function fillFromResponses(
+  engine: EngineWeightsSink,
+  responses: Response[],
+  expectedSha: string | null | undefined,
+  describe: (i: number) => string
+): Promise<number> {
+  for (let i = 0; i < responses.length; i++) {
+    if (!responses[i].ok) {
+      const body = await responses[i].text().catch(() => "");
+      throw new Error(`${describe(i)} (${responses[i].status}): ${body}`);
+    }
+  }
+  const lengths = responses.map(responseLength);
+  if (lengths.every((l): l is number => l !== null)) {
+    const total = lengths.reduce((n, l) => n + l, 0);
+    const ptr = engine.allocWeights(total);
+    try {
+      const hash = createHash("sha256");
+      let offset = 0;
+      for (const res of responses) {
+        const chunk = new Uint8Array(await res.arrayBuffer());
+        hash.update(chunk);
+        engine.writeWeightsChunk(ptr, offset, chunk);
+        offset += chunk.byteLength;
+      }
+      assertShaHex(hash.digest("hex"), expectedSha);
+      return engine.finishWeightsLoad(ptr, total);
+    } catch (err) {
+      engine.discardWeights(ptr);
+      throw err;
+    }
+  }
+  const parts: Uint8Array[] = [];
+  for (const res of responses) parts.push(new Uint8Array(await res.arrayBuffer()));
+  const bytes = concatParts(parts);
+  assertShaHex(createHash("sha256").update(bytes).digest("hex"), expectedSha);
+  const ptr = engine.allocWeights(bytes.byteLength);
+  try {
+    engine.writeWeightsChunk(ptr, 0, bytes);
+    return engine.finishWeightsLoad(ptr, bytes.byteLength);
+  } catch (err) {
+    engine.discardWeights(ptr);
+    throw err;
+  }
+}
+
+/**
  * Loads model weights from chunked static assets, falling back to the same
  * chunk files in B2 when assets fail and B2 is configured. No other source.
+ * Bytes stream into the engine (see EngineWeightsSink); nothing is cached
+ * in JS — a rebuild re-fetches, which the edge serves from its own cache.
  */
-export async function getOrFetchWeights(
+export async function loadWeightsIntoEngine(
+  engine: EngineWeightsSink,
   opts: WeightsLoadOptions
-): Promise<Uint8Array> {
+): Promise<number> {
   if (opts.chunks.length === 0) {
     throw new Error("No weights chunks configured (WEIGHTS_CHUNKS is empty)");
   }
-  const cacheKey = opts.chunks.join(",");
-  if (bytesCache && bytesCache.key === cacheKey) return bytesCache.bytes;
 
   let assetsError: unknown = null;
   if (opts.assetsFetcher && typeof opts.assetsFetcher.fetch === "function") {
@@ -125,10 +191,9 @@ export async function getOrFetchWeights(
         CHUNK_TIMEOUT_MS,
         "Static asset chunk fetch"
       );
-      return await verified(
-        await readOkResponses(responses, (i) => `Static asset missing: ${opts.chunks[i]}`),
-        cacheKey,
-        opts.expectedSha
+      return await fillFromResponses(
+        engine, responses, opts.expectedSha,
+        (i) => `Static asset missing: ${opts.chunks[i]}`
       );
     } catch (err) {
       assetsError = err;
@@ -157,30 +222,13 @@ export async function getOrFetchWeights(
       "B2 chunk fetch"
     );
     // Basename only: full download URLs (bucket + signed host) must not echo to callers.
-    return await verified(
-      await readOkResponses(responses, (i) => `B2 chunk fetch failed: ${opts.chunks[i].split("/").pop()}`),
-      cacheKey,
-      opts.expectedSha
+    return await fillFromResponses(
+      engine, responses, opts.expectedSha,
+      (i) => `B2 chunk fetch failed: ${opts.chunks[i].split("/").pop()}`
     );
   }
 
   throw assetsError instanceof Error
     ? assetsError
     : new Error("Weights unavailable: static assets failed and B2 fallback is not configured");
-}
-
-/** Sha-verify reassembled bytes, then cache them under the chunk key. */
-async function verified(
-  bytes: Uint8Array, cacheKey: string, expectedSha?: string | null
-): Promise<Uint8Array> {
-  if (expectedSha) {
-    const actual = await sha256Hex(bytes);
-    if (actual !== expectedSha.toLowerCase()) {
-      throw new Error(
-        `Weights sha256 mismatch: want ${expectedSha.slice(0, 16)}…, got ${actual.slice(0, 16)}… — refusing to load`
-      );
-    }
-  }
-  bytesCache = { key: cacheKey, bytes };
-  return bytes;
 }

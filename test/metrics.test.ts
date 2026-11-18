@@ -22,18 +22,20 @@ describe("Metrics", () => {
     m.record({ status: 502, latencyMs: 5 });
     m.record({ status: 500, latencyMs: 5 });
     m.record({ status: 200, latencyMs: 0, replayed: true });
+    m.record({ status: 200, latencyMs: 2, fastpath: true });
     const snap: any = m.snapshot();
-    expect(snap.requests).toBe(7);
-    expect(snap.ok).toBe(3);
+    expect(snap.requests).toBe(8);
+    expect(snap.ok).toBe(4);
     expect(snap.client_error).toBe(1);
     expect(snap.saturated).toBe(1);
     expect(snap.bad_gateway).toBe(1);
     expect(snap.server_error).toBe(1);
     expect(snap.retried).toBe(1);
     expect(snap.replayed).toBe(1);
+    expect(snap.fastpath).toBe(1);
     expect(snap.scope).toBe("isolate");
-    expect(snap.latency_ms.count).toBe(7);
-    expect(snap.latency_ms.p50).toBe(5);
+    expect(snap.latency_ms.count).toBe(8);
+    expect(snap.latency_ms.p50).toBe(2);
   });
   test("latency ring caps memory", () => {
     const m = new Metrics();

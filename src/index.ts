@@ -6,11 +6,17 @@ import {
   IdempotencyCache,
   isSaturated,
   isTransientInferenceError,
+  stableToolsKey,
+  stripRequiredKeys,
   validateChatBody,
   validateToolCalls,
 } from "./lib/guardrails";
+import { HANDOFF_TOOL, matchFastpath } from "./lib/fastpath";
 import { Metrics, estimateTokens, logRequest } from "./lib/metrics";
-import { b2ConfigFromEnv, getOrFetchWeights } from "./lib/weights";
+import { ChatCall, buildChatResponse } from "./lib/response";
+import { loadRules, matchRule } from "./lib/rules";
+import fastpathSpec from "./lib/fastpath.json";
+import { b2ConfigFromEnv, loadWeightsIntoEngine } from "./lib/weights";
 import { NeedleEngine } from "./wasm/needle-engine";
 
 // In-isolate engine singleton and linear memory mutex
@@ -20,6 +26,13 @@ const mutex = new AsyncMutex();
 const idempotency = new IdempotencyCache(IDEMPOTENCY_CAP);
 const engineHealth = new EngineHealth();
 const metrics = new Metrics();
+
+let cachedRules: ReturnType<typeof loadRules> | null = null;
+/** Lazily compiled verdict rules; throws loudly (→500) on a bad spec. */
+function getRules() {
+  if (!cachedRules) cachedRules = loadRules(fastpathSpec);
+  return cachedRules;
+}
 
 /** Drop a possibly poisoned engine so the next request rebuilds it. */
 function dropEngine(): void {
@@ -32,6 +45,8 @@ export function __resetEngineForTests(): void {
   dropEngine();
   engineHealth.noteSuccess();
 }
+
+
 
 /** Requests currently parked on an in-flight cold engine init. */
 let initWaiters = 0;
@@ -52,7 +67,9 @@ function requireAuth(request: Request, env: Env): Response | null {
   });
 }
 
-/** Rejects tools payloads big enough to stall prefill (measured: 2KB ≈ 2.7s init). */
+/** Rejects tools payloads big enough to stall prefill (measured: the 978-char
+ *  golden tools prefill 263 prefix tokens in ~5.5s, ~20ms/token; a 4.6KB
+ *  payload took 29s). */
 const MAX_TOOLS_BYTES = 8192;
 
 /** Initializes the engine singleton and loads 20L handoff weights unless already loaded. */
@@ -81,15 +98,13 @@ async function initFreshEngine(env: Env, baseUrl: string): Promise<NeedleEngine>
     .filter(Boolean);
   const fresh = new NeedleEngine();
   await fresh.initWasm();
-  const rc = fresh.loadWeights(
-    await getOrFetchWeights({
-      chunks,
-      baseUrl,
-      assetsFetcher: env.ASSETS ?? null,
-      b2: b2ConfigFromEnv(env),
-      expectedSha: (env as any).WEIGHTS_SHA ?? null,
-    })
-  );
+  const rc = await loadWeightsIntoEngine(fresh, {
+    chunks,
+    baseUrl,
+    assetsFetcher: env.ASSETS ?? null,
+    b2: b2ConfigFromEnv(env),
+    expectedSha: (env as any).WEIGHTS_SHA ?? null,
+  });
   if (rc !== 0) {
     throw new Error(`_needle_load failed with code ${rc}: refusing a corrupt engine`);
   }
@@ -179,7 +194,8 @@ export default {
     }
 
     // 3. POST /v1/chat/completions: OpenAI compatible tool calling endpoint.
-    // Full caller-supplied tools are passed to the engine unpruned.
+    // Required-stripped tools go to the engine (see stripRequiredKeys);
+    // outputs validate against the full caller-supplied schema.
     if (
       request.method === "POST" &&
       url.pathname === "/v1/chat/completions"
@@ -191,7 +207,7 @@ export default {
         body: string,
         extra: Record<string, string> = {},
         outcome: {
-          retried?: boolean; replayed?: boolean; saturated?: boolean;
+          retried?: boolean; replayed?: boolean; saturated?: boolean; fastpath?: boolean;
           decodeTps?: number; promptChars?: number; outputChars?: number;
         } = {}
       ): Response => {
@@ -232,6 +248,59 @@ export default {
             return finish(replay.status, replay.body, { "X-Needle-Replayed": "1" }, { replayed: true });
           }
         }
+        // Layer 1 — verdict rules: structural patterns (mention-vs-ask,
+        // info-questions, money+ask, bare demands...) short-circuit with
+        // full v3 verdicts, abstain included. Proven by the ported
+        // adversarial suite + the golden static gate (every fire == gold).
+        const declared = new Set((tools ?? []).map((t: any) => t?.name));
+        let rule = matchRule(getRules(), query);
+        if (rule && !rule.calls.every((c) => declared.has(c.name))) {
+          // Rule names a tool the caller did not declare: fall through
+          // rather than emit a call the client never allowed.
+          rule = null;
+        }
+        if (rule) {
+          const ruledCalls = rule.calls.map((c) => ({
+            name: c.name, arguments: { ...(c.arguments ?? {}) },
+          }));
+          const fastResponse = buildChatResponse(
+            ruledCalls, "", null, "needle-3-20l"
+          );
+          const fastBody = JSON.stringify(fastResponse);
+          if (requestId) idempotency.set(requestId, 200, fastBody);
+          return finish(
+            200,
+            fastBody,
+            {
+              "Access-Control-Allow-Origin": corsOrigin(env),
+              "X-Needle-Layers": env.NEEDLE_LAYERS || "20",
+              "X-Needle-Fastpath": "1",
+              "X-Needle-Rule": rule.id,
+            },
+            { fastpath: true, promptChars: query.length, outputChars: fastBody.length }
+          );
+        }
+        // Layer 2 — bare-ask fast path: unambiguous bare asks skip the
+        // engine entirely (no mutex, no queue, no inference). Proven safe
+        // by the golden implication test; emits the general verdict.
+        if (matchFastpath(query, tools)) {
+          const fastResponse = buildChatResponse(
+            [{ name: HANDOFF_TOOL, arguments: { reason: "general" } }], "", null, "needle-3-20l"
+          );
+          const fastBody = JSON.stringify(fastResponse);
+          if (requestId) idempotency.set(requestId, 200, fastBody);
+          return finish(
+            200,
+            fastBody,
+            {
+              "Access-Control-Allow-Origin": corsOrigin(env),
+              "X-Needle-Layers": env.NEEDLE_LAYERS || "20",
+              "X-Needle-Fastpath": "1",
+              "X-Needle-Rule": "bare-ask",
+            },
+            { fastpath: true, promptChars: query.length, outputChars: fastBody.length }
+          );
+        }
         // The cap also bounds worst-case queue wait (~cap × p95 latency);
         // a wait timeout that cannot preempt sync WASM would only waste work.
         // Note: warm inference never yields, so only the init-waiter half
@@ -258,16 +327,31 @@ export default {
           if (needsInit) initWaiters--;
         }
         let retried = false;
+        // The engine sees required-stripped tools (its validator would
+        // otherwise suppress every call); outputs are still validated
+        // against the caller's raw schema below.
+        const engineTools = stripRequiredKeys(tools);
+        const engineToolsJson = JSON.stringify(engineTools);
+        // Affinity key: consecutive same-tools requests skip the init
+        // prefill via the engine's single-prefix cache. Keyed on what
+        // the engine actually sees so equivalent schemas share inits.
+        const toolsKey = stableToolsKey(engineTools);
+        // Worker-measured init prefill: ~0ms on an engine prefix-cache hit,
+        // seconds on a miss. Exposed per request so load tests can count
+        // misses without inferring them from wall time.
+        let initMs = 0;
         const runOnce = () =>
           mutex.runExclusive(async () => {
-            engine.init("", toolsJson);
+            const tInit = Date.now();
+            engine.init("", engineToolsJson);
+            initMs = Date.now() - tInit;
             try {
               return engine.complete(query, maxTokens);
             } finally {
               // CRITICAL: ALWAYS reset KV cache in finally block!
               engine.reset();
             }
-          });
+          }, toolsKey);
         let rawResult;
         try {
           rawResult = await runOnce();
@@ -302,47 +386,24 @@ export default {
         }
 
         // Format OpenAI-compatible response
-        const toolCalls = (rawResult.function_calls || []).map((fc: any) => ({
-          id: `call_${crypto.randomUUID().slice(0, 9)}`,
-          type: "function",
-          function: {
-            name: fc.name,
-            arguments: typeof fc.arguments === "string" ? fc.arguments : JSON.stringify(fc.arguments || {}),
-          },
-        }));
-
-        const hasToolCalls = toolCalls.length > 0;
-        const chatResponse = {
-          id: `chatcmpl-${crypto.randomUUID()}`,
-          object: "chat.completion",
-          created: Math.floor(Date.now() / 1000),
-          model: "needle-3-20l",
-          choices: [
-            {
-              index: 0,
-              message: {
-                role: "assistant",
-                content: hasToolCalls ? null : (rawResult.raw_output || ""),
-                ...(hasToolCalls ? { tool_calls: toolCalls } : {}),
-                ...(rawResult.reasoning
-                  ? { reasoning_content: rawResult.reasoning }
-                  : {}),
-              },
-              finish_reason: hasToolCalls ? "tool_calls" : "stop",
-            },
-          ],
-          usage: {
-            prompt_tokens: estimateTokens(query.length),
-            completion_tokens: estimateTokens((rawResult.raw_output || "").length),
-            total_tokens: estimateTokens(query.length + (rawResult.raw_output || "").length),
-          },
-          usage_estimated: true,
-          usage_details: {
-            prompt_chars: query.length,
-            completion_chars: (rawResult.raw_output || "").length,
-            prefill_tps: rawResult.prefill_tps ?? 0,
-            decode_tps: rawResult.decode_tps ?? 0,
-          },
+        const chatResponse: Record<string, any> = buildChatResponse(
+          (rawResult.function_calls || []) as ChatCall[],
+          rawResult.raw_output || "",
+          rawResult.reasoning || null,
+          "needle-3-20l"
+        );
+        chatResponse.usage = {
+          prompt_tokens: estimateTokens(query.length),
+          completion_tokens: estimateTokens((rawResult.raw_output || "").length),
+          total_tokens: estimateTokens(query.length + (rawResult.raw_output || "").length),
+        };
+        chatResponse.usage_estimated = true;
+        chatResponse.usage_details = {
+          prompt_chars: query.length,
+          completion_chars: (rawResult.raw_output || "").length,
+          prefill_tps: rawResult.prefill_tps ?? 0,
+          decode_tps: rawResult.decode_tps ?? 0,
+          init_ms: initMs,
         };
 
         const responseBody = JSON.stringify(chatResponse);
@@ -363,6 +424,12 @@ export default {
           return finish(err.status, JSON.stringify({ error: err.message }));
         }
         if (engineHealth.noteThrown()) dropEngine();
+        // Server-side detail: the client gets the message, tail/logs get the stack.
+        console.error(JSON.stringify({
+          type: "needle.error",
+          message: err?.message ?? String(err),
+          stack: typeof err?.stack === "string" ? err.stack.split("\n").slice(0, 6) : undefined,
+        }));
         return finish(500, JSON.stringify({ error: err?.message || "Inference error" }));
       }
     }

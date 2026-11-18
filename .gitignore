@@ -169,3 +169,6 @@ dist
 # Generated eval outputs (baseline report.json + goldens stay committed)
 /eval/report.ci.json
 /eval/report.prev*.json
+
+# Local scratch: engine clones, probes, measurements (never commit)
+/.local/

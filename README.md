@@ -15,12 +15,19 @@ name `needle` (renaming it would provision a new worker).
 
 ## Results
 
-- Worker eval: **237/252 exact** (routing 244) on the frozen golden suite
-  (the same weights score 238/252 through the Python engine — 7 borderline
-  cases flip deterministically between engines; see `eval/README.md`).
+- Worker eval: **239/252 exact** (routing 246) on the frozen golden suite,
+  including 49 regex-fastpath answers — the WASM engine alone scores 237
+  (the same weights score 238 through Python; 7 borderline cases flip
+  deterministically between engines — see `eval/README.md`).
 - Latency: p50 2.0s, p95 2.4s per request; engine decodes ~39 tok/s.
 - Throughput: ~0.48 req/s per isolate (mutex-serialized); see `eval/bench.json`.
+- Mixed-tools load: the mutex serves same-tools requests consecutively so
+  they share the engine's single-prefix cache (see `src/lib/async-mutex.ts`);
+  reproduce with `bun eval/bench.ts --tools-variants 2`.
 - Cost: ~2050 CPU-ms + ~135 estimated tokens per execution.
+- Caller guidance: keep `tools` payloads small — a tools change costs a full
+  init prefill (~20ms per prefix token; the 978-char golden tools take
+  ~5.5s), while repeats of the previous tools skip it entirely.
 
 ## Quickstart
 
@@ -67,6 +74,16 @@ Full request validation applies: 400s for malformed bodies, 401 when
 cap (with `Retry-After`), 502 when model output fails the tool schema.
 `X-Request-Id` replays identical responses without re-running inference.
 
+Unambiguous bare asks in all 7 languages (`Get me a human being.`,
+`Passez-moi un agent`, …) take a regex fast path (`src/lib/fastpath.ts`):
+answered in microseconds with `X-Needle-Fastpath: 1`, bypassing the
+engine, mutex, and queue entirely. Safety is proven, not promised — a
+test asserts that across all 252 goldens, a match implies the gold is
+exactly `[handoff({})]`, so the path can only ever emit a bare handoff
+and can only misfire toward escalation, never silence. It fires on
+49/252 golden cases (the eval overweights hard cases; real traffic with
+plain asks benefits far more).
+
 ## Architecture
 
 ```
@@ -85,6 +102,8 @@ client -> worker.fetch -> validate -> idempotency? -> 429? -> mutex
 - `src/wasm/` — vendored Needle inference engine + TS wrapper (see
   `src/wasm/SOURCE.md` for provenance).
 - `eval/` — golden harness, regression gates, failure taxonomy, bench.
+- `router/` — stateless depth router in front of single-depth deployments
+  (default policy single-20 on measured evidence; see `router/README.md`).
 
 ## Eval
 

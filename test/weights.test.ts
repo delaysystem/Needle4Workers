@@ -1,7 +1,5 @@
-import { afterEach, describe, expect, test } from "bun:test";
-import { clearWeightsCache, getOrFetchWeights } from "../src/lib/weights";
-
-afterEach(clearWeightsCache);
+import { describe, expect, test } from "bun:test";
+import { loadWeightsIntoEngine } from "../src/lib/weights";
 
 function fetcher(files: Record<string, Uint8Array>, calls: string[] = []) {
   return {
@@ -10,9 +8,27 @@ function fetcher(files: Record<string, Uint8Array>, calls: string[] = []) {
       calls.push(name);
       const bytes = files[name];
       if (!bytes) return new Response("nope", { status: 404 });
-      return new Response(bytes as any);
+      return new Response(bytes as any, {
+        headers: { "content-length": String(bytes.byteLength) },
+      });
     },
     calls,
+  };
+}
+
+/** No Content-Length: forces the accumulate fallback. */
+function lengthlessFetcher(files: Record<string, Uint8Array>) {
+  return {
+    fetch: async (req: Request) => {
+      const name = new URL(req.url).pathname.split("/").pop() as string;
+      const bytes = files[name];
+      if (!bytes) return new Response("nope", { status: 404 });
+      return {
+        ok: true,
+        headers: { get: (_: string) => null },
+        arrayBuffer: async () => bytes.buffer as ArrayBuffer,
+      } as unknown as Response;
+    },
   };
 }
 
@@ -21,27 +37,69 @@ async function shaOf(s: string): Promise<string> {
   return [...new Uint8Array(d)].map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
-describe("getOrFetchWeights", () => {
-  test("concatenates chunks and verifies sha", async () => {
+function fakeEngine(rc = 0) {
+  const calls: string[] = [];
+  let mem = new Uint8Array(0);
+  return {
+    calls,
+    mem: () => mem,
+    allocWeights(total: number) { calls.push(`alloc:${total}`); mem = new Uint8Array(total); return 1000; },
+    writeWeightsChunk(ptr: number, offset: number, chunk: Uint8Array) {
+      calls.push(`write:${offset}:${chunk.length}`);
+      mem.set(chunk, offset);
+    },
+    finishWeightsLoad(ptr: number, total: number) { calls.push(`finish:${ptr}:${total}`); return rc; },
+    discardWeights(ptr: number) { calls.push(`discard:${ptr}`); },
+  };
+}
+
+describe("loadWeightsIntoEngine", () => {
+  test("streams chunks into one allocation at ascending offsets", async () => {
     const f = fetcher({ "a.aa": new Uint8Array([1, 2]), "a.ab": new Uint8Array([3]) });
-    const bytes = await getOrFetchWeights({
+    const eng = fakeEngine();
+    const rc = await loadWeightsIntoEngine(eng, {
       chunks: ["/a.aa", "/a.ab"], baseUrl: "http://x/",
       assetsFetcher: f, expectedSha: await shaOf("\x01\x02\x03"),
     });
-    expect([...bytes]).toEqual([1, 2, 3]);
+    expect(rc).toBe(0);
+    expect(eng.calls).toEqual(["alloc:3", "write:0:2", "write:2:1", "finish:1000:3"]);
+    expect([...eng.mem()]).toEqual([1, 2, 3]);
   });
-  test("sha mismatch fails loudly", async () => {
+  test("sha mismatch fails loudly and discards the allocation", async () => {
     const f = fetcher({ "a.aa": new Uint8Array([9]) });
-    await expect(getOrFetchWeights({
+    const eng = fakeEngine();
+    await expect(loadWeightsIntoEngine(eng, {
       chunks: ["/a.aa"], baseUrl: "http://x/",
       assetsFetcher: f, expectedSha: "00".repeat(32),
     })).rejects.toThrow(/sha256 mismatch/);
+    expect(eng.calls).toEqual(["alloc:1", "write:0:1", "discard:1000"]);
   });
-  test("second load serves the cache without refetching", async () => {
+  test("missing chunk names the chunk", async () => {
+    const f = fetcher({});
+    const eng = fakeEngine();
+    await expect(loadWeightsIntoEngine(eng, {
+      chunks: ["/gone.aa"], baseUrl: "http://x/", assetsFetcher: f,
+    })).rejects.toThrow(/Static asset missing: \/gone\.aa \(404\)/);
+    expect(eng.calls).toEqual([]);
+  });
+  test("servers without Content-Length fall back to accumulate-then-write", async () => {
+    const f = lengthlessFetcher({ "a.aa": new Uint8Array([4, 5]) });
+    const eng = fakeEngine();
+    const rc = await loadWeightsIntoEngine(eng, {
+      chunks: ["/a.aa"], baseUrl: "http://x/",
+      assetsFetcher: f, expectedSha: await shaOf("\x04\x05"),
+    });
+    expect(rc).toBe(0);
+    expect(eng.calls).toEqual(["alloc:2", "write:0:2", "finish:1000:2"]);
+    expect([...eng.mem()]).toEqual([4, 5]);
+  });
+  test("engine rc passes through (index refuses nonzero)", async () => {
     const f = fetcher({ "a.aa": new Uint8Array([1]) });
-    await getOrFetchWeights({ chunks: ["/a.aa"], baseUrl: "http://x/", assetsFetcher: f });
-    await getOrFetchWeights({ chunks: ["/a.aa"], baseUrl: "http://x/", assetsFetcher: f });
-    expect(f.calls).toEqual(["a.aa"]);
+    const eng = fakeEngine(7);
+    const rc = await loadWeightsIntoEngine(eng, {
+      chunks: ["/a.aa"], baseUrl: "http://x/", assetsFetcher: f,
+    });
+    expect(rc).toBe(7);
   });
   test("B2 errors name the chunk, not the signed URL", async () => {
     const orig = globalThis.fetch;
@@ -55,7 +113,7 @@ describe("getOrFetchWeights", () => {
       return new Response("denied", { status: 403 });
     };
     try {
-      await expect(getOrFetchWeights({
+      await expect(loadWeightsIntoEngine(fakeEngine(), {
         chunks: ["/w.aa"], baseUrl: "http://x/", assetsFetcher: null,
         b2: { keyId: "k", applicationKey: "s", bucketName: "bkt", prefix: "p" },
       })).rejects.toThrow(/B2 chunk fetch failed: w\.aa/);
@@ -73,7 +131,7 @@ describe("getOrFetchWeights", () => {
       return new Response("denied", { status: 403 });
     };
     try {
-      await getOrFetchWeights({
+      await loadWeightsIntoEngine(fakeEngine(), {
         chunks: ["/w.aa"], baseUrl: "http://x/", assetsFetcher: null,
         b2: { keyId: "k", applicationKey: "s", bucketName: "bkt", prefix: "p" },
       });

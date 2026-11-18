@@ -4,7 +4,13 @@
  * weights and the real mutex. Environment is recorded because in-process
  * bun numbers are not edge-isolate numbers.
  *
+ * --tools-variants N cycles N semantically distinct tools payloads
+ * round-robin across requests (adversarial order for the engine's
+ * single-prefix cache: at concurrency 1 every request re-prefills).
+ * The default 1 reproduces the original fixed-tools bench.
+ *
  * Usage: bun eval/bench.ts [--requests N] [--concurrency 1,4,8] [--out FILE]
+ *   [--tools-variants N]
  */
 import worker from "../src/index";
 import fs from "node:fs";
@@ -34,7 +40,7 @@ function harnessEnv(weightsDir: string, chunks: string): any {
 }
 
 async function one(env: any, tools: any[], maxTokens: number): Promise<{
-  ms: number; status: number; decodeTps: number; outChars: number; inChars: number;
+  ms: number; status: number; decodeTps: number; outChars: number; inChars: number; initMs: number;
 }> {
   const t0 = Date.now();
   const res = await worker.fetch(
@@ -58,6 +64,7 @@ async function one(env: any, tools: any[], maxTokens: number): Promise<{
     decodeTps: details.decode_tps ?? 0,
     outChars: details.completion_chars ?? 0,
     inChars: QUERY.length,
+    initMs: details.init_ms ?? 0,
   };
 }
 
@@ -70,10 +77,19 @@ async function main(): Promise<void> {
   const chunks = arg("--chunks", DEFAULT_CHUNKS);
   const maxTokens = parseInt(arg("--max-tokens", "128"), 10);
   const tools = JSON.parse(fs.readFileSync(path.join(root, "eval/goldens/tools.json"), "utf-8"));
+  const variants = parseInt(arg("--tools-variants", "1"), 10);
+  const toolsSets: any[][] = Array.from({ length: Math.max(1, variants) }, (_, i) => {
+    if (i === 0) return tools;
+    // Semantically distinct (description suffix changes prefix tokens),
+    // structurally identical (same schema the worker validates against).
+    const copy = JSON.parse(JSON.stringify(tools));
+    copy[0] = { ...copy[0], description: copy[0].description + ` [caller ${i}]` };
+    return copy;
+  });
   const env = harnessEnv(weightsDir, chunks);
 
-  console.log(`warmup (1 request, discarded)`);
-  await one(env, tools, maxTokens);
+  console.log(`warmup (1 request, discarded), tools variants: ${toolsSets.length}`);
+  await one(env, toolsSets[0], maxTokens);
 
   const rows: any[] = [];
   for (const level of levels) {
@@ -82,12 +98,14 @@ async function main(): Promise<void> {
     let tpsSum = 0;
     let tpsN = 0;
     let outChars = 0;
+    let initMsSum = 0;
+    let slowInits = 0;
     const started = Date.now();
     let next = 0;
     const runners = Array.from({ length: level }, async () => {
       while (next < requests) {
-        next++;
-        const r = await one(env, tools, maxTokens);
+        const idx = next++;
+        const r = await one(env, toolsSets[idx % toolsSets.length], maxTokens);
         latencies.push(r.ms);
         if (r.status !== 200) {
           errors += 1;
@@ -95,6 +113,8 @@ async function main(): Promise<void> {
           tpsSum += r.decodeTps;
           tpsN += 1;
           outChars += r.outChars;
+          initMsSum += r.initMs;
+          if (r.initMs > 1000) slowInits += 1;
         }
       }
     });
@@ -113,17 +133,21 @@ async function main(): Promise<void> {
       avg_decode_tps: tpsN > 0 ? Math.round((tpsSum / tpsN) * 10) / 10 : 0,
       avg_out_chars: tpsN > 0 ? Math.round(outChars / tpsN) : 0,
       avg_est_tokens: tpsN > 0 ? Math.ceil((outChars / tpsN + QUERY.length) / 4) : 0,
+      avg_init_ms: tpsN > 0 ? Math.round(initMsSum / tpsN) : 0,
+      slow_inits: slowInits,
     };
     rows.push(row);
     console.log(
       `c=${level}: ${row.rps} rps, p50 ${row.p50_ms}ms, p95 ${row.p95_ms}ms, ` +
-      `decode ${row.avg_decode_tps} tok/s, ~${row.avg_est_tokens} tok/req, errors ${errors}`
+      `decode ${row.avg_decode_tps} tok/s, ~${row.avg_est_tokens} tok/req, ` +
+      `slow_inits ${slowInits}/${tpsN}, errors ${errors}`
     );
   }
 
   const report = {
     query_chars: QUERY.length,
     max_tokens: maxTokens,
+    tools_variants: toolsSets.length,
     environment: {
       runtime: `bun ${Bun.version}`,
       platform: `${os.platform()} ${os.arch()}`,

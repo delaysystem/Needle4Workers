@@ -3,6 +3,8 @@ import {
   EngineHealth,
   IdempotencyCache,
   isTransientInferenceError,
+  stableToolsKey,
+  stripRequiredKeys,
   validateChatBody,
   validateToolCalls,
 } from "../src/lib/guardrails";
@@ -159,5 +161,43 @@ describe("validateToolCalls types and required", () => {
       .toHaveLength(1);
     expect(validateToolCalls([{ name: "book", arguments: { seats: 2 } }], typed))
       .toEqual(["book: missing required argument city"]);
+  });
+});
+
+describe("stableToolsKey", () => {
+  test("ignores object key order, honors content and array order", () => {
+    const a = [{ name: "t", parameters: { b: 1, a: [1, 2] } }];
+    const b = [{ parameters: { a: [1, 2], b: 1 }, name: "t" }];
+    expect(stableToolsKey(a)).toBe(stableToolsKey(b));
+    expect(stableToolsKey([{ name: "t2" }])).not.toBe(stableToolsKey(a));
+    expect(stableToolsKey([{ name: "t" }, { name: "u" }])).not.toBe(
+      stableToolsKey([{ name: "u" }, { name: "t" }])
+    );
+  });
+});
+
+describe("stripRequiredKeys", () => {
+  test("removes required at every depth, keeps the rest", () => {
+    expect(stripRequiredKeys({
+      type: "object",
+      properties: { reason: { enum: ["a"], required: ["x"] } },
+      required: ["reason"],
+    })).toEqual({
+      type: "object",
+      properties: { reason: { enum: ["a"] } },
+    });
+  });
+
+  test("walks arrays and copies (input untouched)", () => {
+    const input = [{ required: ["a"], keep: 1 }, { nested: [{ required: 1, v: 2 }] }];
+    const out = stripRequiredKeys(input);
+    expect(out).toEqual([{ keep: 1 }, { nested: [{ v: 2 }] }]);
+    expect(input[0]).toHaveProperty("required");
+  });
+
+  test("scalars pass through", () => {
+    expect(stripRequiredKeys(null)).toBeNull();
+    expect(stripRequiredKeys(5)).toBe(5);
+    expect(stripRequiredKeys("s")).toBe("s");
   });
 });

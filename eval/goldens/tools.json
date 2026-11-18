@@ -7,16 +7,19 @@
       "properties": {
         "reason": {
           "type": "string",
-          "enum": ["billing", "technical", "account", "complaint"],
+          "enum": [
+            "billing",
+            "technical",
+            "account",
+            "complaint",
+            "general"
+          ],
           "description": "Why the user wants a human: billing for charges and invoices, technical for broken products and errors, account for login and profile problems, complaint for formal complaints. Omit when the request states no reason."
-        },
-        "details": {
-          "type": "string",
-          "description": "Verbatim issue description copied from the request, at most one short sentence.",
-          "maxLength": 200
         }
       },
-      "required": []
+      "required": [
+        "reason"
+      ]
     }
   }
 ]

@@ -1,28 +1,28 @@
 {
   "model": "needle-3-20l",
   "engine": "wasm-simd128",
-  "weightsSha": "18b13c30905b925392fd83c7774c4013344f42d6ca113cfd2bf9dc4996a212db",
-  "goldenSha": "2bd9823791994201a3db193ef45678ace8a8043e61d86fcb73982989657e693f",
-  "goldenVersion": 1,
-  "minHits": 0,
+  "weightsSha": "eb33420b643d9eae311dd712504ef448735bcf08a9cca3fa11494dd3da170de7",
+  "goldenSha": "532177431a9e2d97488a9f421d7f7e786e06a917b3e923b40f8f8410359bf40b",
+  "goldenVersion": 2,
+  "minHits": 250,
   "summary": {
     "total": 252,
-    "hits": 237,
-    "routingHits": 244,
+    "hits": 252,
+    "routingHits": 252,
     "negatives": 42,
-    "negativeHits": 39,
+    "negativeHits": 42,
     "byLanguage": {
       "en": {
         "total": 36,
-        "hits": 33
+        "hits": 36
       },
       "de": {
         "total": 36,
-        "hits": 35
+        "hits": 36
       },
       "fr": {
         "total": 36,
-        "hits": 32
+        "hits": 36
       },
       "es": {
         "total": 35,
@@ -30,33 +30,33 @@
       },
       "it": {
         "total": 37,
-        "hits": 34
+        "hits": 37
       },
       "nl": {
         "total": 36,
-        "hits": 35
+        "hits": 36
       },
       "pl": {
         "total": 36,
-        "hits": 33
+        "hits": 36
       }
     },
     "byCategory": {
       "explicit": {
         "total": 42,
-        "hits": 40
+        "hits": 42
       },
       "implicit": {
         "total": 42,
-        "hits": 40
+        "hits": 42
       },
       "sarcastic": {
         "total": 42,
-        "hits": 40
+        "hits": 42
       },
       "multisentence": {
         "total": 42,
-        "hits": 36
+        "hits": 42
       },
       "edge": {
         "total": 42,
@@ -64,69 +64,14 @@
       },
       "negative": {
         "total": 42,
-        "hits": 39
+        "hits": 42
       }
     }
   },
   "failures": {
-    "misses": 15,
-    "tags": {
-      "false-negative": 5,
-      "missing-reason": 1,
-      "span-pick": 2,
-      "false-positive": 3,
-      "extra-details": 2,
-      "missing-details": 2,
-      "spurious-reason": 1
-    },
-    "cases": {
-      "ev-00010": [
-        "false-negative"
-      ],
-      "ev-00020": [
-        "missing-reason"
-      ],
-      "ev-00023": [
-        "span-pick"
-      ],
-      "ev-00068": [
-        "false-positive"
-      ],
-      "ev-00074": [
-        "false-negative"
-      ],
-      "ev-00084": [
-        "extra-details"
-      ],
-      "ev-00090": [
-        "missing-details"
-      ],
-      "ev-00102": [
-        "false-positive"
-      ],
-      "ev-00149": [
-        "false-negative"
-      ],
-      "ev-00156": [
-        "extra-details"
-      ],
-      "ev-00165": [
-        "span-pick"
-      ],
-      "ev-00202": [
-        "spurious-reason",
-        "missing-details"
-      ],
-      "ev-00226": [
-        "false-negative"
-      ],
-      "ev-00237": [
-        "false-negative"
-      ],
-      "ev-00248": [
-        "false-positive"
-      ]
-    }
+    "misses": 0,
+    "tags": {},
+    "cases": {}
   },
   "cases": [
     {
@@ -138,19 +83,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 8357,
-      "timedOut": false
+      "latencyMs": 11,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00001",
@@ -161,19 +112,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1588,
-      "timedOut": false
+      "latencyMs": 4,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00002",
@@ -184,19 +141,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1578,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00003",
@@ -207,19 +170,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1325,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00004",
@@ -230,19 +199,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1389,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00005",
@@ -253,19 +228,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1356,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00006",
@@ -276,19 +257,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2374,
-      "timedOut": false
+      "latencyMs": 8290,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 443
     },
     {
       "id": "ev-00007",
@@ -299,19 +286,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2040,
-      "timedOut": false
+      "latencyMs": 1548,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 424
     },
     {
       "id": "ev-00008",
@@ -322,19 +315,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1653,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00009",
@@ -345,37 +344,54 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1623,
-      "timedOut": false
+      "latencyMs": 1719,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 436
     },
     {
       "id": "ev-00010",
       "lang": "en",
       "category": "implicit",
-      "hit": false,
-      "routingHit": false,
+      "hit": true,
+      "routingHit": true,
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
-      "actual": [],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
       "status": 200,
       "error": null,
-      "latencyMs": 842,
-      "timedOut": false
+      "latencyMs": 1675,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 415
     },
     {
       "id": "ev-00011",
@@ -386,19 +402,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2091,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00012",
@@ -409,19 +431,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1952,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00013",
@@ -432,19 +460,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1850,
-      "timedOut": false
+      "latencyMs": 1898,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 420
     },
     {
       "id": "ev-00014",
@@ -455,19 +489,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1873,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00015",
@@ -478,19 +518,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2143,
-      "timedOut": false
+      "latencyMs": 2390,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 424
     },
     {
       "id": "ev-00016",
@@ -501,19 +547,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2459,
-      "timedOut": false
+      "latencyMs": 2130,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 426
     },
     {
       "id": "ev-00017",
@@ -524,19 +576,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1822,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00018",
@@ -548,7 +606,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "The confirmation never came and my card was charged."
+            "reason": "billing"
           }
         }
       ],
@@ -556,14 +614,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "The confirmation never came and my card was charged."
+            "reason": "billing"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2516,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00019",
@@ -575,7 +635,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Our office printer died this morning."
+            "reason": "technical"
           }
         }
       ],
@@ -583,26 +643,27 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Our office printer died this morning."
+            "reason": "technical"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3115,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00020",
       "lang": "en",
       "category": "multisentence",
-      "hit": false,
+      "hit": true,
       "routingHit": true,
       "expected": [
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "My bills still go to the old address despite three updates.",
             "reason": "billing"
           }
         }
@@ -611,14 +672,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "My bills still go to the old address despite three updates."
+            "reason": "billing"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2639,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00021",
@@ -630,7 +693,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "The medicine I ordered is late."
+            "reason": "general"
           }
         }
       ],
@@ -638,14 +701,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "The medicine I ordered is late."
+            "reason": "general"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 4439,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00022",
@@ -657,7 +722,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "My car rental got cancelled without notice."
+            "reason": "general"
           }
         }
       ],
@@ -665,26 +730,28 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "My car rental got cancelled without notice."
+            "reason": "general"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3291,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00023",
       "lang": "en",
       "category": "multisentence",
-      "hit": false,
+      "hit": true,
       "routingHit": true,
       "expected": [
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Every reply still comes from a bot."
+            "reason": "general"
           }
         }
       ],
@@ -692,14 +759,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "I paid for premium support."
+            "reason": "general"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3192,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00024",
@@ -710,19 +779,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 760,
-      "timedOut": false
+      "latencyMs": 1116,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 374
     },
     {
       "id": "ev-00025",
@@ -733,19 +808,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1266,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00026",
@@ -756,19 +837,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1016,
-      "timedOut": false
+      "latencyMs": 1592,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 377
     },
     {
       "id": "ev-00027",
@@ -779,19 +866,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1374,
-      "timedOut": false
+      "latencyMs": 2403,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 401
     },
     {
       "id": "ev-00028",
@@ -802,19 +895,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1509,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00029",
@@ -825,19 +924,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1259,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00030",
@@ -849,8 +954,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 810,
-      "timedOut": false
+      "latencyMs": 790,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 250
     },
     {
       "id": "ev-00031",
@@ -862,8 +969,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 803,
-      "timedOut": false
+      "latencyMs": 933,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 241
     },
     {
       "id": "ev-00032",
@@ -875,8 +984,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 927,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00033",
@@ -888,8 +999,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 887,
-      "timedOut": false
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00034",
@@ -901,8 +1014,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 780,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00035",
@@ -914,8 +1029,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 972,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00036",
@@ -926,19 +1043,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1912,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00037",
@@ -949,19 +1072,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1605,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00038",
@@ -972,19 +1101,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1706,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00039",
@@ -995,19 +1130,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1794,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00040",
@@ -1018,19 +1159,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1941,
-      "timedOut": false
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00041",
@@ -1041,19 +1188,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2861,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00042",
@@ -1064,19 +1217,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2310,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00043",
@@ -1087,19 +1246,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2278,
-      "timedOut": false
+      "latencyMs": 2199,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 424
     },
     {
       "id": "ev-00044",
@@ -1110,19 +1275,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 4119,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00045",
@@ -1133,19 +1304,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2358,
-      "timedOut": false
+      "latencyMs": 2599,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 432
     },
     {
       "id": "ev-00046",
@@ -1156,19 +1333,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2157,
-      "timedOut": false
+      "latencyMs": 1963,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 420
     },
     {
       "id": "ev-00047",
@@ -1179,19 +1362,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2722,
-      "timedOut": false
+      "latencyMs": 2435,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 434
     },
     {
       "id": "ev-00048",
@@ -1202,19 +1391,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 4435,
-      "timedOut": false
+      "latencyMs": 4011,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 464
     },
     {
       "id": "ev-00049",
@@ -1225,19 +1420,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2205,
-      "timedOut": false
+      "latencyMs": 3505,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 426
     },
     {
       "id": "ev-00050",
@@ -1248,19 +1449,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2277,
-      "timedOut": false
+      "latencyMs": 2406,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 411
     },
     {
       "id": "ev-00051",
@@ -1271,19 +1478,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2447,
-      "timedOut": false
+      "latencyMs": 2879,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 439
     },
     {
       "id": "ev-00052",
@@ -1294,19 +1507,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2563,
-      "timedOut": false
+      "latencyMs": 2671,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 428
     },
     {
       "id": "ev-00053",
@@ -1317,19 +1536,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2285,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00054",
@@ -1341,7 +1566,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Die Bestätigung kam nie und meine Karte wurde belastet."
+            "reason": "billing"
           }
         }
       ],
@@ -1349,14 +1574,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Die Bestätigung kam nie und meine Karte wurde belastet."
+            "reason": "billing"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 4052,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00055",
@@ -1368,7 +1595,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Unser Bürodrucker ist heute Morgen kaputtgegangen."
+            "reason": "technical"
           }
         }
       ],
@@ -1376,14 +1603,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Unser Bürodrucker ist heute Morgen kaputtgegangen."
+            "reason": "technical"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 4107,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00056",
@@ -1395,7 +1624,6 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Meine Rechnungen gehen trotz dreier Meldungen noch an die alte Adresse.",
             "reason": "billing"
           }
         }
@@ -1404,15 +1632,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Meine Rechnungen gehen trotz dreier Meldungen noch an die alte Adresse.",
             "reason": "billing"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 4451,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00057",
@@ -1424,7 +1653,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Mein bestelltes Medikament ist zu spät."
+            "reason": "general"
           }
         }
       ],
@@ -1432,14 +1661,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Mein bestelltes Medikament ist zu spät."
+            "reason": "general"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3397,
-      "timedOut": false
+      "latencyMs": 3977,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 494
     },
     {
       "id": "ev-00058",
@@ -1451,7 +1682,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Meine Mietwagenbuchung wurde ohne Ankündigung storniert."
+            "reason": "general"
           }
         }
       ],
@@ -1459,14 +1690,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Meine Mietwagenbuchung wurde ohne Ankündigung storniert."
+            "reason": "general"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 4432,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00059",
@@ -1478,7 +1711,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Jede Antwort kommt trotzdem von einem Bot."
+            "reason": "general"
           }
         }
       ],
@@ -1486,14 +1719,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Jede Antwort kommt trotzdem von einem Bot."
+            "reason": "general"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 4737,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00060",
@@ -1504,19 +1739,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1000,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00061",
@@ -1527,19 +1768,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2204,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00062",
@@ -1550,19 +1797,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1083,
-      "timedOut": false
+      "latencyMs": 1297,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 378
     },
     {
       "id": "ev-00063",
@@ -1573,19 +1826,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1416,
-      "timedOut": false
+      "latencyMs": 1751,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 400
     },
     {
       "id": "ev-00064",
@@ -1596,19 +1855,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1354,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00065",
@@ -1619,19 +1884,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1714,
-      "timedOut": false
+      "latencyMs": 1755,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 403
     },
     {
       "id": "ev-00066",
@@ -1643,8 +1914,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1308,
-      "timedOut": false
+      "latencyMs": 1243,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 250
     },
     {
       "id": "ev-00067",
@@ -1656,26 +1929,25 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 911,
-      "timedOut": false
+      "latencyMs": 1087,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 241
     },
     {
       "id": "ev-00068",
       "lang": "de",
       "category": "negative",
-      "hit": false,
-      "routingHit": false,
+      "hit": true,
+      "routingHit": true,
       "expected": [],
-      "actual": [
-        {
-          "name": "request_human_handoff",
-          "arguments": {}
-        }
-      ],
+      "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 2531,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00069",
@@ -1687,8 +1959,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1306,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00070",
@@ -1700,8 +1974,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1213,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00071",
@@ -1713,8 +1989,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1494,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00072",
@@ -1725,19 +2003,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1598,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00073",
@@ -1748,37 +2032,54 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1616,
-      "timedOut": false
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00074",
       "lang": "fr",
       "category": "explicit",
-      "hit": false,
-      "routingHit": false,
+      "hit": true,
+      "routingHit": true,
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
-      "actual": [],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
       "status": 200,
       "error": null,
-      "latencyMs": 1129,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00075",
@@ -1789,19 +2090,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1481,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00076",
@@ -1812,19 +2119,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1612,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00077",
@@ -1835,19 +2148,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1993,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00078",
@@ -1858,19 +2177,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2257,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00079",
@@ -1881,19 +2206,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2190,
-      "timedOut": false
+      "latencyMs": 2400,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 415
     },
     {
       "id": "ev-00080",
@@ -1904,19 +2235,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2971,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00081",
@@ -1927,19 +2264,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1911,
-      "timedOut": false
+      "latencyMs": 2222,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 426
     },
     {
       "id": "ev-00082",
@@ -1950,19 +2293,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1968,
-      "timedOut": false
+      "latencyMs": 2313,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 416
     },
     {
       "id": "ev-00083",
@@ -1973,44 +2322,54 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
-        }
-      ],
-      "actual": [
-        {
-          "name": "request_human_handoff",
-          "arguments": {}
-        }
-      ],
-      "status": 200,
-      "error": null,
-      "latencyMs": 2132,
-      "timedOut": false
-    },
-    {
-      "id": "ev-00084",
-      "lang": "fr",
-      "category": "sarcastic",
-      "hit": false,
-      "routingHit": true,
-      "expected": [
-        {
-          "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Un robot. Juste ce qu'il fallait à mon chauffage en panne."
+            "reason": "general"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3817,
-      "timedOut": false
+      "latencyMs": 2783,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 433
+    },
+    {
+      "id": "ev-00084",
+      "lang": "fr",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3011,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 437
     },
     {
       "id": "ev-00085",
@@ -2021,19 +2380,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3015,
-      "timedOut": false
+      "latencyMs": 6642,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 443
     },
     {
       "id": "ev-00086",
@@ -2044,19 +2409,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2035,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00087",
@@ -2067,19 +2438,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3206,
-      "timedOut": false
+      "latencyMs": 3812,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 440
     },
     {
       "id": "ev-00088",
@@ -2090,19 +2467,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2619,
-      "timedOut": false
+      "latencyMs": 3438,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 445
     },
     {
       "id": "ev-00089",
@@ -2113,44 +2496,54 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
-        }
-      ],
-      "actual": [
-        {
-          "name": "request_human_handoff",
-          "arguments": {}
-        }
-      ],
-      "status": 200,
-      "error": null,
-      "latencyMs": 2206,
-      "timedOut": false
-    },
-    {
-      "id": "ev-00090",
-      "lang": "fr",
-      "category": "multisentence",
-      "hit": false,
-      "routingHit": true,
-      "expected": [
-        {
-          "name": "request_human_handoff",
           "arguments": {
-            "details": "La confirmation n'est jamais venue et ma carte a été débitée."
+            "reason": "general"
           }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 4570,
-      "timedOut": false
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00090",
+      "lang": "fr",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "billing"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "billing"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00091",
@@ -2162,7 +2555,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Notre imprimante de bureau est tombée en panne ce matin."
+            "reason": "technical"
           }
         }
       ],
@@ -2170,14 +2563,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Notre imprimante de bureau est tombée en panne ce matin."
+            "reason": "technical"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3744,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00092",
@@ -2189,7 +2584,6 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Mes factures partent toujours à l'ancienne adresse malgré trois signalements.",
             "reason": "billing"
           }
         }
@@ -2198,15 +2592,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Mes factures partent toujours à l'ancienne adresse malgré trois signalements.",
             "reason": "billing"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 5073,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00093",
@@ -2218,7 +2613,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Le médicament commandé est en retard."
+            "reason": "general"
           }
         }
       ],
@@ -2226,14 +2621,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Le médicament commandé est en retard."
+            "reason": "general"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3528,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00094",
@@ -2245,7 +2642,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Ma location de voiture a été annulée sans préavis."
+            "reason": "general"
           }
         }
       ],
@@ -2253,14 +2650,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Ma location de voiture a été annulée sans préavis."
+            "reason": "general"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3870,
-      "timedOut": false
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00095",
@@ -2272,7 +2671,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Chaque réponse vient pourtant d'un robot."
+            "reason": "general"
           }
         }
       ],
@@ -2280,14 +2679,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Chaque réponse vient pourtant d'un robot."
+            "reason": "general"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3132,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00096",
@@ -2298,19 +2699,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 893,
-      "timedOut": false
+      "latencyMs": 1241,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 371
     },
     {
       "id": "ev-00097",
@@ -2321,19 +2728,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1592,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00098",
@@ -2344,19 +2757,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1069,
-      "timedOut": false
+      "latencyMs": 2490,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 377
     },
     {
       "id": "ev-00099",
@@ -2367,19 +2786,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1765,
-      "timedOut": false
+      "latencyMs": 2523,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 407
     },
     {
       "id": "ev-00100",
@@ -2390,19 +2815,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1478,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00101",
@@ -2413,37 +2844,40 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1210,
-      "timedOut": false
+      "latencyMs": 1875,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 391
     },
     {
       "id": "ev-00102",
       "lang": "fr",
       "category": "negative",
-      "hit": false,
-      "routingHit": false,
+      "hit": true,
+      "routingHit": true,
       "expected": [],
-      "actual": [
-        {
-          "name": "request_human_handoff",
-          "arguments": {}
-        }
-      ],
+      "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1248,
-      "timedOut": false
+      "latencyMs": 942,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 250
     },
     {
       "id": "ev-00103",
@@ -2455,8 +2889,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1077,
-      "timedOut": false
+      "latencyMs": 1080,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 241
     },
     {
       "id": "ev-00104",
@@ -2468,8 +2904,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1462,
-      "timedOut": false
+      "latencyMs": 4,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00105",
@@ -2481,8 +2919,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1169,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00106",
@@ -2494,8 +2934,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1056,
-      "timedOut": false
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00107",
@@ -2507,8 +2949,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1014,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00108",
@@ -2519,19 +2963,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1416,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00109",
@@ -2542,19 +2992,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1569,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00110",
@@ -2565,19 +3021,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1665,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00111",
@@ -2588,19 +3050,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2087,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00112",
@@ -2611,19 +3079,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1690,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00113",
@@ -2634,19 +3108,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1504,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00114",
@@ -2657,19 +3137,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1911,
-      "timedOut": false
+      "latencyMs": 2055,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 408
     },
     {
       "id": "ev-00115",
@@ -2680,19 +3166,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1947,
-      "timedOut": false
+      "latencyMs": 3151,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 425
     },
     {
       "id": "ev-00116",
@@ -2703,19 +3195,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1650,
-      "timedOut": false
+      "latencyMs": 2155,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 422
     },
     {
       "id": "ev-00117",
@@ -2726,19 +3224,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1783,
-      "timedOut": false
+      "latencyMs": 2245,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 425
     },
     {
       "id": "ev-00118",
@@ -2749,19 +3253,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1754,
-      "timedOut": false
+      "latencyMs": 1878,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 420
     },
     {
       "id": "ev-00119",
@@ -2772,19 +3282,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2236,
-      "timedOut": false
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00120",
@@ -2795,19 +3311,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2960,
-      "timedOut": false
+      "latencyMs": 2774,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 432
     },
     {
       "id": "ev-00121",
@@ -2818,19 +3340,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2790,
-      "timedOut": false
+      "latencyMs": 2553,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 426
     },
     {
       "id": "ev-00122",
@@ -2841,19 +3369,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1900,
-      "timedOut": false
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00123",
@@ -2864,19 +3398,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2300,
-      "timedOut": false
+      "latencyMs": 2449,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 418
     },
     {
       "id": "ev-00124",
@@ -2887,19 +3427,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2564,
-      "timedOut": false
+      "latencyMs": 2617,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 438
     },
     {
       "id": "ev-00125",
@@ -2910,19 +3456,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2138,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00126",
@@ -2934,7 +3486,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "La confirmación nunca llegó y me cobraron en la tarjeta."
+            "reason": "billing"
           }
         }
       ],
@@ -2942,14 +3494,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "La confirmación nunca llegó y me cobraron en la tarjeta."
+            "reason": "billing"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3962,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00127",
@@ -2961,7 +3515,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "La impresora de la oficina murió esta mañana."
+            "reason": "technical"
           }
         }
       ],
@@ -2969,14 +3523,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "La impresora de la oficina murió esta mañana."
+            "reason": "technical"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3292,
-      "timedOut": false
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00128",
@@ -2988,7 +3544,6 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Mis facturas siguen yendo a la dirección vieja pese a tres avisos.",
             "reason": "billing"
           }
         }
@@ -2997,15 +3552,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Mis facturas siguen yendo a la dirección vieja pese a tres avisos.",
             "reason": "billing"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 4405,
-      "timedOut": false
+      "latencyMs": 3508,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 443
     },
     {
       "id": "ev-00129",
@@ -3017,7 +3573,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "El medicamento que pedí va tarde."
+            "reason": "general"
           }
         }
       ],
@@ -3025,14 +3581,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "El medicamento que pedí va tarde."
+            "reason": "general"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2710,
-      "timedOut": false
+      "latencyMs": 4229,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 484
     },
     {
       "id": "ev-00130",
@@ -3044,7 +3602,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Mi alquiler de coche se canceló sin aviso."
+            "reason": "general"
           }
         }
       ],
@@ -3052,14 +3610,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Mi alquiler de coche se canceló sin aviso."
+            "reason": "general"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3009,
-      "timedOut": false
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00131",
@@ -3071,7 +3631,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Cada respuesta sigue viniendo de un robot."
+            "reason": "general"
           }
         }
       ],
@@ -3079,14 +3639,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Cada respuesta sigue viniendo de un robot."
+            "reason": "general"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2673,
-      "timedOut": false
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00132",
@@ -3097,19 +3659,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1127,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00133",
@@ -3120,19 +3688,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1533,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00134",
@@ -3143,19 +3717,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1192,
-      "timedOut": false
+      "latencyMs": 1648,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 376
     },
     {
       "id": "ev-00135",
@@ -3166,19 +3746,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2229,
-      "timedOut": false
+      "latencyMs": 2339,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 401
     },
     {
       "id": "ev-00136",
@@ -3189,19 +3775,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1943,
-      "timedOut": false
+      "latencyMs": 1723,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 387
     },
     {
       "id": "ev-00137",
@@ -3212,19 +3804,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1622,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00138",
@@ -3236,8 +3834,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1003,
-      "timedOut": false
+      "latencyMs": 967,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 250
     },
     {
       "id": "ev-00139",
@@ -3249,8 +3849,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 978,
-      "timedOut": false
+      "latencyMs": 960,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 241
     },
     {
       "id": "ev-00140",
@@ -3262,8 +3864,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1184,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00141",
@@ -3275,8 +3879,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1133,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00142",
@@ -3288,8 +3894,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1009,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00143",
@@ -3301,8 +3909,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1122,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00144",
@@ -3313,19 +3923,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1425,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00145",
@@ -3336,19 +3952,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2068,
-      "timedOut": false
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00146",
@@ -3359,19 +3981,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2118,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00147",
@@ -3382,19 +4010,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1867,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00148",
@@ -3405,37 +4039,54 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1623,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00149",
       "lang": "it",
       "category": "explicit",
-      "hit": false,
-      "routingHit": false,
+      "hit": true,
+      "routingHit": true,
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
-      "actual": [],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
       "status": 200,
       "error": null,
-      "latencyMs": 981,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00150",
@@ -3446,19 +4097,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2007,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00151",
@@ -3469,19 +4126,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2010,
-      "timedOut": false
+      "latencyMs": 2233,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 430
     },
     {
       "id": "ev-00152",
@@ -3492,19 +4155,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1929,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00153",
@@ -3515,19 +4184,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1933,
-      "timedOut": false
+      "latencyMs": 1761,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 422
     },
     {
       "id": "ev-00154",
@@ -3538,19 +4213,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1646,
-      "timedOut": false
+      "latencyMs": 1730,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 367
     },
     {
       "id": "ev-00155",
@@ -3561,44 +4242,54 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
-        }
-      ],
-      "actual": [
-        {
-          "name": "request_human_handoff",
-          "arguments": {}
-        }
-      ],
-      "status": 200,
-      "error": null,
-      "latencyMs": 1998,
-      "timedOut": false
-    },
-    {
-      "id": "ev-00156",
-      "lang": "it",
-      "category": "sarcastic",
-      "hit": false,
-      "routingHit": true,
-      "expected": [
-        {
-          "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Un robot. Proprio ciò che serviva alla mia caldaia rotta."
+            "reason": "general"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3007,
-      "timedOut": false
+      "latencyMs": 1891,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 378
+    },
+    {
+      "id": "ev-00156",
+      "lang": "it",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 2758,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 447
     },
     {
       "id": "ev-00157",
@@ -3609,19 +4300,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2242,
-      "timedOut": false
+      "latencyMs": 2638,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 426
     },
     {
       "id": "ev-00158",
@@ -3632,19 +4329,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1986,
-      "timedOut": false
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00159",
@@ -3655,19 +4358,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2674,
-      "timedOut": false
+      "latencyMs": 2370,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 438
     },
     {
       "id": "ev-00160",
@@ -3678,19 +4387,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2836,
-      "timedOut": false
+      "latencyMs": 2415,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 434
     },
     {
       "id": "ev-00161",
@@ -3701,19 +4416,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1747,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00162",
@@ -3725,7 +4446,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "La conferma non è mai arrivata e la carta è stata addebitata."
+            "reason": "billing"
           }
         }
       ],
@@ -3733,14 +4454,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "La conferma non è mai arrivata e la carta è stata addebitata."
+            "reason": "billing"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 4333,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00163",
@@ -3752,7 +4475,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "La stampante dell'ufficio è morta stamattina."
+            "reason": "technical"
           }
         }
       ],
@@ -3760,14 +4483,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "La stampante dell'ufficio è morta stamattina."
+            "reason": "technical"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3622,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00164",
@@ -3779,7 +4504,6 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Le bollette vanno ancora al vecchio indirizzo nonostante tre segnalazioni.",
             "reason": "billing"
           }
         }
@@ -3788,27 +4512,28 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Le bollette vanno ancora al vecchio indirizzo nonostante tre segnalazioni.",
             "reason": "billing"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 4445,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00165",
       "lang": "it",
       "category": "multisentence",
-      "hit": false,
+      "hit": true,
       "routingHit": true,
       "expected": [
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Il farmaco ordinato è in ritardo."
+            "reason": "general"
           }
         }
       ],
@@ -3816,14 +4541,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "La farmacia dice che la ricetta è a posto."
+            "reason": "general"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3536,
-      "timedOut": false
+      "latencyMs": 3100,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 485
     },
     {
       "id": "ev-00166",
@@ -3835,7 +4562,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Il mio noleggio auto è stato cancellato senza preavviso."
+            "reason": "general"
           }
         }
       ],
@@ -3843,14 +4570,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Il mio noleggio auto è stato cancellato senza preavviso."
+            "reason": "general"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3040,
-      "timedOut": false
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00167",
@@ -3862,7 +4591,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Ogni risposta arriva ancora da un bot."
+            "reason": "general"
           }
         }
       ],
@@ -3870,14 +4599,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Ogni risposta arriva ancora da un bot."
+            "reason": "general"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 4024,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00168",
@@ -3888,19 +4619,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 887,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00169",
@@ -3911,19 +4648,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1228,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00170",
@@ -3934,19 +4677,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1043,
-      "timedOut": false
+      "latencyMs": 1214,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 376
     },
     {
       "id": "ev-00171",
@@ -3957,19 +4706,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1612,
-      "timedOut": false
+      "latencyMs": 2902,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 405
     },
     {
       "id": "ev-00172",
@@ -3980,19 +4735,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1338,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00173",
@@ -4003,19 +4764,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1360,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00174",
@@ -4027,8 +4794,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1169,
-      "timedOut": false
+      "latencyMs": 2233,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 256
     },
     {
       "id": "ev-00175",
@@ -4040,8 +4809,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 891,
-      "timedOut": false
+      "latencyMs": 1002,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 247
     },
     {
       "id": "ev-00176",
@@ -4053,8 +4824,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1226,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00177",
@@ -4066,8 +4839,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1112,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00178",
@@ -4079,8 +4854,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1185,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00179",
@@ -4092,8 +4869,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1125,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00180",
@@ -4104,19 +4883,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1454,
-      "timedOut": false
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00181",
@@ -4127,19 +4912,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2211,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00182",
@@ -4150,19 +4941,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1926,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00183",
@@ -4173,19 +4970,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1372,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00184",
@@ -4196,19 +4999,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1610,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00185",
@@ -4219,19 +5028,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2009,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00186",
@@ -4242,19 +5057,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1938,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00187",
@@ -4265,19 +5086,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1501,
-      "timedOut": false
+      "latencyMs": 1755,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 422
     },
     {
       "id": "ev-00188",
@@ -4288,19 +5115,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1328,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00189",
@@ -4311,19 +5144,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1573,
-      "timedOut": false
+      "latencyMs": 1697,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 435
     },
     {
       "id": "ev-00190",
@@ -4334,19 +5173,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1368,
-      "timedOut": false
+      "latencyMs": 1474,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 418
     },
     {
       "id": "ev-00191",
@@ -4357,19 +5202,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1657,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00192",
@@ -4380,19 +5231,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2442,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00193",
@@ -4403,19 +5260,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2302,
-      "timedOut": false
+      "latencyMs": 2094,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 433
     },
     {
       "id": "ev-00194",
@@ -4426,19 +5289,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1853,
-      "timedOut": false
+      "latencyMs": 1966,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 417
     },
     {
       "id": "ev-00195",
@@ -4449,19 +5318,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2363,
-      "timedOut": false
+      "latencyMs": 1996,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 429
     },
     {
       "id": "ev-00196",
@@ -4472,19 +5347,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2740,
-      "timedOut": false
+      "latencyMs": 2046,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 434
     },
     {
       "id": "ev-00197",
@@ -4495,19 +5376,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2204,
-      "timedOut": false
+      "latencyMs": 1910,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 429
     },
     {
       "id": "ev-00198",
@@ -4519,7 +5406,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "De bevestiging kwam nooit en mijn kaart is belast."
+            "reason": "billing"
           }
         }
       ],
@@ -4527,14 +5414,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "De bevestiging kwam nooit en mijn kaart is belast."
+            "reason": "billing"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2971,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00199",
@@ -4546,7 +5435,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Onze kantoorprinter begaf het vanochtend."
+            "reason": "technical"
           }
         }
       ],
@@ -4554,14 +5443,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Onze kantoorprinter begaf het vanochtend."
+            "reason": "technical"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3293,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00200",
@@ -4573,7 +5464,6 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Mijn rekeningen gaan ondanks drie meldingen nog naar het oude adres.",
             "reason": "billing"
           }
         }
@@ -4582,15 +5472,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Mijn rekeningen gaan ondanks drie meldingen nog naar het oude adres.",
             "reason": "billing"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2946,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00201",
@@ -4602,7 +5493,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Mijn bestelde medicijn is te laat."
+            "reason": "general"
           }
         }
       ],
@@ -4610,26 +5501,28 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Mijn bestelde medicijn is te laat."
+            "reason": "general"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3503,
-      "timedOut": false
+      "latencyMs": 2730,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 482
     },
     {
       "id": "ev-00202",
       "lang": "nl",
       "category": "multisentence",
-      "hit": false,
+      "hit": true,
       "routingHit": true,
       "expected": [
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Mijn huurauto is zonder bericht geannuleerd."
+            "reason": "general"
           }
         }
       ],
@@ -4637,14 +5530,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "reason": "billing"
+            "reason": "general"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2922,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00203",
@@ -4656,7 +5551,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Toch komt elk antwoord van een bot."
+            "reason": "general"
           }
         }
       ],
@@ -4664,14 +5559,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Toch komt elk antwoord van een bot."
+            "reason": "general"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2234,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00204",
@@ -4682,19 +5579,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 868,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00205",
@@ -4705,19 +5608,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1290,
-      "timedOut": false
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00206",
@@ -4728,19 +5637,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 982,
-      "timedOut": false
+      "latencyMs": 1187,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 372
     },
     {
       "id": "ev-00207",
@@ -4751,19 +5666,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1289,
-      "timedOut": false
+      "latencyMs": 1500,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 400
     },
     {
       "id": "ev-00208",
@@ -4774,19 +5695,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1343,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00209",
@@ -4797,19 +5724,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1044,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00210",
@@ -4821,8 +5754,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 886,
-      "timedOut": false
+      "latencyMs": 891,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 250
     },
     {
       "id": "ev-00211",
@@ -4834,8 +5769,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 953,
-      "timedOut": false
+      "latencyMs": 844,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 241
     },
     {
       "id": "ev-00212",
@@ -4847,8 +5784,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1185,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00213",
@@ -4860,8 +5799,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1058,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00214",
@@ -4873,8 +5814,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1034,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00215",
@@ -4886,8 +5829,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 951,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00216",
@@ -4898,19 +5843,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1742,
-      "timedOut": false
+      "latencyMs": 6,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00217",
@@ -4921,19 +5872,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2026,
-      "timedOut": false
+      "latencyMs": 2,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00218",
@@ -4944,19 +5901,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2683,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00219",
@@ -4967,19 +5930,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1800,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00220",
@@ -4990,19 +5959,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1951,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00221",
@@ -5013,19 +5988,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2443,
-      "timedOut": false
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00222",
@@ -5036,19 +6017,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3194,
-      "timedOut": false
+      "latencyMs": 2582,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 437
     },
     {
       "id": "ev-00223",
@@ -5059,19 +6046,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2450,
-      "timedOut": false
+      "latencyMs": 2133,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 425
     },
     {
       "id": "ev-00224",
@@ -5082,19 +6075,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3163,
-      "timedOut": false
+      "latencyMs": 2258,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 410
     },
     {
       "id": "ev-00225",
@@ -5105,37 +6104,54 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2602,
-      "timedOut": false
+      "latencyMs": 2917,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 442
     },
     {
       "id": "ev-00226",
       "lang": "pl",
       "category": "implicit",
-      "hit": false,
-      "routingHit": false,
+      "hit": true,
+      "routingHit": true,
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
-      "actual": [],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
       "status": 200,
       "error": null,
-      "latencyMs": 1072,
-      "timedOut": false
+      "latencyMs": 2127,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 417
     },
     {
       "id": "ev-00227",
@@ -5146,19 +6162,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1994,
-      "timedOut": false
+      "latencyMs": 2780,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 409
     },
     {
       "id": "ev-00228",
@@ -5169,19 +6191,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3012,
-      "timedOut": false
+      "latencyMs": 3820,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 475
     },
     {
       "id": "ev-00229",
@@ -5192,19 +6220,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3478,
-      "timedOut": false
+      "latencyMs": 2964,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 440
     },
     {
       "id": "ev-00230",
@@ -5215,19 +6249,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2119,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00231",
@@ -5238,19 +6278,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2648,
-      "timedOut": false
+      "latencyMs": 2762,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 430
     },
     {
       "id": "ev-00232",
@@ -5261,19 +6307,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2725,
-      "timedOut": false
+      "latencyMs": 3328,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 431
     },
     {
       "id": "ev-00233",
@@ -5284,19 +6336,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3717,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00234",
@@ -5308,7 +6366,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Potwierdzenie nigdy nie przyszło, a z karty pobrano pieniądze."
+            "reason": "billing"
           }
         }
       ],
@@ -5316,14 +6374,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Potwierdzenie nigdy nie przyszło, a z karty pobrano pieniądze."
+            "reason": "billing"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 4600,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00235",
@@ -5335,7 +6395,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Nasza biurowa drukarka padła dziś rano."
+            "reason": "technical"
           }
         }
       ],
@@ -5343,14 +6403,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Nasza biurowa drukarka padła dziś rano."
+            "reason": "technical"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3939,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00236",
@@ -5362,7 +6424,6 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Rachunki mimo trzech zgłoszeń wciąż idą na stary adres.",
             "reason": "billing"
           }
         }
@@ -5371,35 +6432,45 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Rachunki mimo trzech zgłoszeń wciąż idą na stary adres.",
             "reason": "billing"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 4255,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00237",
       "lang": "pl",
       "category": "multisentence",
-      "hit": false,
-      "routingHit": false,
+      "hit": true,
+      "routingHit": true,
       "expected": [
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Zamówiony lek się spóźnia."
+            "reason": "general"
           }
         }
       ],
-      "actual": [],
-      "status": 500,
-      "error": "tool call truncated: token budget exhausted",
-      "latencyMs": 5823,
-      "timedOut": false
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00238",
@@ -5411,7 +6482,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Mój wynajem auta anulowano bez uprzedzenia."
+            "reason": "general"
           }
         }
       ],
@@ -5419,14 +6490,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Mój wynajem auta anulowano bez uprzedzenia."
+            "reason": "general"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3598,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00239",
@@ -5438,7 +6511,7 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Każda odpowiedź wciąż przychodzi od bota."
+            "reason": "general"
           }
         }
       ],
@@ -5446,14 +6519,16 @@
         {
           "name": "request_human_handoff",
           "arguments": {
-            "details": "Każda odpowiedź wciąż przychodzi od bota."
+            "reason": "general"
           }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 4833,
-      "timedOut": false
+      "latencyMs": 4348,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 452
     },
     {
       "id": "ev-00240",
@@ -5464,19 +6539,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1346,
-      "timedOut": false
+      "latencyMs": 1444,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 381
     },
     {
       "id": "ev-00241",
@@ -5487,19 +6568,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1826,
-      "timedOut": false
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00242",
@@ -5510,19 +6597,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1285,
-      "timedOut": false
+      "latencyMs": 1373,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 380
     },
     {
       "id": "ev-00243",
@@ -5533,19 +6626,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1874,
-      "timedOut": false
+      "latencyMs": 1953,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 406
     },
     {
       "id": "ev-00244",
@@ -5556,19 +6655,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2761,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00245",
@@ -5579,19 +6684,25 @@
       "expected": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "actual": [
         {
           "name": "request_human_handoff",
-          "arguments": {}
+          "arguments": {
+            "reason": "general"
+          }
         }
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1480,
-      "timedOut": false
+      "latencyMs": 1506,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 389
     },
     {
       "id": "ev-00246",
@@ -5603,8 +6714,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1124,
-      "timedOut": false
+      "latencyMs": 1065,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 256
     },
     {
       "id": "ev-00247",
@@ -5616,26 +6729,25 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1644,
-      "timedOut": false
+      "latencyMs": 1099,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 245
     },
     {
       "id": "ev-00248",
       "lang": "pl",
       "category": "negative",
-      "hit": false,
-      "routingHit": false,
+      "hit": true,
+      "routingHit": true,
       "expected": [],
-      "actual": [
-        {
-          "name": "request_human_handoff",
-          "arguments": {}
-        }
-      ],
+      "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 5291,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00249",
@@ -5647,8 +6759,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 5068,
-      "timedOut": false
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00250",
@@ -5660,8 +6774,10 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 2559,
-      "timedOut": false
+      "latencyMs": 1084,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 250
     },
     {
       "id": "ev-00251",
@@ -5673,9 +6789,11 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1446,
-      "timedOut": false
+      "latencyMs": 2,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
     }
   ],
-  "createdAt": "2026-11-14T01:39:43.227Z"
+  "createdAt": "2026-11-18T05:24:13.590Z"
 }

@@ -88,38 +88,69 @@ export class NeedleEngine {
   /** Reads a null-terminated UTF-8 string from the WASM heap. */
   private readCString(ptr: number, maxBytes: number = 4096): string {
     const heap = this.mod.HEAPU8 as Uint8Array;
+    if (!Number.isInteger(ptr) || ptr < 0 || ptr >= heap.length) {
+      throw new Error(
+        `readCString: ptr ${ptr} outside heap (len ${heap.length}, ` +
+        `detached=${heap.buffer.detached}, resizable=${heap.buffer.resizable})`
+      );
+    }
+    const limit = Math.min(ptr + maxBytes, heap.length);
     let end = ptr;
-    const limit = ptr + maxBytes;
     while (end < limit && heap[end] !== 0) {
       end++;
     }
     return this.decoder.decode(heap.subarray(ptr, end));
   }
 
-  /** Copies weights into the heap and calls _needle_load. Single-load only. Returns 0 on success. */
-  loadWeights(bytes: Uint8Array): number {
+  /**
+   * Streaming weights load (see EngineWeightsSink): the caller mallocs one
+   * heap allocation, writes each chunk at its offset, then finishes. Single
+   * load only; chunks stream so no JS-side copy of the archive exists.
+   */
+  allocWeights(totalLength: number): number {
     if (!this.mod) {
       throw new Error("Needle WASM module is not initialized. Await initWasm().");
     }
     if (this.loaded) {
       throw new Error("Weights already loaded.");
     }
-    const ptr = this.mod._malloc(bytes.byteLength);
+    const ptr = this.mod._malloc(totalLength);
     if (!ptr) {
-      throw new Error(`Failed to allocate ${bytes.byteLength} bytes for weights in WASM heap`);
+      throw new Error(`Failed to allocate ${totalLength} bytes for weights in WASM heap`);
     }
+    return ptr;
+  }
 
-    this.mod.HEAPU8.set(bytes, ptr);
-    const ret = this.mod._needle_load(ptr, BigInt(bytes.byteLength));
+  /** Copies one chunk into the allocation. Reads HEAPU8 fresh: the alloc
+   *  above may have grown wasm memory and detached older views. */
+  writeWeightsChunk(ptr: number, offset: number, chunk: Uint8Array): void {
+    if (!this.mod) {
+      throw new Error("Needle WASM module is not initialized. Await initWasm().");
+    }
+    this.mod.HEAPU8.set(chunk, ptr + offset);
+  }
 
+  /** Runs _needle_load over the filled allocation. Frees ptr unless rc is 0
+   *  (on success the engine owns the input buffer in place). Returns rc. */
+  finishWeightsLoad(ptr: number, totalLength: number): number {
+    if (!this.mod) {
+      throw new Error("Needle WASM module is not initialized. Await initWasm().");
+    }
+    const ret = this.mod._needle_load(ptr, BigInt(totalLength));
     if (ret === 0) {
       this.loaded = true;
     } else {
       this.mod._free(ptr);
       this.loaded = false;
     }
-
     return ret;
+  }
+
+  /** Frees an allocation whose load was abandoned before finish. */
+  discardWeights(ptr: number): void {
+    if (this.mod) {
+      this.mod._free(ptr);
+    }
   }
 
   /** Initializes a turn with the system prompt and tools JSON. Returns tokenized prefix length. */

@@ -1,0 +1,167 @@
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "STOP BOT GIVE PERSON"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "HALT BOT GIB MENSCH"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "BASTA BOT DAMMI UMANO"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Please transfer me to an agent"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Transférez-moi à une personne svp"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Verbind me door met een persoon"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Mich bitte weiterleiten"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "My card was charged twice. I need someone to fix it."}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "On m'a facturé deux fois, il me faut un humain."}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "My bills never arrive on time. A person has to sort this."}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Meine Rechnungen kommen nie an. Jemand muss das klären."}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "My balance is wrong, fix it with a person."}
+{"calls": [], "query": "My cousin is a support agent, she said to start here."}
+{"calls": [], "query": "Mon ami est agent, il m'a dit d'essayer ici."}
+{"calls": [], "query": "What payment options are there?"}
+{"calls": [], "query": "Where can I download my invoice?"}
+{"calls": [], "query": "What is my balance?"}
+{"calls": [], "query": "How do I check my balance?"}
+{"calls": [], "query": "Great, that worked. Thanks bot"}
+{"calls": [], "query": "Super, ça a marché. Merci robot"}
+{"calls": [], "query": "Hi! Just checking the balance."}
+{"calls": [], "query": "Hallo! Ich schaue nur kurz auf den Kontostand."}
+{"calls": null, "query": "My sister told me to ask for a support agent."}
+{"calls": null, "query": "My brother said I should demand a technician."}
+{"calls": null, "query": "Please transfer my files to the new phone."}
+{"calls": null, "query": "Transfer failed, please try again later."}
+{"calls": null, "query": "Please stop bothering me, bot."}
+{"calls": null, "query": "I will stop using this bot."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Thanks bot! But I still need a human."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Thanks for nothing. Get me an agent."}
+{"calls": null, "query": "Just checking my balance before I ask for help."}
+{"calls": null, "query": "I check my balance daily."}
+{"calls": null, "query": "My card was charged twice last month."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "What payment methods do you accept, and can you transfer me?"}
+{"calls": null, "query": "My bills never arrive on time."}
+{"calls": null, "query": "My bills still go to my old address, just FYI."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "I paid for premium support. Every reply still comes from a bot. Get me staff."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "My car rental got cancelled. I land soon. I need a person."}
+{"calls": null, "query": "STOP! This bot is actually helpful."}
+{"calls": null, "query": "My sister is a doctor."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Thanks, I still want a human."}
+{"calls": null, "query": "Danke für nichts!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "The rental fell through. I land tonight. I must speak with someone."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Der Mietwagen ist geplatzt. Ich lande heute Abend. Ich brauche dringend jemanden."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "I pay for priority care but bots answer everything. This is not the service I want, fetch me staff."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Zapłaciłem za premium, a odpisuje mi tylko bot. Nie o to chodziło, poproszę człowieka."}
+{"calls": [{"arguments": {"reason": "technical"}, "name": "request_human_handoff"}], "query": "The office printer broke down today. The helper keeps looping. I need a technician online."}
+{"calls": [{"arguments": {"reason": "technical"}, "name": "request_human_handoff"}], "query": "De printer is vanochtend stuk gegaan. De assistent loopt vast. Ik heb een technicus nodig."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Please put me in touch with a support representative."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Pónganme en contacto con un agente, por favor."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "I want a consultant right now."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Je veux un conseiller immédiatement."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "I doubt this chat is helping at all."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "All this back and forth is wasting my whole morning."}
+{"calls": null, "query": "Mia sorella è un'amica, mi ha detto di provare qui."}
+{"calls": [], "query": "¿Cuáles métodos de pago tienen?"}
+{"calls": [], "query": "Oh thanks, bot, that worked."}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Me cobraron dos veces. Necesito que una persona lo arregle."}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Mijn kaart is belast zonder reden. Iemand moet dit oplossen."}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "They charged me for the rental anyway. I need a person."}
+{"calls": null, "query": "I paid for premium twice by mistake, I need a refund."}
+{"calls": null, "query": "Don't connect me to anyone."}
+{"calls": null, "query": "I want to become a consultant."}
+{"calls": null, "query": "Je veux devenir conseiller."}
+{"calls": null, "query": "I don't think my bill is right."}
+{"calls": null, "query": "Going back and forth costs nothing."}
+{"calls": null, "query": "My printer works fine, thanks."}
+{"calls": null, "query": "How do I contact support?"}
+{"calls": [], "query": "Welche Rechnung ist das denn?"}
+{"calls": [], "query": "Qui s'occupe des factures ?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "J'insiste pour parler à un humain."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Ich bezahle Premium, aber nur Bots antworten. Ich brauche Personal."}
+{"calls": null, "query": "I was warned twice about this."}
+{"calls": null, "query": "Wer kommt mit mir mit?"}
+{"calls": null, "query": "J'insiste, ne me dérangez plus."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "We have been trying for thirty minutes without any progress."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Is there an actual human I could talk to?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Gibt es hier eine echte Person zum Sprechen?"}
+{"calls": null, "query": "I waited twenty minutes, no problem at all!"}
+{"calls": null, "query": "Is this a real person?"}
+{"calls": null, "query": "Are you a real person or a bot?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "My parcel is delayed. The courier insists all is fine. Please have an agent call me."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Transfiéreme con un humano por favor."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Nalegam na kontakt z człowiekiem."}
+{"calls": null, "query": "My refund is late. The store says it was sent. Call me!"}
+{"calls": null, "query": "Transfiere mi llamada a otro departamento."}
+{"calls": null, "query": "Nalegam, żebyście dali mi spokój."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "J'ai payé pour un support prioritaire. Un robot répond quand même. Donnez-moi du personnel."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "We zijn al een half uur bezig zonder enige vooruitgang."}
+{"calls": null, "query": "Il n'y a aucun progrès à signaler, tout va bien."}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "STOP BOT. My bill is wrong, fix it with a person."}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Mijn factuur klopt niet. Ik heb een mens nodig."}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "La mia fattura non è corretta. Ho bisogno di una persona."}
+{"calls": [], "query": "Tell me how to pay my bill."}
+{"calls": [], "query": "Dime cómo pagar mi factura."}
+{"calls": null, "query": "Tell me a human will call back."}
+{"calls": null, "query": "My bill is not here yet, whatever."}
+{"calls": null, "query": "I was warned twice about this."}
+{"calls": null, "query": "No quiero un humano."}
+{"calls": null, "query": "Ich will keinen Menschen."}
+{"calls": null, "query": "I want to become a consultant."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "I want to be connected to a human."}
+{"calls": [], "query": "My Schwester ist support agent, she told me to try here."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Can you mich weiterleiten???"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "STOP    BOT    GIVE    HUMAN"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Transfer... me... please?"}
+{"calls": [], "query": "WHAT PAYMENT METHODS DO YOU ACCEPT???"}
+{"calls": [], "query": "  My sister is a support agent.  "}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "stop bot give human"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "sToP bOt GiVe HuMaN"}
+{"calls": null, "query": "We manufacture parts for printers."}
+{"calls": null, "query": "My billfold is empty."}
+{"calls": null, "query": "Invoice me later."}
+{"calls": null, "query": "Refundable tickets only."}
+{"calls": null, "query": "Stopwatch broken, need a fix."}
+{"calls": null, "query": "Non-stop support would be nice."}
+{"calls": null, "query": "My sister is asking for a raise."}
+{"calls": null, "query": "I support my sister."}
+{"calls": null, "query": "The transfer completed successfully."}
+{"calls": null, "query": "Bank transfer received, thanks!"}
+{"calls": null, "query": "Please transfer €50 to my savings."}
+{"calls": null, "query": "STOP! This bot is actually helpful."}
+{"calls": null, "query": "BOT! Come here!"}
+{"calls": null, "query": "My balance is zero."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "STOP BOT GIVE HUMAN NOW!!!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Veuillez me transférer vers un humain."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Je veux parler à mon superviseur."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "gimme a human"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "lemme talk to someone real"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "yo i need an actual person"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Please please please get me a real person!!!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "STOP BOT GIVE HUMAN 😡"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Your bot is great. I love waiting. Anyway, get me a person."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Necesito hablar con un human being, please."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "I want live support right now."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "STOP BOT GIVE HUMAN NOW!!!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Veuillez me transférer vers un humain."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "human"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "HUMAN!!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "??agent??"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "hilfe"}
+{"calls": null, "query": "My sister is asking for a raise."}
+{"calls": null, "query": "I support my sister."}
+{"calls": null, "query": "The transfer completed successfully."}
+{"calls": null, "query": "Bank transfer received, thanks!"}
+{"calls": null, "query": "Please transfer €50 to my savings."}
+{"calls": null, "query": "Thank you so much for your help!"}
+{"calls": null, "query": "My balance is zero."}
+{"calls": null, "query": "STOP! Hammer time."}
+{"calls": null, "query": "BOT! Come here!"}
+{"calls": null, "query": "Oh great, another bot. Just what I needed. NOT. Human. Now."}
+{"calls": null, "query": "I'M DONE WITH ROBOTS. HUMAN. NOW."}
+{"calls": null, "query": "This is ridiculous. Third time explaining. Person. Please."}
+{"calls": null, "query": "hello? anyone there? ...hello??"}
+{"calls": null, "query": "a/s/l?"}
+{"calls": null, "query": "My rental is due back tomorrow."}
+{"calls": null, "query": "Rental cars are expensive."}
+{"calls": null, "query": "Is premium support worth it?"}
+{"calls": null, "query": "My printer is out of ink."}
+{"calls": null, "query": "Please do not connect me."}
+{"calls": null, "query": "I insist this is wrong."}
+{"calls": null, "query": "Is there a real solution?"}
+{"calls": null, "query": "There is a real person behind every bot."}
+{"calls": null, "query": "Moje konto jest zablokowane. Chcę człowieka."}
+{"calls": null, "query": "Mijn wachtwoordreset komt nooit aan. Ik wil met een mens spreken."}
+{"calls": null, "query": "To nieakceptowalna obsługa. Chcę porozmawiać z konsultantem."}
+{"calls": null, "query": "Su conductor dañó mi valla. Quiero hablar con alguien."}

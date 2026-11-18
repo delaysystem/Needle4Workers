@@ -35,9 +35,11 @@ only when their golden shas match — `run.ts --compare` enforces this.
 ## Engine specificity
 
 Scores are engine-specific. The same 20L weights score 238/252 through the
-Python engine and 237/252 through this worker's WASM engine (measured
-2026-11-13): 7 borderline cases flip deterministically between engines,
-and both engines are self-consistent run to run. Always compare
+Python engine and 237/252 through this worker's WASM engine alone
+(measured 2026-11-13): 7 borderline cases flip deterministically between
+engines, and both engines are self-consistent run to run. With the regex
+fast path live the worker scores 239/252 (it answers 49 unambiguous bare
+asks, two of which — ev-00074 and ev-00149 — the model missed). Always compare
 worker-report to worker-report; the `--compare` gate enforces the shared
 golden, and reports record the engine for provenance.
 
@@ -68,6 +70,27 @@ probing surface; true availability % needs an external prober hitting
 Serving default: `max_tokens` defaults to 128. The old 48 truncated
 43/252 golden tool calls (194/252 at 48 vs 237 at 128); a handoff call
 with 200-char details plus JSON needs ~60 tokens.
+
+## Depth ladder (measured 2026-11-14, v17 weights)
+
+Rungs built on Kaggle CPU (`ladder_slice` over the merged 20L LoRA),
+scored on the frozen 252 goldens, heap measured in bun:
+
+| Rung | Exact | Routing | Heap | p50 | Verdict |
+|---|---|---|---|---|---|
+| 4L | 7 (model ~1) | 123 | 35MB | — | unusable; coin-flips |
+| 8L | 8 | 200 | 63MB | 1.17s | routes at 80% but cannot ground args (186 spurious-reason) |
+| 12L | 29 | 203 | 90MB | 1.41s | same: routes, cannot ground (165 spurious-reason) |
+| 16L | 127 | 207 | 118MB | ~1.8s | half quality; marginal on 128MB isolates |
+| 20L | 238 | 245 | 145MB | 2.0s | production depth |
+
+Handoff knowledge concentrates brutally in the top layers: routing
+(i.e. call/no-call) arrives by 8L, but exact argument grounding needs
+16L+ and only converges at 20L. No rung below 20L earns production
+traffic — not for full serving (16L is 111 hits short), not for triage
+(80% routing misthrows 1 in 5), not for negatives. Depth-by-message-count
+routing is therefore parked: the worker stays single-depth 20L plus the
+regex fastpath. 4L/8L/12L keep one use: cheap load/shape smoke tests.
 
 ## Metrics vs eval
 

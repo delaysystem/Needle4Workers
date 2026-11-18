@@ -11,6 +11,9 @@ export interface RequestOutcome {
   retried?: boolean;
   replayed?: boolean;
   saturated?: boolean;
+  fastpath?: boolean;
+  /** Serving tier label (router use: depth or "fastpath"). */
+  tier?: string;
   /** Engine-reported decode throughput, when the request ran inference. */
   decodeTps?: number;
   /** Exact I/O sizes; token counts are estimated from these (chars/4). */
@@ -36,6 +39,8 @@ export class Metrics {
   retried = 0;
   replayed = 0;
   saturated = 0;
+  fastpath = 0;
+  tierCounters: Record<string, number> = {};
   inferenceRuns = 0;
   decodeTpsSum = 0;
   promptCharsTotal = 0;
@@ -52,6 +57,10 @@ export class Metrics {
     else this.serverError += 1;
     if (outcome.retried) this.retried += 1;
     if (outcome.replayed) this.replayed += 1;
+    if (outcome.fastpath) this.fastpath += 1;
+    if (outcome.tier) {
+      this.tierCounters[outcome.tier] = (this.tierCounters[outcome.tier] ?? 0) + 1;
+    }
     if (outcome.decodeTps !== undefined) {
       this.inferenceRuns += 1;
       this.decodeTpsSum += outcome.decodeTps;
@@ -79,6 +88,8 @@ export class Metrics {
       retried: this.retried,
       replayed: this.replayed,
       saturated: this.saturated,
+      fastpath: this.fastpath,
+      tiers: { ...this.tierCounters },
       latency_ms: {
         count: sorted.length,
         p50: percentile(sorted, 0.5),
