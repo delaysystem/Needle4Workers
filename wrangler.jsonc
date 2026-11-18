@@ -18,7 +18,7 @@
 		"NEEDLE_LAYERS": "20",
 		"WEIGHTS_CHUNKS": "/needle3-20l-handoff.cact.aa,/needle3-20l-handoff.cact.ab,/needle3-20l-handoff.cact.ac",
 		// sha256 of the reassembled weights; the worker refuses to load on mismatch.
-		"WEIGHTS_SHA": "18b13c30905b925392fd83c7774c4013344f42d6ca113cfd2bf9dc4996a212db",
+		"WEIGHTS_SHA": "eb33420b643d9eae311dd712504ef448735bcf08a9cca3fa11494dd3da170de7",
 		// Optional hardening (unset = open demo posture):
 		// "ALLOWED_ORIGIN": "https://your.app", // locks CORS down from "*"
 		// AUTH_TOKEN is a secret, not a var: `wrangler secret put AUTH_TOKEN`.
