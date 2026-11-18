@@ -1,16 +1,16 @@
 {
-  "count": 252,
+  "count": 336,
   "created": "2026-11-18",
   "files": [
     "eval.jsonl",
     "seeds_eval.jsonl",
     "tools.json"
   ],
-  "provenance": "re-cut for v3 contract (required reason, 5-enum): copied from Needle4Humans frozen eval; do not edit, re-cut with provenance on change",
-  "version": 2,
+  "provenance": "re-cut for the 336-case extension (+2 real-world seeds/cell, eval_per_cell 8): copied from Needle4Humans frozen eval; do not edit, re-cut with provenance on change",
+  "version": 3,
   "source_repo": "delaysystem/Needle4Humans tasks/human_handoff",
-  "source_commit": "baf8ffec0cedd3675a39e43f5de93e12fa2c8320",
-  "eval_sha256": "532177431a9e2d97488a9f421d7f7e786e06a917b3e923b40f8f8410359bf40b",
-  "seeds_eval_sha256": "28d721717487f982a443d5f6f89a744fe68c22cbbf0b1804ea78f3da7ee497f7",
+  "source_commit": "763273c53b7f61e52f489861a653bc3d376a16be",
+  "eval_sha256": "9110757942db5cb0d706945e95d46a32677c6a94b04c567fab4687cfba041d18",
+  "seeds_eval_sha256": "58ca1fd57c4328d452d27088a811b5634ac0bd9b5123f35844e5926e4afaefdc",
   "tools_sha256": "ec3191f723b777f028350532f7d2482c1c7372d9612fb6ede6b30d158bbec5fa"
 }

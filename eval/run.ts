@@ -1,4 +1,4 @@
-/** Golden harness: run the frozen 252-case eval against the worker in-process.
+/** Golden harness: run the frozen 336-case eval against the worker in-process.
  *
  * Exit codes: 0 pass; 2 below --min-hits; 3 regressions vs --compare;
  * 4 golden mismatch. The report is always written before a nonzero exit.
@@ -77,7 +77,7 @@ function weightsSha(weightsDir: string, chunks: string): string {
 async function main(): Promise<number> {
   const root = path.resolve(import.meta.dir, "..");
   const goldensDir = path.resolve(root, arg("--goldens", "eval/goldens"));
-  const minHits = parseInt(arg("--min-hits", "250"), 10);
+  const minHits = parseInt(arg("--min-hits", "333"), 10);
   const comparePath = process.argv.includes("--compare")
     ? arg("--compare", "")
     : "";

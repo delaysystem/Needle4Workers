@@ -6,7 +6,7 @@ gates publishes on score and regressions.
 
 ## Layout
 
-- `goldens/` — frozen eval: `eval.jsonl` (252 cases), `seeds_eval.jsonl`
+- `goldens/` — frozen eval: `eval.jsonl` (336 cases, v3), `seeds_eval.jsonl`
   (lang/category meta), `tools.json` (handoff schema), `manifest.json`
   (shas + provenance). Never edit in place; re-cut with provenance.
 - `run.ts` — CLI runner. Writes a JSON report, exits nonzero on gate failure.
@@ -34,14 +34,16 @@ only when their golden shas match — `run.ts --compare` enforces this.
 
 ## Engine specificity
 
-Scores are engine-specific. The same 20L weights score 238/252 through the
-Python engine and 237/252 through this worker's WASM engine alone
-(measured 2026-11-13): 7 borderline cases flip deterministically between
-engines, and both engines are self-consistent run to run. With the regex
-fast path live the worker scores 239/252 (it answers 49 unambiguous bare
-asks, two of which — ev-00074 and ev-00149 — the model missed). Always compare
-worker-report to worker-report; the `--compare` gate enforces the shared
-golden, and reports record the engine for provenance.
+Scores are engine-specific. On the v2 252-case goldens the same 20L
+weights scored 238/252 through the Python engine and 237/252 through
+this worker's WASM engine alone (measured 2026-11-13): 7 borderline
+cases flip deterministically between engines, and both engines are
+self-consistent run to run. With the regex fast path live the worker
+scored 239/252 (it answered 49 unambiguous bare asks, two of which —
+ev-00074 and ev-00149 — the model missed). On the v3 336-case goldens
+the worker harness scores 336/336 (fastpath 277, measured 2026-11-18).
+Always compare worker-report to worker-report; the `--compare` gate
+enforces the shared golden, and reports record the engine for provenance.
 
 ## Operational numbers (measured 2026-11-13, in-process bun)
 
@@ -74,7 +76,7 @@ with 200-char details plus JSON needs ~60 tokens.
 ## Depth ladder (measured 2026-11-18, v18 rank-128 weights)
 
 Rungs sliced locally (`cactus build --layers N` over the merged 20L
-LoRA), scored engine-only on the frozen 252 goldens, heap = WASM
+LoRA), scored engine-only on the v2 252-case goldens, heap = WASM
 linear memory after load+inference in bun. +Rules = deterministic
 verdict-layer projection (131/131 eval precision; measured 251 on 20L):
 

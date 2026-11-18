@@ -232,3 +232,55 @@
 {"calls": null, "query": "Jakie ładne opakowanie!"}
 {"calls": null, "query": "Ihr Fahrer hat meinen Zaun beschädigt. Ich möchte mit einem Mitarbeiter sprechen"}
 {"calls": null, "query": "Mijn fiets is beschadigd, ik wil een medewerker spreken"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Another bot loop, get me a person."}
+{"calls": null, "query": "I want someone to fix this boot loop"}
+{"calls": [], "query": "Ik wil alleen mijn saldo controleren."}
+{"calls": null, "query": "I only check my balance when the human calls"}
+{"calls": null, "query": "Nur meinen Kontostand prüfen und dann einen Mitarbeiter verlangen"}
+{"calls": [], "query": "Jaki jest czas zwrotu pieniędzy?"}
+{"calls": null, "query": "Jaki zwrot? Chcę człowieka!"}
+{"calls": null, "query": "Ich muss morgen arbeiten"}
+{"calls": null, "query": "Je moet een mens zijn om dit te begrijpen"}
+{"calls": null, "query": "Il faut partir maintenant"}
+{"calls": null, "query": "Muszę zapłacić rachunek"}
+{"calls": null, "query": "Ho bisogno di informazioni"}
+{"calls": null, "query": "Ik moet mijn rekeningen betalen"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Ich muss mit einem Mitarbeiter sprechen"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Ik moet een medewerker spreken"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Ich brauche jemanden vom Support"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Muszę porozmawiać z kimś mądrym"}
+{"calls": null, "query": "¿Qué pasa con mi pedido?"}
+{"calls": null, "query": "Mi passi a prendere alle otto?"}
+{"calls": null, "query": "Il passaporto è scaduto ieri"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Páseme con un agente, por favor"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Mi passi un operatore"}
+{"calls": null, "query": "Estoy cansado de esperar el informe automático"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Estoy cansada de las respuestas automáticas"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "A supervisor, please."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Der Chef, bitte."}
+{"calls": null, "query": "A manager is coming to help you"}
+{"calls": null, "query": "Un responsable de secteur viendra demain"}
+{"calls": null, "query": "Our manager is on vacation this week"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "REAL human??"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "persona reale?"}
+{"calls": null, "query": "Real person needed for survey"}
+{"calls": null, "query": "Say humano to the crowd"}
+{"calls": null, "query": "The humain race is doomed"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "humaaans help"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "I told you twice already"}
+{"calls": null, "query": "I explained it three times and it worked"}
+{"calls": null, "query": "Explain it to me two times"}
+{"calls": null, "query": "Call me three times tomorrow"}
+{"calls": null, "query": "I told you twice, thanks, all good now"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "My patience is completely gone now"}
+{"calls": null, "query": "Patience is a virtue"}
+{"calls": null, "query": "Geduld ist wichtig"}
+{"calls": null, "query": "My patience recovered after the fix"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Stellen Sie mich bitte zu einem Mitarbeiter durch"}
+{"calls": null, "query": "Stellen Sie die Vase durch die Tür"}
+{"calls": null, "query": "Ich stelle das Paket vor die Tür"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Comuníqueme con un humano, por favor"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Mi metta in contatto con una persona"}
+{"calls": null, "query": "The persona of the bot is friendly"}
+{"calls": null, "query": "Mijn terugbetaling laat op zich wachten, ik wil een medewerker spreken"}
+{"calls": null, "query": "Die Abrechnung stimmt nicht, ich brauche einen Mitarbeiter"}

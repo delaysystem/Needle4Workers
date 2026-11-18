@@ -2,69 +2,69 @@
   "model": "needle-3-20l",
   "engine": "wasm-simd128",
   "weightsSha": "eb33420b643d9eae311dd712504ef448735bcf08a9cca3fa11494dd3da170de7",
-  "goldenSha": "532177431a9e2d97488a9f421d7f7e786e06a917b3e923b40f8f8410359bf40b",
-  "goldenVersion": 2,
-  "minHits": 250,
+  "goldenSha": "9110757942db5cb0d706945e95d46a32677c6a94b04c567fab4687cfba041d18",
+  "goldenVersion": 3,
+  "minHits": 333,
   "summary": {
-    "total": 252,
-    "hits": 252,
-    "routingHits": 252,
-    "negatives": 42,
-    "negativeHits": 42,
+    "total": 336,
+    "hits": 336,
+    "routingHits": 336,
+    "negatives": 56,
+    "negativeHits": 56,
     "byLanguage": {
       "en": {
-        "total": 36,
-        "hits": 36
+        "total": 48,
+        "hits": 48
       },
       "de": {
-        "total": 36,
-        "hits": 36
+        "total": 48,
+        "hits": 48
       },
       "fr": {
-        "total": 36,
-        "hits": 36
+        "total": 48,
+        "hits": 48
       },
       "es": {
-        "total": 35,
-        "hits": 35
+        "total": 47,
+        "hits": 47
       },
       "it": {
-        "total": 37,
-        "hits": 37
+        "total": 49,
+        "hits": 49
       },
       "nl": {
-        "total": 36,
-        "hits": 36
+        "total": 48,
+        "hits": 48
       },
       "pl": {
-        "total": 36,
-        "hits": 36
+        "total": 48,
+        "hits": 48
       }
     },
     "byCategory": {
       "explicit": {
-        "total": 42,
-        "hits": 42
+        "total": 56,
+        "hits": 56
       },
       "implicit": {
-        "total": 42,
-        "hits": 42
+        "total": 56,
+        "hits": 56
       },
       "sarcastic": {
-        "total": 42,
-        "hits": 42
+        "total": 56,
+        "hits": 56
       },
       "multisentence": {
-        "total": 42,
-        "hits": 42
+        "total": 56,
+        "hits": 56
       },
       "edge": {
-        "total": 42,
-        "hits": 42
+        "total": 56,
+        "hits": 56
       },
       "negative": {
-        "total": 42,
-        "hits": 42
+        "total": 56,
+        "hits": 56
       }
     }
   },
@@ -98,7 +98,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 20,
+      "latencyMs": 22,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -127,7 +127,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 0,
+      "latencyMs": 1,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -156,7 +156,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 4,
+      "latencyMs": 5,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -185,7 +185,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 0,
+      "latencyMs": 2,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -272,7 +272,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 0,
+      "latencyMs": 1,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -301,7 +301,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 10831,
+      "latencyMs": 15435,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 424
@@ -359,7 +359,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1983,
+      "latencyMs": 2556,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 436
@@ -446,7 +446,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1,
+      "latencyMs": 0,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -475,7 +475,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 0,
+      "latencyMs": 1,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -504,7 +504,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 0,
+      "latencyMs": 1,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -562,7 +562,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 0,
+      "latencyMs": 1,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -736,7 +736,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2,
+      "latencyMs": 0,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -852,10 +852,10 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1557,
+      "latencyMs": 0,
       "timedOut": false,
-      "fastpath": false,
-      "completionChars": 377
+      "fastpath": true,
+      "completionChars": 0
     },
     {
       "id": "ev-00027",
@@ -954,7 +954,7 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 804,
+      "latencyMs": 1064,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 250
@@ -969,7 +969,7 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1025,
+      "latencyMs": 1377,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 241
@@ -1014,7 +1014,7 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 0,
+      "latencyMs": 1,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -1087,7 +1087,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1,
+      "latencyMs": 0,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -1145,7 +1145,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1,
+      "latencyMs": 0,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -1174,7 +1174,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1,
+      "latencyMs": 0,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -1203,7 +1203,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 0,
+      "latencyMs": 1,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -1261,7 +1261,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2808,
+      "latencyMs": 3335,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 424
@@ -1319,7 +1319,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 5782,
+      "latencyMs": 3031,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 432
@@ -1377,7 +1377,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3116,
+      "latencyMs": 3268,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 434
@@ -1406,7 +1406,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 4074,
+      "latencyMs": 4230,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 464
@@ -1667,7 +1667,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 4376,
+      "latencyMs": 4966,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 494
@@ -1914,7 +1914,7 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1891,
+      "latencyMs": 2035,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 250
@@ -1929,7 +1929,7 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1443,
+      "latencyMs": 1268,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 241
@@ -2018,7 +2018,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 0,
+      "latencyMs": 1,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -2221,7 +2221,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3029,
+      "latencyMs": 3564,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 415
@@ -2279,7 +2279,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2615,
+      "latencyMs": 2989,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 426
@@ -2308,7 +2308,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1,
+      "latencyMs": 0,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -2337,7 +2337,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3167,
+      "latencyMs": 4538,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 433
@@ -2366,7 +2366,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2848,
+      "latencyMs": 3791,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 437
@@ -2453,7 +2453,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 4363,
+      "latencyMs": 4391,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 440
@@ -2627,7 +2627,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 0,
+      "latencyMs": 1,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -2656,7 +2656,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1,
+      "latencyMs": 0,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -2830,7 +2830,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 0,
+      "latencyMs": 2,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -2874,7 +2874,7 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1036,
+      "latencyMs": 2834,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 250
@@ -2889,7 +2889,7 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1226,
+      "latencyMs": 1657,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 241
@@ -2904,7 +2904,7 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 5,
+      "latencyMs": 7,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -2919,7 +2919,7 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 0,
+      "latencyMs": 1,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -3036,7 +3036,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1,
+      "latencyMs": 0,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -3181,7 +3181,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2777,
+      "latencyMs": 4439,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 425
@@ -3239,7 +3239,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2579,
+      "latencyMs": 2904,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 425
@@ -3326,7 +3326,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3135,
+      "latencyMs": 3673,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 432
@@ -3355,7 +3355,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 0,
+      "latencyMs": 1,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -3732,7 +3732,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1379,
+      "latencyMs": 1625,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 376
@@ -3819,7 +3819,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 0,
+      "latencyMs": 1,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -3834,7 +3834,7 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1307,
+      "latencyMs": 1486,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 250
@@ -3849,7 +3849,7 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1001,
+      "latencyMs": 2182,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 241
@@ -3864,7 +3864,7 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1,
+      "latencyMs": 0,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -3894,7 +3894,7 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 0,
+      "latencyMs": 1,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -3996,7 +3996,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1,
+      "latencyMs": 0,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -4141,7 +4141,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2417,
+      "latencyMs": 3962,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 430
@@ -4199,7 +4199,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2126,
+      "latencyMs": 2039,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 422
@@ -4228,7 +4228,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1,
+      "latencyMs": 0,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -4286,7 +4286,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 4071,
+      "latencyMs": 3960,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 447
@@ -4402,7 +4402,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1,
+      "latencyMs": 0,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -4431,7 +4431,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 0,
+      "latencyMs": 1,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -4489,7 +4489,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1,
+      "latencyMs": 0,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -4547,7 +4547,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3730,
+      "latencyMs": 5597,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 485
@@ -4605,7 +4605,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 0,
+      "latencyMs": 1,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -4692,7 +4692,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1458,
+      "latencyMs": 1523,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 376
@@ -4794,7 +4794,7 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1170,
+      "latencyMs": 1776,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 256
@@ -4809,7 +4809,7 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1246,
+      "latencyMs": 1024,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 247
@@ -4898,7 +4898,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1,
+      "latencyMs": 0,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -4956,7 +4956,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 0,
+      "latencyMs": 1,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -5101,7 +5101,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1717,
+      "latencyMs": 2400,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 422
@@ -5159,7 +5159,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1860,
+      "latencyMs": 3498,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 435
@@ -5188,7 +5188,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1626,
+      "latencyMs": 3139,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 418
@@ -5275,7 +5275,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 0,
+      "latencyMs": 1,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -5362,7 +5362,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1,
+      "latencyMs": 0,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -5507,7 +5507,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2917,
+      "latencyMs": 5523,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 482
@@ -5754,7 +5754,7 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 865,
+      "latencyMs": 995,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 250
@@ -5769,7 +5769,7 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 935,
+      "latencyMs": 1533,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 241
@@ -5814,7 +5814,7 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1,
+      "latencyMs": 0,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -5916,7 +5916,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1,
+      "latencyMs": 0,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -6032,7 +6032,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2863,
+      "latencyMs": 3235,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 437
@@ -6061,7 +6061,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2404,
+      "latencyMs": 3918,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 425
@@ -6090,7 +6090,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2699,
+      "latencyMs": 3060,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 410
@@ -6119,7 +6119,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2977,
+      "latencyMs": 4938,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 442
@@ -6148,7 +6148,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 0,
+      "latencyMs": 1,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -6177,7 +6177,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2081,
+      "latencyMs": 5000,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 409
@@ -6206,7 +6206,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3853,
+      "latencyMs": 4864,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 475
@@ -6235,7 +6235,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3131,
+      "latencyMs": 4312,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 440
@@ -6264,7 +6264,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1,
+      "latencyMs": 0,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -6293,7 +6293,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 3266,
+      "latencyMs": 3998,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 430
@@ -6322,7 +6322,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 5716,
+      "latencyMs": 4945,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 431
@@ -6525,7 +6525,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 4903,
+      "latencyMs": 4453,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 452
@@ -6554,7 +6554,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2580,
+      "latencyMs": 1529,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 381
@@ -6641,7 +6641,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 2332,
+      "latencyMs": 2410,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 406
@@ -6699,7 +6699,7 @@
       ],
       "status": 200,
       "error": null,
-      "latencyMs": 1868,
+      "latencyMs": 2122,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 389
@@ -6714,7 +6714,7 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1282,
+      "latencyMs": 1291,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 256
@@ -6729,7 +6729,7 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 1390,
+      "latencyMs": 1263,
       "timedOut": false,
       "fastpath": false,
       "completionChars": 245
@@ -6744,7 +6744,7 @@
       "actual": [],
       "status": 200,
       "error": null,
-      "latencyMs": 0,
+      "latencyMs": 1,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
@@ -6789,11 +6789,2251 @@
       "actual": [],
       "status": 200,
       "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00252",
+      "lang": "en",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00253",
+      "lang": "en",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "billing"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "billing"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00254",
+      "lang": "en",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00255",
+      "lang": "en",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00256",
+      "lang": "en",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00257",
+      "lang": "en",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00258",
+      "lang": "en",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00259",
+      "lang": "en",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "billing"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "billing"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00260",
+      "lang": "en",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00261",
+      "lang": "en",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
       "latencyMs": 1,
       "timedOut": false,
       "fastpath": true,
       "completionChars": 0
+    },
+    {
+      "id": "ev-00262",
+      "lang": "en",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00263",
+      "lang": "en",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1916,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 250
+    },
+    {
+      "id": "ev-00264",
+      "lang": "de",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00265",
+      "lang": "de",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00266",
+      "lang": "de",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00267",
+      "lang": "de",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00268",
+      "lang": "de",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00269",
+      "lang": "de",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00270",
+      "lang": "de",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00271",
+      "lang": "de",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00272",
+      "lang": "de",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00273",
+      "lang": "de",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00274",
+      "lang": "de",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00275",
+      "lang": "de",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1667,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 247
+    },
+    {
+      "id": "ev-00276",
+      "lang": "fr",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00277",
+      "lang": "fr",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "billing"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "billing"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00278",
+      "lang": "fr",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00279",
+      "lang": "fr",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00280",
+      "lang": "fr",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00281",
+      "lang": "fr",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00282",
+      "lang": "fr",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00283",
+      "lang": "fr",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00284",
+      "lang": "fr",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00285",
+      "lang": "fr",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00286",
+      "lang": "fr",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00287",
+      "lang": "fr",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1318,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 250
+    },
+    {
+      "id": "ev-00288",
+      "lang": "es",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00289",
+      "lang": "es",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "billing"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "billing"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00290",
+      "lang": "es",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00291",
+      "lang": "es",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00292",
+      "lang": "es",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00293",
+      "lang": "es",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00294",
+      "lang": "es",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00295",
+      "lang": "es",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00296",
+      "lang": "es",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 3,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00297",
+      "lang": "es",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00298",
+      "lang": "es",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00299",
+      "lang": "es",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1300,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 241
+    },
+    {
+      "id": "ev-00300",
+      "lang": "it",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00301",
+      "lang": "it",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "billing"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "billing"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00302",
+      "lang": "it",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00303",
+      "lang": "it",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00304",
+      "lang": "it",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00305",
+      "lang": "it",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00306",
+      "lang": "it",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00307",
+      "lang": "it",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00308",
+      "lang": "it",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00309",
+      "lang": "it",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00310",
+      "lang": "it",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00311",
+      "lang": "it",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1635,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 250
+    },
+    {
+      "id": "ev-00312",
+      "lang": "nl",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00313",
+      "lang": "nl",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "billing"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "billing"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00314",
+      "lang": "nl",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00315",
+      "lang": "nl",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00316",
+      "lang": "nl",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00317",
+      "lang": "nl",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00318",
+      "lang": "nl",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00319",
+      "lang": "nl",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00320",
+      "lang": "nl",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00321",
+      "lang": "nl",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00322",
+      "lang": "nl",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00323",
+      "lang": "nl",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1039,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 250
+    },
+    {
+      "id": "ev-00324",
+      "lang": "pl",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00325",
+      "lang": "pl",
+      "category": "explicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "billing"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "billing"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00326",
+      "lang": "pl",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00327",
+      "lang": "pl",
+      "category": "implicit",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00328",
+      "lang": "pl",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00329",
+      "lang": "pl",
+      "category": "sarcastic",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00330",
+      "lang": "pl",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00331",
+      "lang": "pl",
+      "category": "multisentence",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00332",
+      "lang": "pl",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00333",
+      "lang": "pl",
+      "category": "edge",
+      "hit": true,
+      "routingHit": true,
+      "expected": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "actual": [
+        {
+          "name": "request_human_handoff",
+          "arguments": {
+            "reason": "general"
+          }
+        }
+      ],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00334",
+      "lang": "pl",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 0,
+      "timedOut": false,
+      "fastpath": true,
+      "completionChars": 0
+    },
+    {
+      "id": "ev-00335",
+      "lang": "pl",
+      "category": "negative",
+      "hit": true,
+      "routingHit": true,
+      "expected": [],
+      "actual": [],
+      "status": 200,
+      "error": null,
+      "latencyMs": 1526,
+      "timedOut": false,
+      "fastpath": false,
+      "completionChars": 247
     }
   ],
-  "createdAt": "2026-11-18T17:26:21.706Z"
+  "createdAt": "2026-11-18T18:00:15.346Z"
 }

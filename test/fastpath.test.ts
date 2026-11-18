@@ -153,10 +153,10 @@ describe("matchFastpath negatives", () => {
 });
 
 describe("golden implication proof", () => {
-  test("a match implies the gold is exactly [handoff({general})] — all 252 cases", () => {
+  test("a match implies the gold is exactly [handoff({general})] — all 336 cases", () => {
     const rows = fs.readFileSync(path.join(ROOT, "eval/goldens/eval.jsonl"), "utf-8")
       .trim().split("\n").map((l) => JSON.parse(l));
-    expect(rows.length).toBe(252);
+    expect(rows.length).toBe(336);
     const violations: string[] = [];
     let hits = 0;
     for (const row of rows) {
@@ -169,6 +169,6 @@ describe("golden implication proof", () => {
       if (!ok) violations.push(`${row.id}: ${JSON.stringify(row.answers)}`);
     }
     expect(violations).toEqual([]);
-    console.log(`fastpath fires on ${hits}/252 goldens, 0 implication violations`);
+    console.log(`fastpath fires on ${hits}/336 goldens, 0 implication violations`);
   });
 });
