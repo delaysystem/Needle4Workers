@@ -71,26 +71,27 @@ Serving default: `max_tokens` defaults to 128. The old 48 truncated
 43/252 golden tool calls (194/252 at 48 vs 237 at 128); a handoff call
 with 200-char details plus JSON needs ~60 tokens.
 
-## Depth ladder (measured 2026-11-14, v17 weights)
+## Depth ladder (measured 2026-11-18, v18 rank-128 weights)
 
-Rungs built on Kaggle CPU (`ladder_slice` over the merged 20L LoRA),
-scored on the frozen 252 goldens, heap measured in bun:
+Rungs sliced locally (`cactus build --layers N` over the merged 20L
+LoRA), scored engine-only on the frozen 252 goldens, heap = WASM
+linear memory after load+inference in bun. +Rules = deterministic
+verdict-layer projection (131/131 eval precision; measured 251 on 20L):
 
-| Rung | Exact | Routing | Heap | p50 | Verdict |
+| Rung | Exact | Routing | +Rules | Heap | Verdict |
 |---|---|---|---|---|---|
-| 4L | 7 (model ~1) | 123 | 35MB | — | unusable; coin-flips |
-| 8L | 8 | 200 | 63MB | 1.17s | routes at 80% but cannot ground args (186 spurious-reason) |
-| 12L | 29 | 203 | 90MB | 1.41s | same: routes, cannot ground (165 spurious-reason) |
-| 16L | 127 | 207 | 118MB | ~1.8s | half quality; marginal on 128MB isolates |
-| 20L | 238 | 245 | 145MB | 2.0s | production depth |
+| 4L | 20 | 186 | 140 | 35.4MB | smoke tests only |
+| 8L | 30 | 198 | 144 | 62.9MB | routes at 79%, cannot ground reasons |
+| 12L | 33 | 150 | 140 | 90.4MB | fits easily, weak everywhere |
+| 16L | 124 | 144 | 192 | 117.9MB | fits 128MB isolates; the slim pick |
+| 20L | 225 | 231 | 251 | 145.4MB | full quality; needs >128MB serving |
 
-Handoff knowledge concentrates brutally in the top layers: routing
-(i.e. call/no-call) arrives by 8L, but exact argument grounding needs
-16L+ and only converges at 20L. No rung below 20L earns production
-traffic — not for full serving (16L is 111 hits short), not for triage
-(80% routing misthrows 1 in 5), not for negatives. Depth-by-message-count
-routing is therefore parked: the worker stays single-depth 20L plus the
-regex fastpath. 4L/8L/12L keep one use: cheap load/shape smoke tests.
+Routing (call/no-call) arrives by 8L but exact reason grounding needs
+16L+ and only converges at 20L. The rules layer contributes most where
+the engine is weakest (+107–120 below 12L, +68 at 16L, +26 at 20L),
+which is why 16L+rules (192) is viable while 16L alone (124) is not.
+Latency per rung was not remeasured for v18 (last: 4L n/a, 8L 1.17s,
+12L 1.41s, 16L ~1.8s, 20L 2.0s on v17).
 
 ## Metrics vs eval
 
