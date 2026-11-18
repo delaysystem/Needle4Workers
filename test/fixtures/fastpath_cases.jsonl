@@ -148,9 +148,9 @@
 {"calls": null, "query": "My balance is zero."}
 {"calls": null, "query": "STOP! Hammer time."}
 {"calls": null, "query": "BOT! Come here!"}
-{"calls": null, "query": "Oh great, another bot. Just what I needed. NOT. Human. Now."}
-{"calls": null, "query": "I'M DONE WITH ROBOTS. HUMAN. NOW."}
-{"calls": null, "query": "This is ridiculous. Third time explaining. Person. Please."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Oh great, another bot. Just what I needed. NOT. Human. Now."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "I'M DONE WITH ROBOTS. HUMAN. NOW."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "This is ridiculous. Third time explaining. Person. Please."}
 {"calls": null, "query": "hello? anyone there? ...hello??"}
 {"calls": null, "query": "a/s/l?"}
 {"calls": null, "query": "My rental is due back tomorrow."}
@@ -165,3 +165,70 @@
 {"calls": null, "query": "Mijn wachtwoordreset komt nooit aan. Ik wil met een mens spreken."}
 {"calls": null, "query": "To nieakceptowalna obsługa. Chcę porozmawiać z konsultantem."}
 {"calls": null, "query": "Su conductor dañó mi valla. Quiero hablar con alguien."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "I demand to speak with your supervisor."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Let me talk to a human being."}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "My invoice is wrong. I demand to speak to your supervisor."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Enough. Human. Please."}
+{"calls": null, "query": "Can I speak to a manager about my bill?"}
+{"calls": null, "query": "I do not think this conversation is helping anyone. My bill is wrong though."}
+{"calls": null, "query": "Let me think about it."}
+{"calls": null, "query": "Demand is high this quarter."}
+{"calls": null, "query": "The human was nice. Thanks!"}
+{"calls": null, "query": "Human resources will call you."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Enough. Real human please."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Umano per favore."}
+{"calls": null, "query": "Every human, please note the exits."}
+{"calls": null, "query": "Say please to the human at the desk."}
+{"calls": null, "query": "Human please stop calling me right now"}
+{"calls": null, "query": "The human please ignored my message"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Manager, now!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Ya basta. Jefe, ahora."}
+{"calls": null, "query": "My supervisor now works elsewhere."}
+{"calls": null, "query": "The manager is busy now, call back later"}
+{"calls": null, "query": "Supervisor meeting now in room 3"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Hello? Anybody real here?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Pronto, c'è qualcuno di vero qui?"}
+{"calls": null, "query": "Anyone there? I need my balance."}
+{"calls": null, "query": "If anyone knows the answer, tell me"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "mensch hilfe"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "mens help"}
+{"calls": null, "query": "mens help me please I'm stuck"}
+{"calls": null, "query": "The mens help desk is closed today"}
+{"calls": null, "query": "The mens department is on floor two"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Zet me door naar een medewerker"}
+{"calls": null, "query": "Zet de plant door naar Jan."}
+{"calls": null, "query": "Zet het door naar de juiste afdeling"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "I'm sick of these bot replies"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Harto de las respuestas automáticas"}
+{"calls": null, "query": "I'm not fed up with the automated replies"}
+{"calls": null, "query": "Ich habe die automatischen Antworten nicht satt"}
+{"calls": null, "query": "The automated replies used to annoy me, but this one helped"}
+{"calls": null, "query": "I'm tired of waiting for the automated report"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Is there anyone real here?"}
+{"calls": null, "query": "Soy una persona real, no un bot"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Est-ce qu'il y a une vraie personne ?"}
+{"calls": null, "query": "Give me twenty minutes to make progress"}
+{"calls": null, "query": "Necesito veinte minutos más para avanzar"}
+{"calls": null, "query": "Questo tira e molla politico mi diverte"}
+{"calls": null, "query": "Ich bestehe den Test morgen"}
+{"calls": null, "query": "Ich will Mitarbeiter werden"}
+{"calls": null, "query": "Ik wil medewerker worden"}
+{"calls": null, "query": "Je veux être une personne importante"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "will mit nem menschen reden"}
+{"calls": null, "query": "Para el robot de cocina tengo un manual"}
+{"calls": null, "query": "Transfiera el saldo a mi cuenta"}
+{"calls": null, "query": "Przekażcie pozdrowienia Janowi"}
+{"calls": null, "query": "Put me through to voicemail"}
+{"calls": null, "query": "Comuníquese con nosotros mañana"}
+{"calls": null, "query": "Comuníqueme su número de pedido"}
+{"calls": null, "query": "Połączenie internetowe nie działa"}
+{"calls": null, "query": "Por la tarde la farmacia cierra temprano"}
+{"calls": null, "query": "Llegamos a un arreglo amistoso"}
+{"calls": null, "query": "Mis facturas llegan a tiempo, todo en orden"}
+{"calls": null, "query": "Y a-t-il une personne devant vous ?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Ich will einen Mitarbeiter sprechen"}
+{"calls": [], "query": "Jakie metody płatności akceptujecie?"}
+{"calls": [], "query": "Jaka jest polityka zwrotów?"}
+{"calls": null, "query": "Jakie ładne opakowanie!"}
+{"calls": null, "query": "Ihr Fahrer hat meinen Zaun beschädigt. Ich möchte mit einem Mitarbeiter sprechen"}
+{"calls": null, "query": "Mijn fiets is beschadigd, ik wil een medewerker spreken"}
