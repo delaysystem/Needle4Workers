@@ -4,10 +4,11 @@ import {
   HttpError,
   IDEMPOTENCY_CAP,
   IdempotencyCache,
+  PinnedTools,
   isSaturated,
   isTransientInferenceError,
-  stableToolsKey,
-  stripRequiredKeys,
+  preparePinnedTools,
+  resolveEngineToolsJson,
   validateChatBody,
   validateToolCalls,
 } from "./lib/guardrails";
@@ -16,7 +17,7 @@ import { Metrics, estimateTokens, logRequest } from "./lib/metrics";
 import { ChatCall, buildChatResponse } from "./lib/response";
 import { loadRules, matchRule } from "./lib/rules";
 import fastpathSpec from "./lib/fastpath.json";
-import { b2ConfigFromEnv, loadWeightsIntoEngine } from "./lib/weights";
+import { b2ConfigFromEnv, fetchWeightResponses, fillEngineFromResponses } from "./lib/weights";
 import { NeedleEngine } from "./wasm/needle-engine";
 
 // In-isolate engine singleton and linear memory mutex
@@ -32,6 +33,29 @@ let cachedRules: ReturnType<typeof loadRules> | null = null;
 function getRules() {
   if (!cachedRules) cachedRules = loadRules(fastpathSpec);
   return cachedRules;
+}
+
+let pinnedCache: { raw: string; pinned: PinnedTools | null } | null = null;
+/**
+ * Deployment-pinned tools from PINNED_TOOLS (a JSON tools array), parsed
+ * once per distinct value. Unset/empty = feature off; unparseable warns
+ * once per value and runs unpinned rather than 500ing every request.
+ */
+function getPinnedTools(env: Env): PinnedTools | null {
+  const raw = (env as any).PINNED_TOOLS as string | undefined;
+  if (!raw) return null;
+  if (!pinnedCache || pinnedCache.raw !== raw) {
+    let pinned: PinnedTools | null = null;
+    try {
+      const parsed: unknown = JSON.parse(raw);
+      if (!Array.isArray(parsed)) throw new Error("PINNED_TOOLS must be a JSON array of tools");
+      pinned = preparePinnedTools(parsed);
+    } catch (err: any) {
+      console.warn(`PINNED_TOOLS ignored (collapse off): ${err?.message ?? err}`);
+    }
+    pinnedCache = { raw, pinned };
+  }
+  return pinnedCache.pinned;
 }
 
 /** Drop a possibly poisoned engine so the next request rebuilds it. */
@@ -97,14 +121,20 @@ async function initFreshEngine(env: Env, baseUrl: string): Promise<NeedleEngine>
     .map((s) => s.trim())
     .filter(Boolean);
   const fresh = new NeedleEngine();
-  await fresh.initWasm();
-  const rc = await loadWeightsIntoEngine(fresh, {
-    chunks,
-    baseUrl,
-    assetsFetcher: env.ASSETS ?? null,
-    b2: b2ConfigFromEnv(env),
-    expectedSha: (env as any).WEIGHTS_SHA ?? null,
-  });
+  // Overlap: chunk fetch (network) runs while the WASM module imports and
+  // instantiates (local). The fill joins both — alloc needs response
+  // lengths and a live module. Promise.all subscribes to both legs, so a
+  // failed instantiate never leaves a rejected fetch unhandled.
+  const [_, fetched] = await Promise.all([
+    fresh.initWasm(),
+    fetchWeightResponses({
+      chunks,
+      baseUrl,
+      assetsFetcher: env.ASSETS ?? null,
+      b2: b2ConfigFromEnv(env),
+    }),
+  ]);
+  const rc = await fillEngineFromResponses(fresh, fetched, (env as any).WEIGHTS_SHA ?? null);
   if (rc !== 0) {
     throw new Error(`_needle_load failed with code ${rc}: refusing a corrupt engine`);
   }
@@ -208,7 +238,8 @@ export default {
         extra: Record<string, string> = {},
         outcome: {
           retried?: boolean; replayed?: boolean; saturated?: boolean; fastpath?: boolean;
-          decodeTps?: number; promptChars?: number; outputChars?: number;
+          pinned?: boolean;
+          decodeTps?: number; initMs?: number; promptChars?: number; outputChars?: number;
         } = {}
       ): Response => {
         const latencyMs = Date.now() - t0;
@@ -329,13 +360,18 @@ export default {
         let retried = false;
         // The engine sees required-stripped tools (its validator would
         // otherwise suppress every call); outputs are still validated
-        // against the caller's raw schema below.
-        const engineTools = stripRequiredKeys(tools);
-        const engineToolsJson = JSON.stringify(engineTools);
-        // Affinity key: consecutive same-tools requests skip the init
-        // prefill via the engine's single-prefix cache. Keyed on what
-        // the engine actually sees so equivalent schemas share inits.
-        const toolsKey = stableToolsKey(engineTools);
+        // against the caller's raw schema below. Pinned deployments
+        // collapse semantically identical callers onto the proven bytes.
+        const { json: engineToolsJson, pinned: pinnedTools } = resolveEngineToolsJson(
+          tools, getPinnedTools(env)
+        );
+        // Affinity key: the exact bytes the engine sees. The engine
+        // tokenizes the raw tools string, not parsed content (measured
+        // 2026-11-18: key order alone flips verdicts and misses the
+        // single-prefix cache), so only byte-identical neighbors share
+        // an init — a canonicalized key would batch requests that each
+        // still pay the full multi-second prefill.
+        const toolsKey = engineToolsJson;
         // Worker-measured init prefill: ~0ms on an engine prefix-cache hit,
         // seconds on a miss. Exposed per request so load tests can count
         // misses without inferring them from wall time.
@@ -345,12 +381,10 @@ export default {
             const tInit = Date.now();
             engine.init("", engineToolsJson);
             initMs = Date.now() - tInit;
-            try {
-              return engine.complete(query, maxTokens);
-            } finally {
-              // CRITICAL: ALWAYS reset KV cache in finally block!
-              engine.reset();
-            }
+            // No reset here: complete() resets the KV ring in its own
+            // finally on every path that creates KV state, so a second
+            // reset would only re-memset a clean ring.
+            return engine.complete(query, maxTokens);
           }, toolsKey);
         let rawResult;
         try {
@@ -358,15 +392,18 @@ export default {
         } catch (err) {
           if (!isTransientInferenceError(err)) throw err;
           retried = true;
-          // No reset here: runOnce's finally already reset, and a reset
+          // No reset here: complete()'s finally already reset, and a reset
           // outside the mutex could wipe KV state another request holds.
           rawResult = await runOnce();
         }
         engineHealth.noteSuccess();
 
-        // Measured compute for this inference (tps from the engine, sizes exact).
+        // Measured compute for this inference (tps from the engine, sizes exact;
+        // initMs rides along so prefix-cache misses show in logs + /v1/metrics).
         const compute = {
           decodeTps: typeof rawResult.decode_tps === "number" ? rawResult.decode_tps : undefined,
+          initMs,
+          pinned: pinnedTools,
           promptChars: query.length,
           outputChars: (rawResult.raw_output || "").length,
         };
@@ -416,6 +453,7 @@ export default {
             "X-Needle-Layers": env.NEEDLE_LAYERS || "20",
             "X-Needle-SIMD": "128",
             ...(retried ? { "X-Needle-Retried": "1" } : {}),
+            ...(pinnedTools ? { "X-Needle-Pinned": "1" } : {}),
           },
           { retried, ...compute }
         );

@@ -46,6 +46,46 @@ describe("unicode bridge", () => {
     expect(applyRules(rules, "un humain!")).toEqual([]);
     expect(applyRules(rules, "inhumains")).toBeNull();
   });
+
+  test("\\w spans Cyrillic like Python", () => {
+    const rules = loadRules({ rules: [{ id: "a", pattern: "\\bчеловек\\w*", calls: [] }] });
+    expect(applyRules(rules, "с человеком")).toEqual([]);
+    expect(applyRules(rules, "xчеловекy")).toBeNull();
+  });
+
+  test("\\b respects Cyrillic edges and case like Python", () => {
+    const rules = loadRules({ rules: [{ id: "a", pattern: "\\bспасибо\\b", calls: [] }] });
+    expect(applyRules(rules, "СПАСИБО!")).toEqual([]);
+    expect(applyRules(rules, "неспасибо")).toBeNull();
+    const uk = loadRules({ rules: [{ id: "a", pattern: "\\bлюдин\\w*\\b", calls: [] }] });
+    expect(applyRules(uk, "з людиною")).toEqual([]);
+    expect(applyRules(uk, "xлюдиною")).toBeNull();
+  });
+
+  test("shipped spec stays inside the bridge class", async () => {
+    const { WORD_CH } = await import("../src/lib/rules");
+    const spec = await Bun.file(
+      new URL("../src/lib/fastpath.json", import.meta.url).pathname
+    ).json();
+    const wordChar = new RegExp(`[${WORD_CH}]`);
+    const bad: string[] = [];
+    for (const rule of spec.rules) {
+      for (const ch of rule.pattern as string) {
+        const code = ch.codePointAt(0) as number;
+        if (code === 0xbf || code === 0xa1) continue; // ¿ ¡ match themselves
+        // ASCII, escapes, and regex syntax pass; every other literal
+        // must be a bridge word char or Python/JS diverge on it.
+        if (code > 0x7e && !wordChar.test(ch)) bad.push(`${rule.id}: U+${code.toString(16)}`);
+      }
+      // \w and \b must not appear inside [...] classes (the transform
+      // rewrites bare tokens only).
+      const classes = (rule.pattern as string).match(/\[(?:\\.|[^\]\\])*\]/g) ?? [];
+      for (const cls of classes) {
+        if (/\\[wb]/.test(cls)) bad.push(`${rule.id}: \\w/\\b inside ${cls.slice(0, 20)}`);
+      }
+    }
+    expect(bad).toEqual([]);
+  });
 });
 
 describe("verdict copies", () => {

@@ -284,3 +284,660 @@
 {"calls": null, "query": "The persona of the bot is friendly"}
 {"calls": null, "query": "Mijn terugbetaling laat op zich wachten, ik wil een medewerker spreken"}
 {"calls": null, "query": "Die Abrechnung stimmt nicht, ich brauche einen Mitarbeiter"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Manager, maintenant!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Kierownika, już!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Osobę poproszę"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Ludzi poproszę"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Żywy człowiek?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Ktoś prawdziwy?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Uomo aiuto!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Tam ktoś prawdziwy?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Nie sądzę, że to pomaga"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Czekamy od dwudziestu minut bez postępu"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Zapłaciłem za premium, a bot milczy. Poproszę obsługę."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Ik heb jullie automatische antwoorden gehad"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Hin und Her verschwendet Zeit"}
+{"calls": null, "query": "Le superviseur arrive maintenant"}
+{"calls": null, "query": "Szef już idzie"}
+{"calls": null, "query": "Już dobrze, dziękuję"}
+{"calls": null, "query": "Maintenant, comment ça marche?"}
+{"calls": null, "query": "Osobno poproszę"}
+{"calls": null, "query": "To nie dla człowieka"}
+{"calls": null, "query": "Poproszę o spokój"}
+{"calls": null, "query": "To żywy człowiek, nie bot"}
+{"calls": null, "query": "Prawdziwy problem, nieprawdaż?"}
+{"calls": null, "query": "Sei umano, aiuto non serve"}
+{"calls": null, "query": "umano aiuto per favore"}
+{"calls": null, "query": "Humanoid robots help"}
+{"calls": null, "query": "Tam ktoś zostawił telefon"}
+{"calls": null, "query": "Ktoś prawdziwy zostawił to tu"}
+{"calls": null, "query": "Myślę, że to pomaga"}
+{"calls": null, "query": "Nie sądzę, żeby padało"}
+{"calls": null, "query": "Pomocy!"}
+{"calls": null, "query": "Czekam od dwudziestu minut"}
+{"calls": null, "query": "Bez żadnego postępu, ale spróbuję dalej"}
+{"calls": null, "query": "Spotkamy się za dwadzieścia minut"}
+{"calls": null, "query": "Zapłaciłem za premium, bot działa świetnie"}
+{"calls": null, "query": "Dziękuję za dobrą obsługę"}
+{"calls": null, "query": "Ik heb de automatische update gehad"}
+{"calls": null, "query": "Ik heb gehad wat ik nodig had"}
+{"calls": null, "query": "Verschwenden Sie keine Zeit"}
+{"calls": null, "query": "Quel après-midi magnifique"}
+{"calls": null, "query": "Nie marnuj czasu"}
+{"calls": null, "query": "Marnuję czas na głupoty"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Ktoś?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Quelqu'un?"}
+{"calls": null, "query": "Someone left this here"}
+{"calls": null, "query": "Is someone there?"}
+{"calls": null, "query": "Someone to talk to would be nice"}
+{"calls": null, "query": "Someone told me to call"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Geben Sie mir einen Menschen"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Donnez-moi un agent!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Deme una persona, por favor"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Mi dia un operatore"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Faccia chiamare una persona per favore"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Laat een medewerker me bellen"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Dajcie mi kierownika"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Bitte lassen Sie mich von einer Person anrufen"}
+{"calls": null, "query": "Wenn Sie mir einen Menschen geben würden, wäre ich froh"}
+{"calls": null, "query": "Sagen Sie nicht: Lassen Sie mich von einem Mitarbeiter anrufen"}
+{"calls": null, "query": "En panne? Ne dites pas 'Donnez-moi une personne', dites 'au revoir'."}
+{"calls": null, "query": "Deme una persona? No, mejor espero"}
+{"calls": null, "query": "No me des una persona todavía"}
+{"calls": null, "query": "Dajcie mi znać"}
+{"calls": null, "query": "Nie dajcie mi człowieka"}
+{"calls": null, "query": "Mi ha dato una persona ieri, grazie"}
+{"calls": null, "query": "What does 'Lassen Sie mich von einem Mitarbeiter anrufen' mean?"}
+{"calls": null, "query": "Laat me met rust"}
+{"calls": null, "query": "Faccia pure con comodo"}
+{"calls": null, "query": "Deme tiempo para pensarlo"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Give me a human, I value your opinion"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Donnez-moi une personne. J'ai un avis sur tout ça."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "I need someone with experience"}
+{"calls": null, "query": "Donnez-moi votre avis, pas une personne"}
+{"calls": null, "query": "Give me your opinion, not a human"}
+{"calls": null, "query": "Dame tu opinión, no una persona"}
+{"calls": null, "query": "Gib mir deine Meinung, keinen Menschen"}
+{"calls": null, "query": "Geef me je mening, geen mens"}
+{"calls": null, "query": "Daj mi swoją opinię, nie człowieka"}
+{"calls": null, "query": "Dammi la tua opinione, non una persona"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "I want to talk to a person, not a bot"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "I need a person, not a machine"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Je veux parler à une personne, pas un robot"}
+{"calls": null, "query": "Give me an apple, not a person"}
+{"calls": null, "query": "Donnez-moi une pomme, pas une personne"}
+{"calls": null, "query": "Dame una manzana, no una persona"}
+{"calls": null, "query": "Dammi una mela, non una persona"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "You keep repeating the help page"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Stop repeating the same answer"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Do your answers repeat the help page?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "All solutions assume false premises"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Each reply supposes things that aren't true"}
+{"calls": null, "query": "Your answers repeat the help page, which is exactly what I needed, thanks!"}
+{"calls": null, "query": "Your answers don't just repeat the help page"}
+{"calls": null, "query": "Please don't repeat the help page, just the link"}
+{"calls": null, "query": "Your answers repeat the help page, and the bill arrived yesterday"}
+{"calls": null, "query": "Every solution you offer assumes I have admin access"}
+{"calls": null, "query": "Every solution worked, thanks!"}
+{"calls": null, "query": "No solution assumes false things here"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "I don't like bots. Your answers repeat the help page."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Vos réponses ne font que répéter la page d'aide"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "I don't agree. Every solution assumes false premises"}
+{"calls": null, "query": "Je ne vais pas répéter la page"}
+{"calls": null, "query": "Ne répète pas la page d'aide"}
+{"calls": null, "query": "Ne répète jamais la page"}
+{"calls": null, "query": "Not every solution assumes false things"}
+{"calls": null, "query": "Je ne pense pas que chaque solution suppose des choses fausses"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Non, vos réponses répètent la page d'aide"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "No, every solution assumes false premises"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Vos réponses répètent la page d'aide"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Vous répétez la page d'aide"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Sie wiederholen die Hilfeseite"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Jij herhaalt de helppagina"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "You repeat the help page"}
+{"calls": null, "query": "Repito: la página de ayuda dice que sí"}
+{"calls": null, "query": "Ripeto, la pagina di aiuto dice così"}
+{"calls": null, "query": "Powtarzam: strona pomocy mówi tak"}
+{"calls": null, "query": "I repeat, the help page says hi"}
+{"calls": null, "query": "Ich wiederhole die Hilfeseite gern"}
+{"calls": null, "query": "Je répète la page d'aide pour moi"}
+{"calls": null, "query": "Ik herhaal de helppagina even"}
+{"calls": [], "query": "Where can I update my delivery address?"}
+{"calls": [], "query": "Is my new address updated?"}
+{"calls": [], "query": "Kann ich meine Lieferadresse ändern?"}
+{"calls": [], "query": "Is the store open on Sundays?"}
+{"calls": [], "query": "Quand ouvre le magasin?"}
+{"calls": [], "query": "Thanks, that's great!"}
+{"calls": [], "query": "Merci, c'est parfait!"}
+{"calls": [], "query": "Danke, das funktioniert!"}
+{"calls": [], "query": "Dankjewel, het werkt perfect!"}
+{"calls": [], "query": "Dzięki, działa świetnie!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Chce gadac z kims"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "How do I change my delivery address? Actually, get me a human."}
+{"calls": null, "query": "My delivery address is wrong, fix it now!"}
+{"calls": null, "query": "How do I change my password?"}
+{"calls": null, "query": "Change my delivery address"}
+{"calls": null, "query": "When will you close my account?"}
+{"calls": null, "query": "What time does the store close for a human?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Store hours? Actually I need a person"}
+{"calls": null, "query": "The store is closed, I need help"}
+{"calls": null, "query": "Cosa faccio ora?"}
+{"calls": null, "query": "Thanks, that never worked"}
+{"calls": null, "query": "Thanks, not solved yet"}
+{"calls": null, "query": "Merci, pas résolu"}
+{"calls": null, "query": "Danke, nicht gelöst"}
+{"calls": null, "query": "Gracias, no funcionó"}
+{"calls": null, "query": "Grazie, non funziona"}
+{"calls": null, "query": "Bedankt, niet gewerkt"}
+{"calls": null, "query": "Dzięki, nie działa"}
+{"calls": null, "query": "Thanks a bunch. NOT solved"}
+{"calls": null, "query": "Problem solved... not!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Thanks, that worked. Now get me a human"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Danke, das hat funktioniert. Ich brauche einen Mitarbeiter"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Merci, ça marche. Donnez-moi un agent"}
+{"calls": null, "query": "Thanks, but my bill is still wrong"}
+{"calls": null, "query": "Danke, aber die Rechnung stimmt nicht"}
+{"calls": null, "query": "Thanks, I think that worked"}
+{"calls": null, "query": "Dzięki, chyba działa"}
+{"calls": null, "query": "Thanks for nothing"}
+{"calls": null, "query": "Thanks a lot. My account is still locked"}
+{"calls": null, "query": "Thanks!"}
+{"calls": null, "query": "Thank you for your help"}
+{"calls": null, "query": "Thanks, that worked. Just kidding, it's broken"}
+{"calls": null, "query": "Nie chce gadac z czlowiekiem"}
+{"calls": null, "query": "niechce gadac z czlowiekiem"}
+{"calls": null, "query": "Chce gadac z toba"}
+{"calls": null, "query": "Chce gadac z czlowiekiem? Nie, dziękuję"}
+{"calls": null, "query": "Thanks, I need it faster"}
+{"calls": null, "query": "Thanks, the router works now"}
+{"calls": [], "query": "Wo kann ich meine Versandadresse ändern?"}
+{"calls": [], "query": "Waar kan ik mijn bezorgadres wijzigen?"}
+{"calls": [], "query": "Danke für die gelöste Aufgabe"}
+{"calls": [], "query": "Merci pour les problèmes résolus"}
+{"calls": [], "query": "Gracias por los problemas resueltos"}
+{"calls": [], "query": "Grazie per i problemi risolti"}
+{"calls": [], "query": "Bedankt, het werkte meteen"}
+{"calls": [], "query": "Dzięki, sprawa rozwiązana"}
+{"calls": [], "query": "Dzięki, wszystko idealnie!"}
+{"calls": null, "query": "Où est le bureau de change?"}
+{"calls": null, "query": "Cambia idea ogni giorno"}
+{"calls": null, "query": "Rozwiązanie jest złe, dziękuję"}
+{"calls": null, "query": "Oh brilliant, another chatbot. Anyway, where are my account settings?"}
+{"calls": null, "query": "Fantastic, a robot. What was my last invoice?"}
+{"calls": null, "query": "Yeah right, like that's going to help. Whatever."}
+{"calls": null, "query": "Super. Ein Roboter. Na toll."}
+{"calls": null, "query": "Genial, un robot más. Da igual."}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Oh great, another bot. Can you connect me to a supervisor?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Yeah, because talking to a robot always solves everything. Anyway I need a real person."}
+{"calls": null, "query": "Wonderful. Just wonderful. My printer is on fire and nobody cares."}
+{"calls": null, "query": "Brilliant. Absolutely brilliant. Thanks for nothing, you useless bot."}
+{"calls": null, "query": "Sure, the bot will definitely fix my billing issue. Sure."}
+{"calls": null, "query": "Oh perfect, another human asking me to wait. Just kidding, take your time, no rush."}
+{"calls": null, "query": "Wunderbar. Noch ein Bot. Mir doch egal, mach was du willst."}
+{"calls": null, "query": "Thanks, it works. Not that you did anything."}
+{"calls": null, "query": "Danke, funktioniert. Nicht dass du geholfen hättest."}
+{"calls": null, "query": "Great, it works! Now break something else, genius."}
+{"calls": [], "query": "Why is my bill higher this month?"}
+{"calls": [], "query": "Why is my balance zero?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "You repeat the same answer after every chat"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Sie wiederholen die Hilfeseite nach jedem Anruf"}
+{"calls": null, "query": "Why is my bill so high?!"}
+{"calls": null, "query": "Pourquoi ma facture est-elle si élevée ?"}
+{"calls": null, "query": "Warum ist meine Rechnung so hoch?!"}
+{"calls": null, "query": "Why is my bill too high?!"}
+{"calls": null, "query": "Why such high fees?!"}
+{"calls": null, "query": "Wiederhol die Hilfeseite"}
+{"calls": null, "query": "Bitte wiederhol die Hilfeseite"}
+{"calls": null, "query": "Herhaal de helppagina"}
+{"calls": null, "query": "Powtarzaj stronę pomocy"}
+{"calls": null, "query": "Wiederholen Sie die Hilfeseite"}
+{"calls": null, "query": "Repeat after me: the help page"}
+{"calls": null, "query": "Wiederhole nach mir die Hilfeseite"}
+{"calls": null, "query": "Répète après moi la page d'aide"}
+{"calls": null, "query": "Repite después de mí la página de ayuda"}
+{"calls": null, "query": "Ripeti dopo di me la pagina di aiuto"}
+{"calls": null, "query": "Herhaal na mij de helppagina"}
+{"calls": null, "query": "Powtarzaj za mną stronę pomocy"}
+{"calls": null, "query": "Danke für nichts"}
+{"calls": null, "query": "Merci pour rien"}
+{"calls": null, "query": "Gracias por nada"}
+{"calls": null, "query": "Grazie di niente"}
+{"calls": null, "query": "Bedankt voor niks"}
+{"calls": null, "query": "Dzięki za nic"}
+{"calls": null, "query": "No human needed, thanks"}
+{"calls": null, "query": "Dites-moi une personne à contacter"}
+{"calls": null, "query": "How do I change the subject?"}
+{"calls": null, "query": "I want to change my delivery address"}
+{"calls": null, "query": "What time is it?"}
+{"calls": null, "query": "When do you close?"}
+{"calls": null, "query": "Every solution assumes good faith"}
+{"calls": null, "query": "Chce gadac z botem"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Embert kérek"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Hanem kérek egy embert"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Nu, vreau o persoană"}
+{"calls": null, "query": "Nem kérek embert"}
+{"calls": null, "query": "Vill inte ha en människa"}
+{"calls": null, "query": "Jeg vil ikke snakke med et menneske"}
+{"calls": null, "query": "Vil ikke ha et menneske her"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Quero uma pessoa"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Me dá um agente"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Bir görevli istiyorum"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "İstiyorum bir görevli"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Bana bir görevli verin"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Jag vill ha en människa"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Ge mig en agent"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Jeg vil have et menneske"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Giv mig en agent"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Jeg gider godt en agent"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Jeg vil ha et menneske"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Gi meg en agent"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Chci mluvit s člověkem"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Dejte mi operátora"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Vreau o persoană"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Dați-mi un agent"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Kérek egy embert"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Adjon egy embert"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Хочу поговорить с человеком"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Дайте мне человека"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Хочу поговорити з людиною"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Дайте мені людину"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Мені потрібна людина"}
+{"calls": null, "query": "No quiero nada de nadie, solo un humano"}
+{"calls": null, "query": "I want no agent"}
+{"calls": null, "query": "Ich will keinen Menschen"}
+{"calls": null, "query": "Je veux pas de personne"}
+{"calls": null, "query": "Ik wil geen mens"}
+{"calls": null, "query": "Vreau nu o persoană"}
+{"calls": null, "query": "Dê-me a sua opinião, não uma pessoa"}
+{"calls": null, "query": "Bana fikrini ver, değil bir insan"}
+{"calls": null, "query": "I want nobody here"}
+{"calls": null, "query": "I want to be an agent"}
+{"calls": null, "query": "Quero ser atendido"}
+{"calls": null, "query": "Nechci člověka"}
+{"calls": null, "query": "Få mennesker vet detta"}
+{"calls": null, "query": "Jeg gider ikke en agent"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Bana bir görevli verin"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Me conecte com um agente"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Beni operatöre bağlayın"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Koppla mig till en agent"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Stil mig igennem til en agent"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Sett meg over til en agent"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Přepojte mě na operátora"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Conectează-mă cu un agent"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Kapcsoljon egy ügyintézőhöz"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Соедините меня с оператором"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "З'єднайте мене з оператором"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Insisto em falar com gente"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Israrla bir temsilci istiyorum"}
+{"calls": null, "query": "Passa o sal, por favor"}
+{"calls": null, "query": "Pune telefonul jos"}
+{"calls": null, "query": "Stille et spørgsmål om regningen"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Sätt mig över till en agent"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Sæt mig igennem til en agent"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Me dá uma pessoa"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Bana bir görevli verin"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Transferă-mă la un agent"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Gerente, agora!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Müdür, hemen!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Chefen, nu!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Sjefen, nå!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Šéfe, teď!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Șefule, acum!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Főnök, most!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Менеджер, сейчас!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Менеджер, зараз!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "STOP BOT HUMANO!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Alguém?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Biri?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Någon?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Nogen?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Noen?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Někdo?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Cineva?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Valaki?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Кто-нибудь?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Хтось?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Tem alguém real aí?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Orada gerçek biri var mı?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Finns det någon riktig här?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Er der nogen rigtig her?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Er det noen virkelig her?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Je tu skutečný člověk?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Este cineva real aici?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Van itt igazi ember?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Есть здесь настоящий человек?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Є тут справжня людина?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Uma pessoa, por favor"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Bir görevli, lütfen"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "En agent, tak"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "En agent, tak"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "En agent, takk"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Člověka, prosím"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Un agent, vă rog"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Embert kérem"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Человека, пожалуйста"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Людину, будь ласка"}
+{"calls": null, "query": "Någonstans?"}
+{"calls": null, "query": "Nogenlunde?"}
+{"calls": null, "query": "Dejte mi pokoj s robotem"}
+{"calls": [], "query": "Obrigado, resolvido!"}
+{"calls": [], "query": "Teşekkürler, çalışıyor!"}
+{"calls": [], "query": "Tack, det fungerar!"}
+{"calls": [], "query": "Tak, det virker!"}
+{"calls": [], "query": "Takk, det fungerer!"}
+{"calls": [], "query": "Díky, funguje!"}
+{"calls": [], "query": "Mulțumesc, funcționează!"}
+{"calls": [], "query": "Köszi, működik!"}
+{"calls": [], "query": "Спасибо, работает!"}
+{"calls": [], "query": "Дякую, працює!"}
+{"calls": [], "query": "Eyvallah, çalışıyor!"}
+{"calls": null, "query": "Obrigado por nada"}
+{"calls": null, "query": "Hiçbir şey için sağol"}
+{"calls": null, "query": "Tack för ingenting"}
+{"calls": null, "query": "Tak for ingenting"}
+{"calls": null, "query": "Takk for ingenting"}
+{"calls": null, "query": "Díky za nic"}
+{"calls": null, "query": "Mulțumesc pentru nimic"}
+{"calls": null, "query": "Köszi semmiért"}
+{"calls": null, "query": "Спасибо ни за что"}
+{"calls": null, "query": "Дякую ні за що"}
+{"calls": null, "query": "Não preciso de humanos, obrigado"}
+{"calls": null, "query": "Valeu a pena?"}
+{"calls": null, "query": "Valeu!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "En agent, tack"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Uma pessoa para mim, por favor"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Uma pessoa para você, por favor"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "A person for me, please"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Eine Person für mich, bitte"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Une personne pour moi, s'il vous plaît"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Una persona para mí, por favor"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Una persona per me, per favore"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Een persoon voor mij, alsjeblieft"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Osobę dla mnie, proszę"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Bir görevli benim için, lütfen"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Bir görevli benim icin, lütfen"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "En person för mig, tack"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "En person for mig, tak"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "En person for meg, takk"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Osobu pro mě, prosím"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "O persoană pentru mine, vă rog"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Egy embert nekem, kérem"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Человека для меня, пожалуйста"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Людину для мене, будь ласка"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Uma pessoa, para mim, por favor"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "A person for me please hold the line"}
+{"calls": null, "query": "A person for me? No, please do not"}
+{"calls": null, "query": "Para mim, uma conta, por favor"}
+{"calls": null, "query": "Uma pessoa para amanhã, por favor"}
+{"calls": [], "query": "Obrigado bot"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Jag vill ha en person"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Хочу человека"}
+{"calls": null, "query": "Quero dinheiro de uma pessoa"}
+{"calls": null, "query": "Obrigado bot, minha fatura está errada"}
+{"calls": null, "query": "Duvido que minha fatura esteja certa, me passe uma pessoa"}
+{"calls": null, "query": "Quero uma pessoa para meu pagamento"}
+{"calls": null, "query": "Teşekkürler bot, faturam yanlış"}
+{"calls": null, "query": "Param için bir görevli istiyorum"}
+{"calls": null, "query": "Ücretim için bir insan istiyorum"}
+{"calls": null, "query": "Köszi robot, rossz a számla"}
+{"calls": null, "query": "Embert akarok a pénzemért"}
+{"calls": null, "query": "Спасибо бот, мой счёт неверный"}
+{"calls": null, "query": "Хочу человека за свои деньги"}
+{"calls": null, "query": "Дякую бот, мій рахунок неправильний"}
+{"calls": null, "query": "Хочу людину за свої гроші"}
+{"calls": null, "query": "Jag vill ha en person för mina pengar"}
+{"calls": null, "query": "Tack boten, min betalning är fel"}
+{"calls": null, "query": "Jeg vil have en person for mine penge"}
+{"calls": null, "query": "Tak bot, min regning er forkert"}
+{"calls": null, "query": "Jeg vil ha en person for pengene mine"}
+{"calls": null, "query": "Takk bot, regningen min er feil"}
+{"calls": null, "query": "Chci osobu za své peníze"}
+{"calls": null, "query": "Díky robot, moje platba je špatně"}
+{"calls": null, "query": "Vreau o persoană pentru banii mei"}
+{"calls": null, "query": "Mulțumesc bot, plata mea este greșită"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Duvido disso, me ajuda?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Sanmıyorum, yardım edin"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Jag tvivlar, hjälp mig"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Jeg tvivler, hjælp mig"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Jeg tviler, hjelp meg"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Pochybuji, pomozte mi"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Mă îndoiesc, ajută-mă"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Kétlem, segítsen"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Сомневаюсь, помогите"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Сумніваюся, допоможіть"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Minha paciência acabou!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Sabrım taştı!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Tålamodet tryter!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Min tålmodighed er slut!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Tålmodigheten min tar slutt!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Moje trpělivost došla!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Răbdarea mea s-a terminat!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Elfogyott a türelmem!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Моё терпение лопнуло!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Моє терпіння урвалося!"}
+{"calls": [{"arguments": {"reason": "technical"}, "name": "request_human_handoff"}], "query": "Minha impressora quebrou, chame o técnico"}
+{"calls": [{"arguments": {"reason": "technical"}, "name": "request_human_handoff"}], "query": "Yazıcım bozuldu, teknisyen çağırın"}
+{"calls": [{"arguments": {"reason": "technical"}, "name": "request_human_handoff"}], "query": "Skrivaren gick sönder, skicka en tekniker"}
+{"calls": [{"arguments": {"reason": "technical"}, "name": "request_human_handoff"}], "query": "Printeren er i stykker, send en tekniker"}
+{"calls": [{"arguments": {"reason": "technical"}, "name": "request_human_handoff"}], "query": "Skriveren er død, send en tekniker"}
+{"calls": [{"arguments": {"reason": "technical"}, "name": "request_human_handoff"}], "query": "Tiskárna se rozbila, zavolejte technika"}
+{"calls": [{"arguments": {"reason": "technical"}, "name": "request_human_handoff"}], "query": "Imprimanta s-a stricat, chemați tehnicianul"}
+{"calls": [{"arguments": {"reason": "technical"}, "name": "request_human_handoff"}], "query": "A nyomtató elromlott, hívjon szerelőt"}
+{"calls": [{"arguments": {"reason": "technical"}, "name": "request_human_handoff"}], "query": "Принтер сломался, вызовите техника"}
+{"calls": [{"arguments": {"reason": "technical"}, "name": "request_human_handoff"}], "query": "Принтер зламався, викличте техніка"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Fui debitado duas vezes, resolva isso"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Kartımdan iki kez kesildi, düzeltin"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Jag debiterades två gånger, fixa det"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Jeg blev debiteret to gange, fikse det"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Jeg ble debitert to ganger, fiks det"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Bylo mi naúčtováno dvakrát, opravte to"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Am fost debitat de două ori, rezolvați"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Kétszer vonták le, javítsák ki"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "С меня списали дважды, исправьте"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "З мене списали двічі, виправте"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Minha fatura está errada, quero uma pessoa"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Faturam yanlış, bir görevli istiyorum"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Min faktura är fel, jag vill ha en person"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Min regning er forkert, jeg vil have en person"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Regningen min er feil, jeg vil ha en person"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Můj účet je špatně, chci osobu"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Factura mea este greșită, vreau o persoană"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "A számla rossz, embert kérek"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Мой счёт неверный, хочу человека"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Мій рахунок неправильний, хочу людину"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Fatura não paga, quero uma pessoa"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Fatura ödenmiş değil, görevli istiyorum"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Fakturan inte betald, jag vill ha en person"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Regningen ikke betalt, jeg vil have en person"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Regningen ikke betalt, jeg vil ha en person"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Faktura není zaplacená, chci osobu"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Factura nu este plătită, vreau o persoană"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "A számla nincs kifizetve, embert kérek"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Счёт не оплачен, хочу человека"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Рахунок не сплачений, хочу людину"}
+{"calls": [], "query": "Só vendo meu saldo"}
+{"calls": [], "query": "Sadece bakiyeme bakıyorum"}
+{"calls": [], "query": "Kollar bara saldot"}
+{"calls": [], "query": "Tjekker bare min saldo"}
+{"calls": [], "query": "Sjekker bare saldoen"}
+{"calls": [], "query": "Jen kontroluji zůstatek"}
+{"calls": [], "query": "Doar verific soldul"}
+{"calls": [], "query": "Csak megnézem az egyenleget"}
+{"calls": [], "query": "Только проверю баланс"}
+{"calls": [], "query": "Тільки перевірю баланс"}
+{"calls": null, "query": "Duvido que a fatura esteja certa, me ajuda"}
+{"calls": null, "query": "Fatura hakkında şüpheliyim, yardım edin"}
+{"calls": null, "query": "Duvido, obrigado"}
+{"calls": null, "query": "Tenha paciência"}
+{"calls": null, "query": "Só vendo meu saldo e está errado!"}
+{"calls": null, "query": "Minha impressora funciona, obrigado"}
+{"calls": null, "query": "Fui debitado, obrigado"}
+{"calls": null, "query": "Minha fatura está errada"}
+{"calls": null, "query": "Fatura não paga"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Meu aluguel de carro precisa de ajuda"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Araç kiralama için yardım lazım"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Min hyrbil behöver hjälp"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Min lejebil behøver hjælp"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Leiebilen min trenger hjelp"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Pronájem auta, potřebuji pomoc"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Închiriere auto, am nevoie de ajutor"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Autóbérlés, segítség kell"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Аренда авто, нужна помощь"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Оренда авто, потрібна допомога"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Meu pedido está atrasado na farmácia, me ligue"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Siparişim gecikti, eczaneden beni arayın"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Min beställning är försenad på apoteket, ring mig"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Min bestilling er forsinket på apoteket, ring mig"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Bestillingen min er forsinket på apoteket, ring meg"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Moje objednávka se opozdila v lékárně, zavolejte mi"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Comanda mea este întârziată la farmacie, sună-mă"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Késik a rendelésem a gyógyszertárban, hívjon vissza"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Мой заказ опаздывает в аптеку, перезвоните"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Моє замовлення запізнюється в аптеку, передзвоніть"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Estou farto deste bot"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Bu bottan bıktım"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Jag är trött på den här boten"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Jeg er træt af den her bot"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Jeg er lei av denne boten"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Mám dost toho robota"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "M-am săturat de botul ăsta"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Elegem van ebből a botból"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Мне надоел этот бот"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Мені набрид цей бот"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Ser jogado de um lado para o outro custa tempo"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Oradan oraya yollanmak israf, zamanım gidiyor"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Att bollas fram och tillbaka kostar tid"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "At blive kastet frem og tilbage koster tid"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Å bli kastet fram og tilbake koster tid"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "To přehazování stojí čas"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Să fiu plimbat de colo-colo costă timp"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Az ide-oda küldözgetés pazarlás és időpocsékolás"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Меня футболят туда-сюда, это стоит времени"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Мене футболять туди-сюди, це коштує часу"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Vinte minutos sem progresso"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Yirmi dakikadır ilerleme yok"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Tjugo minuter utan framsteg"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Tyve minutter uden fremskridt"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Tjue minutter uten fremgang"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Dvacet minut bez pokroku"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Douăzeci de minute fără progres"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Húsz perce semmi előrelépés"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Двадцать минут без прогресса"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Двадцять хвилин без прогресу"}
+{"calls": [{"arguments": {"reason": "billing"}, "name": "request_human_handoff"}], "query": "Meu aluguel de carro foi cobrado, preciso de uma pessoa"}
+{"calls": null, "query": "Meu pedido está atrasado"}
+{"calls": null, "query": "Não estou farto do bot"}
+{"calls": null, "query": "Estou farto"}
+{"calls": null, "query": "No estoy harto del bot"}
+{"calls": null, "query": "Custa tempo"}
+{"calls": null, "query": "Vinte minutos e tudo resolvido"}
+{"calls": null, "query": "Meu aluguel de carro foi cobrado duas vezes"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Já expliquei duas vezes!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "İki kez anlattım!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Jag har förklarat två gånger!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Jeg har forklaret to gange!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Jeg har forklart to ganger!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Dvakrát jsem vysvětlil!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Am explicat de două ori!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Kétszer elmagyaráztam!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Я дважды объяснил!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Я двічі пояснив!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Lo he dicho dos veces"}
+{"calls": [], "query": "Meu irmão é agente"}
+{"calls": [], "query": "Min bror är agent"}
+{"calls": [], "query": "Min bror er agent"}
+{"calls": [], "query": "Můj bratr je agent"}
+{"calls": [], "query": "Fratele meu este agent"}
+{"calls": [], "query": "Benim kardeşim temsilci"}
+{"calls": [], "query": "A testvérem képviselő"}
+{"calls": [], "query": "Мой брат — агент"}
+{"calls": [], "query": "Мій брат — агент"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Quero um agente para meu irmão"}
+{"calls": null, "query": "Um dos atendentes disse isso"}
+{"calls": null, "query": "I told him to reboot"}
+{"calls": null, "query": "Sa deuxième demande"}
+{"calls": null, "query": "Obrigado, expliquei duas vezes e resolveu"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Meu irmão quer um agente"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Benim kardeşim bir temsilci istiyor"}
+{"calls": [], "query": "Qual é a minha fatura?"}
+{"calls": [], "query": "Ne kadar ödemem gerekiyor?"}
+{"calls": [], "query": "Vad är mitt saldo?"}
+{"calls": [], "query": "Hvad er min saldo?"}
+{"calls": [], "query": "Hva er saldoen min?"}
+{"calls": [], "query": "Jaký je můj zůstatek?"}
+{"calls": [], "query": "Care este soldul meu?"}
+{"calls": [], "query": "Mennyi az egyenlegem?"}
+{"calls": [], "query": "Какой у меня баланс?"}
+{"calls": [], "query": "Який у мене баланс?"}
+{"calls": [], "query": "Tak, działa!"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Aș vrea o persoană"}
+{"calls": null, "query": "Ei, uma pessoa!"}
+{"calls": null, "query": "Por que minha fatura está tão alta?"}
+{"calls": null, "query": "Quem é essa pessoa?"}
+{"calls": null, "query": "Neden faturam bu kadar yüksek?"}
+{"calls": null, "query": "Para istiyorum"}
+{"calls": null, "query": "Je ne trouve pas ma facture, aidez-moi"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "pessoa ajuda"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "insan yardım"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "människa hjälp"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "menneske hjælp"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "menneske hjelp"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "člověk pomoc"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "om ajutor"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "ember segítség"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "человек помощь"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "людина допомога"}
+{"calls": [], "query": "Como mudo meu endereço?"}
+{"calls": [], "query": "Nasıl değiştiririm adresimi?"}
+{"calls": [], "query": "Hur ändrar jag min adress?"}
+{"calls": [], "query": "Hvordan ændrer jeg min adresse?"}
+{"calls": [], "query": "Hvordan endrer jeg adressen min?"}
+{"calls": [], "query": "Jak změním svou adresu?"}
+{"calls": [], "query": "Cum îmi schimb adresa?"}
+{"calls": [], "query": "Hogyan módosítom a címem?"}
+{"calls": [], "query": "Как изменить мой адрес?"}
+{"calls": [], "query": "Як змінити мою адресу?"}
+{"calls": [], "query": "Qual é o horário da loja?"}
+{"calls": [], "query": "Hangi saatlerde açık mağaza?"}
+{"calls": [], "query": "Vilka tider har butiken öppet?"}
+{"calls": [], "query": "Hvilke tider har butikken åbent?"}
+{"calls": [], "query": "Hvilke tider har butikken åpent?"}
+{"calls": [], "query": "Kdy je otevřeno v obchodě?"}
+{"calls": [], "query": "Care este programul magazinului?"}
+{"calls": [], "query": "Mikor van nyitva a bolt?"}
+{"calls": [], "query": "Когда открыт магазин?"}
+{"calls": [], "query": "Коли відчинено магазин?"}
+{"calls": null, "query": "ajuda"}
+{"calls": null, "query": "pessoa ajuda muito"}
+{"calls": null, "query": "Como mudo meu endereço para uma pessoa?"}
+{"calls": null, "query": "Qual é o horário para uma pessoa?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Você repete a mesma resposta, ajuda?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Aynı cevabı tekrarlıyorsun, yardım?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Du upprepar samma svar, hjälp?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Du gentager samme svar, hjælp?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Du gjentar samme svar, hjelp?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Opakuješ stejnou odpověď, pomoc?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Repeți același răspuns, ajutor?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Ismétled ugyanazt a választ, segítség?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Ты повторяешь тот же ответ, помощь?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Ти повторюєш ту саму відповідь, допомога?"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Toda solução supõe algo falso"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Her çözüm varsayıyor ve bu yanlış"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Varje lösning antar något falskt"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Hver løsning antager noget forkert"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Hver løsning antar noe feil"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Každé řešení předpokládá něco nepravdivého"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Fiecare soluție presupune ceva fals"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Minden megoldás feltételez valamit és ez hamis"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Каждое решение предполагает ложное"}
+{"calls": [{"arguments": {"reason": "general"}, "name": "request_human_handoff"}], "query": "Кожне рішення припускає щось хибне"}
+{"calls": [], "query": "Você repete a mesma resposta, obrigado, funcionou!"}
+{"calls": null, "query": "Eu repito a mesma resposta"}
+{"calls": null, "query": "Repete a página de ajuda, por favor"}
+{"calls": null, "query": "Não repete a mesma resposta"}
+{"calls": null, "query": "A fatura repete o erro, ajuda?"}
+{"calls": [], "query": "Toda solução supõe algo falso, obrigado, funcionou!"}
+{"calls": null, "query": "Nem toda solução supõe algo falso"}
+{"calls": null, "query": "Toda fatura supõe algo falso"}
+{"calls": null, "query": "Você repete a mesma resposta, mas funcionou!"}
+{"calls": null, "query": "Toda solução supõe algo falso, mas funcionou!"}

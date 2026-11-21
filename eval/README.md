@@ -41,7 +41,9 @@ cases flip deterministically between engines, and both engines are
 self-consistent run to run. With the regex fast path live the worker
 scored 239/252 (it answered 49 unambiguous bare asks, two of which —
 ev-00074 and ev-00149 — the model missed). On the v3 336-case goldens
-the worker harness scores 336/336 (fastpath 277, measured 2026-11-18).
+the worker harness scores 336/336 (fastpath 336 — every golden now
+resolves in the rules layers with zero engine calls, measured
+2026-11-19; the bench therefore uses an adversarial fall-through query).
 Always compare worker-report to worker-report; the `--compare` gate
 enforces the shared golden, and reports record the engine for provenance.
 

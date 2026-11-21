@@ -12,14 +12,21 @@ export interface RequestOutcome {
   replayed?: boolean;
   saturated?: boolean;
   fastpath?: boolean;
+  /** Caller tools collapsed to the deployment's pinned serialization. */
+  pinned?: boolean;
   /** Serving tier label (router use: depth or "fastpath"). */
   tier?: string;
   /** Engine-reported decode throughput, when the request ran inference. */
   decodeTps?: number;
+  /** Init prefill wall time: ~0ms on an engine prefix-cache hit, seconds on a miss. */
+  initMs?: number;
   /** Exact I/O sizes; token counts are estimated from these (chars/4). */
   promptChars?: number;
   outputChars?: number;
 }
+
+/** Init prefill above this counts as a prefix-cache miss (bench uses the same line). */
+export const SLOW_INIT_MS = 1000;
 
 /** Industry-rough token estimate, always labeled as such at use sites. */
 export function estimateTokens(chars: number): number {
@@ -40,9 +47,12 @@ export class Metrics {
   replayed = 0;
   saturated = 0;
   fastpath = 0;
+  pinned = 0;
   tierCounters: Record<string, number> = {};
   inferenceRuns = 0;
   decodeTpsSum = 0;
+  slowInits = 0;
+  initMsMax = 0;
   promptCharsTotal = 0;
   outputCharsTotal = 0;
   estTokensTotal = 0;
@@ -58,12 +68,17 @@ export class Metrics {
     if (outcome.retried) this.retried += 1;
     if (outcome.replayed) this.replayed += 1;
     if (outcome.fastpath) this.fastpath += 1;
+    if (outcome.pinned) this.pinned += 1;
     if (outcome.tier) {
       this.tierCounters[outcome.tier] = (this.tierCounters[outcome.tier] ?? 0) + 1;
     }
     if (outcome.decodeTps !== undefined) {
       this.inferenceRuns += 1;
       this.decodeTpsSum += outcome.decodeTps;
+    }
+    if (outcome.initMs !== undefined) {
+      if (outcome.initMs > this.initMsMax) this.initMsMax = outcome.initMs;
+      if (outcome.initMs > SLOW_INIT_MS) this.slowInits += 1;
     }
     const promptChars = outcome.promptChars ?? 0;
     const outputChars = outcome.outputChars ?? 0;
@@ -89,6 +104,7 @@ export class Metrics {
       replayed: this.replayed,
       saturated: this.saturated,
       fastpath: this.fastpath,
+      pinned: this.pinned,
       tiers: { ...this.tierCounters },
       latency_ms: {
         count: sorted.length,
@@ -101,6 +117,8 @@ export class Metrics {
         avg_decode_tps: this.inferenceRuns > 0
           ? Math.round((this.decodeTpsSum / this.inferenceRuns) * 10) / 10
           : 0,
+        slow_inits: this.slowInits,
+        init_ms_max: this.initMsMax,
         prompt_chars_total: this.promptCharsTotal,
         output_chars_total: this.outputCharsTotal,
         est_tokens_total: this.estTokensTotal,

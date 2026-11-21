@@ -5,7 +5,11 @@
  *
  * Usage: bun eval/run.ts [--goldens DIR] [--min-hits N] [--compare R.json]
  *   [--out R.json] [--limit N] [--max-tokens N] [--chunks a,b,c]
- *   [--tools-file F.json] [--layers N]
+ *   [--tools-file F.json] [--pinned-tools P.json] [--layers N]
+ *
+ * --pinned-tools sets the worker's PINNED_TOOLS env from a file, proving
+ * the collapse path (e.g. --tools-file with reordered keys plus --pinned-tools
+ * with the golden file must still hit every case).
  */
 import worker from "../src/index";
 import { createHash } from "node:crypto";
@@ -95,6 +99,11 @@ async function main(): Promise<number> {
     ? JSON.parse(fs.readFileSync(path.resolve(root, toolsFile), "utf-8"))
     : goldenTools;
   if (toolsFile) console.log(`tools override: ${toolsFile} (${JSON.stringify(tools).length} chars)`);
+  const pinnedFile = arg("--pinned-tools", "");
+  if (pinnedFile) {
+    env.PINNED_TOOLS = fs.readFileSync(path.resolve(root, pinnedFile), "utf-8");
+    console.log(`pinned tools: ${pinnedFile}`);
+  }
   const ctx = {} as any;
   const selected = limit > 0 ? rows.slice(0, limit) : rows;
   console.log(`golden v${manifest.version} (${manifest.eval_sha256.slice(0, 12)}), ${selected.length}/${rows.length} cases, min-hits ${minHits}`);

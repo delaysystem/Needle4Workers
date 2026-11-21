@@ -113,22 +113,33 @@ async function b2Authorize(
 }
 
 /**
+ * Fetched chunk responses plus their error narrator. Fetching needs no
+ * engine: callers overlap it with WASM instantiate and fill afterwards.
+ */
+export interface WeightFetch {
+  responses: Response[];
+  describe: (i: number) => string;
+}
+
+/**
  * Fill the engine's heap allocation from fetched chunk responses: lengths
  * come from headers (no bodies held), then each body streams through the
  * running sha into its heap slot and is released. Peak JS-side cost is one
- * chunk, not the archive. Servers without Content-Length fall back to the
- * old accumulate-then-write path.
+ * chunk, not the archive — bodies drain sequentially on purpose, so a
+ * Promise.all here would triple peak memory against the 128MB isolate
+ * budget. Servers without Content-Length fall back to the
+ * accumulate-then-write path.
  */
-async function fillFromResponses(
+export async function fillEngineFromResponses(
   engine: EngineWeightsSink,
-  responses: Response[],
-  expectedSha: string | null | undefined,
-  describe: (i: number) => string
+  fetched: WeightFetch,
+  expectedSha: string | null | undefined
 ): Promise<number> {
+  const responses = fetched.responses;
   for (let i = 0; i < responses.length; i++) {
     if (!responses[i].ok) {
       const body = await responses[i].text().catch(() => "");
-      throw new Error(`${describe(i)} (${responses[i].status}): ${body}`);
+      throw new Error(`${fetched.describe(i)} (${responses[i].status}): ${body}`);
     }
   }
   const lengths = responses.map(responseLength);
@@ -166,15 +177,12 @@ async function fillFromResponses(
 }
 
 /**
- * Loads model weights from chunked static assets, falling back to the same
- * chunk files in B2 when assets fail and B2 is configured. No other source.
- * Bytes stream into the engine (see EngineWeightsSink); nothing is cached
- * in JS — a rebuild re-fetches, which the edge serves from its own cache.
+ * Fetch every chunk (static assets, else the same files in B2). Returns
+ * raw responses: the ok check lives in the fill phase, so a failed fetch
+ * never touches the engine. Engine-free by design — the cold path starts
+ * this before WASM instantiate and fills once both are ready.
  */
-export async function loadWeightsIntoEngine(
-  engine: EngineWeightsSink,
-  opts: WeightsLoadOptions
-): Promise<number> {
+export async function fetchWeightResponses(opts: WeightsLoadOptions): Promise<WeightFetch> {
   if (opts.chunks.length === 0) {
     throw new Error("No weights chunks configured (WEIGHTS_CHUNKS is empty)");
   }
@@ -191,10 +199,10 @@ export async function loadWeightsIntoEngine(
         CHUNK_TIMEOUT_MS,
         "Static asset chunk fetch"
       );
-      return await fillFromResponses(
-        engine, responses, opts.expectedSha,
-        (i) => `Static asset missing: ${opts.chunks[i]}`
-      );
+      return {
+        responses,
+        describe: (i) => `Static asset missing: ${opts.chunks[i]}`,
+      };
     } catch (err) {
       assetsError = err;
     }
@@ -222,13 +230,29 @@ export async function loadWeightsIntoEngine(
       "B2 chunk fetch"
     );
     // Basename only: full download URLs (bucket + signed host) must not echo to callers.
-    return await fillFromResponses(
-      engine, responses, opts.expectedSha,
-      (i) => `B2 chunk fetch failed: ${opts.chunks[i].split("/").pop()}`
-    );
+    return {
+      responses,
+      describe: (i) => `B2 chunk fetch failed: ${opts.chunks[i].split("/").pop()}`,
+    };
   }
 
   throw assetsError instanceof Error
     ? assetsError
     : new Error("Weights unavailable: static assets failed and B2 fallback is not configured");
+}
+
+/**
+ * Loads model weights from chunked static assets, falling back to the same
+ * chunk files in B2 when assets fail and B2 is configured. No other source.
+ * Bytes stream into the engine (see EngineWeightsSink); nothing is cached
+ * in JS — a rebuild re-fetches, which the edge serves from its own cache.
+ * One-shot composition of fetch + fill; latency-sensitive callers overlap
+ * the fetch with WASM instantiate via the split phases instead.
+ */
+export async function loadWeightsIntoEngine(
+  engine: EngineWeightsSink,
+  opts: WeightsLoadOptions
+): Promise<number> {
+  const fetched = await fetchWeightResponses(opts);
+  return fillEngineFromResponses(engine, fetched, opts.expectedSha);
 }

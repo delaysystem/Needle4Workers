@@ -8,6 +8,13 @@
 // to the FIFO head after MAX_AFFINITY_SKIPS consecutive affinity grants so no
 // waiter starves. Callers without a key share the default class ("") and see
 // plain FIFO.
+//
+// ENGAGEMENT NOTE: affinity only reorders waiters that are actually queued,
+// and a queued waiter needs a hold that yields to the event loop. Today's
+// engine is fully synchronous inside the hold, so warm requests serialize
+// before a queue can form and affinity never engages (measured 2026-11-18:
+// identical mixed-load slow_inits with and without keying). The mutex still
+// provides exclusion; the affinity stands ready for streaming/async engines.
 export const MAX_AFFINITY_SKIPS = 4;
 
 interface Waiter {

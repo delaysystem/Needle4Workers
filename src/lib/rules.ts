@@ -9,10 +9,11 @@
  * Python's `\w`/`\b` are Unicode-aware, JavaScript's are ASCII-only.
  * At load, every `\w` becomes the Latin word class below and every `\b`
  * becomes the equivalent explicit boundary, so matching behavior is
- * identical for the 7 supported languages. No `/u` flag: it would
- * reject the patterns' identity escapes. Equivalence is proven, not
- * assumed: test/fastpath-cases.test.ts runs all adversarial cases and
- * the golden static gate asserts every fire matches its gold exactly.
+ * identical for the 17 supported languages (Latin + Cyrillic scripts).
+ * No `/u` flag: it would reject the patterns' identity escapes.
+ * Equivalence is proven, not assumed: test/fastpath-cases.test.ts runs
+ * all adversarial cases and the golden static gate asserts every fire
+ * matches its gold exactly.
  */
 
 export interface RuleCall {
@@ -31,8 +32,10 @@ interface CompiledRule extends Rule {
   re: RegExp;
 }
 
-// Latin letters (covers EN/DE/FR/ES/IT/NL/PL diacritics) + digits + _.
-const WORD_CH = "A-Za-z0-9_\\u00C0-\\u024F\\u1E00-\\u1EFF";
+// Latin letters (covers PT/TR/SV/DA/NO/CS/RO/HU + EN/DE/FR/ES/IT/NL/PL
+// diacritics) + Cyrillic (RU/UK, U+0400-U+04FF incl. ё/є/і/ї/ґ) + digits + _.
+// Exported so the shipped-spec audit below pins new vocabulary inside it.
+export const WORD_CH = "A-Za-z0-9_\\u00C0-\\u024F\\u1E00-\\u1EFF\\u0400-\\u04FF";
 const WORD_CLASS = `[${WORD_CH}]`;
 // ASCII \b is (?:(?<!\w)(?=\w)|(?<=\w)(?!\w)); this is the same shape
 // with the Unicode word class above.
@@ -43,7 +46,10 @@ function toUnicodeRegex(source: string, caseSensitive: boolean): RegExp {
   // Order matters: expand \w first (it introduces no new \b), then \b.
   // Neither appears inside a [...] class in any shipped spec; the
   // loader test asserts the transform only touches bare tokens.
-  const expanded = source
+  // TURKISH-I PARITY (pattern side): fold İ/ı to ASCII i so patterns
+  // match the folded query exactly the way Python re.I equates i/I/İ/ı.
+  const folded = source.replace(/İ/g, "i").replace(/ı/g, "i");
+  const expanded = folded
     .split("\\w")
     .join(WORD_CLASS)
     .split("\\b")
@@ -83,9 +89,13 @@ export function loadRules(spec: unknown): CompiledRule[] {
 }
 
 export function matchRule(rules: CompiledRule[], query: string): CompiledRule | null {
+  // TURKISH-I PARITY (query side; patterns are folded at load): Python
+  // re.I equates i/I with İ (U+0130)/ı (U+0131) but JS /i does not, so
+  // both sides fold to ASCII i for identical matching.
+  const folded = query.replace(/İ/g, "i").replace(/ı/g, "i");
   for (const rule of rules) {
     rule.re.lastIndex = 0;
-    if (rule.re.test(query)) return rule;
+    if (rule.re.test(folded)) return rule;
   }
   return null;
 }

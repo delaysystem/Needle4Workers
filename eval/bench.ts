@@ -16,9 +16,15 @@ import worker from "../src/index";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { percentile } from "../src/lib/metrics";
+import { SLOW_INIT_MS, percentile } from "../src/lib/metrics";
 
-const QUERY = "I paid for premium support. Every reply still comes from a bot. Get me staff.";
+// Engine-bound by construction: matches no verdict rule and no bare-ask
+// pattern (verified 2026-11-19; all 336 goldens now rule-fire, so the
+// bench uses an adversarial fall-through instead), so every request pays
+// a real prefill + decode. one() throws if this ever fastpaths, so a
+// future rule that swallows the query fails loudly instead of reporting
+// ~0ms.
+const QUERY = "Someone to talk to would be nice";
 const DEFAULT_CHUNKS = "needle3-20l-handoff.cact.aa,needle3-20l-handoff.cact.ab,needle3-20l-handoff.cact.ac";
 
 function arg(name: string, fallback: string): string {
@@ -56,6 +62,11 @@ async function one(env: any, tools: any[], maxTokens: number): Promise<{
     env,
     {} as any
   );
+  if (res.headers.get("X-Needle-Fastpath") === "1") {
+    throw new Error(
+      `bench query fastpathed (${QUERY.slice(0, 60)}…): pick an engine-bound query`
+    );
+  }
   const payload: any = await res.json().catch(() => ({}));
   const details = payload?.usage_details ?? {};
   return {
@@ -114,7 +125,7 @@ async function main(): Promise<void> {
           tpsN += 1;
           outChars += r.outChars;
           initMsSum += r.initMs;
-          if (r.initMs > 1000) slowInits += 1;
+          if (r.initMs > SLOW_INIT_MS) slowInits += 1;
         }
       }
     });

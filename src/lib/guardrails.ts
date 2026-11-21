@@ -68,6 +68,49 @@ export function stripRequiredKeys(value: unknown): unknown {
   return value;
 }
 
+/** Deployment-pinned tools, precomputed once per isolate (null = off). */
+export interface PinnedTools {
+  /** Canonical key of the RAW pinned tools — the comparison side. */
+  key: string;
+  /** Stripped pinned serialization — the exact bytes the engine sees. */
+  json: string;
+}
+
+/** Precompute both pinned forms from the raw pinned tools value. */
+export function preparePinnedTools(raw: unknown): PinnedTools {
+  return {
+    key: stableToolsKey(raw),
+    json: JSON.stringify(stripRequiredKeys(raw)),
+  };
+}
+
+export interface ResolvedEngineTools {
+  json: string;
+  pinned: boolean;
+}
+
+/**
+ * Resolve the exact tools bytes the engine inits with. Caller tools that
+ * are semantically identical to the deployment's pinned set collapse to
+ * the pinned serialization — the accuracy-PROVEN bytes — so formatting
+ * variants (key order, the proven verdict-flip hazard) get proven
+ * verdicts plus prefix-cache hits instead of a full re-prefill. Anything
+ * else flows through untouched on the caller's own bytes.
+ *
+ * Comparison runs on RAW tools: `required` changes output validation, so
+ * only raw-identical callers may share the pinned verdicts. Array order
+ * stays significant (tool order is part of the engine prefix).
+ */
+export function resolveEngineToolsJson(
+  caller: unknown,
+  pinned: PinnedTools | null
+): ResolvedEngineTools {
+  if (pinned && stableToolsKey(caller) === pinned.key) {
+    return { json: pinned.json, pinned: true };
+  }
+  return { json: JSON.stringify(stripRequiredKeys(caller)), pinned: false };
+}
+
 export function validateChatBody(body: unknown): ValidChatBody {
   if (typeof body !== "object" || body === null || Array.isArray(body)) {
     throw new HttpError(400, "Request body must be a JSON object");

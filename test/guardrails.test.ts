@@ -3,6 +3,8 @@ import {
   EngineHealth,
   IdempotencyCache,
   isTransientInferenceError,
+  preparePinnedTools,
+  resolveEngineToolsJson,
   stableToolsKey,
   stripRequiredKeys,
   validateChatBody,
@@ -173,6 +175,54 @@ describe("stableToolsKey", () => {
     expect(stableToolsKey([{ name: "t" }, { name: "u" }])).not.toBe(
       stableToolsKey([{ name: "u" }, { name: "t" }])
     );
+  });
+});
+
+describe("resolveEngineToolsJson", () => {
+  const PINNED = preparePinnedTools(HANDOFF);
+  const reordered = [
+    {
+      parameters: {
+        required: [],
+        properties: {
+          details: { maxLength: 200, type: "string" },
+          reason: { enum: ["billing", "technical", "account", "complaint"], type: "string" },
+        },
+        type: "object",
+      },
+      name: "request_human_handoff",
+    },
+  ];
+  test("unpinned deployments send the caller bytes, required-stripped", () => {
+    const got = resolveEngineToolsJson(HANDOFF, null);
+    expect(got.pinned).toBe(false);
+    expect(got.json).toBe(JSON.stringify(stripRequiredKeys(HANDOFF)));
+    expect(got.json).not.toContain("required");
+  });
+  test("key-reordered but identical tools collapse to the pinned bytes", () => {
+    const got = resolveEngineToolsJson(reordered, PINNED);
+    expect(got.pinned).toBe(true);
+    expect(got.json).toBe(PINNED.json);
+  });
+  test("pinned bytes preserve the proven serialization, not sorted keys", () => {
+    expect(PINNED.json.startsWith('[{"name":')).toBe(true);
+  });
+  test("different content flows through untouched", () => {
+    const other = [{ name: "get_weather", parameters: { type: "object" } }];
+    const got = resolveEngineToolsJson(other, PINNED);
+    expect(got.pinned).toBe(false);
+    expect(got.json).toBe(JSON.stringify(stripRequiredKeys(other)));
+  });
+  test("different tool order flows through untouched", () => {
+    const two = preparePinnedTools([{ name: "a" }, { name: "b" }]);
+    const got = resolveEngineToolsJson([{ name: "b" }, { name: "a" }], two);
+    expect(got.pinned).toBe(false);
+  });
+  test("different required flows through: it changes output validation", () => {
+    const strict = structuredClone(HANDOFF);
+    (strict[0] as any).parameters.required = ["reason"];
+    const got = resolveEngineToolsJson(strict, PINNED);
+    expect(got.pinned).toBe(false);
   });
 });
 

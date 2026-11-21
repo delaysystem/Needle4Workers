@@ -42,6 +42,12 @@ describe("Metrics", () => {
     for (let i = 0; i < 600; i++) m.record({ status: 200, latencyMs: i });
     expect((m.snapshot() as any).latency_ms.count).toBe(512);
   });
+  test("pinned tools collapse is counted", () => {
+    const m = new Metrics();
+    m.record({ status: 200, latencyMs: 1500, pinned: true });
+    m.record({ status: 200, latencyMs: 1600 });
+    expect((m.snapshot() as any).pinned).toBe(1);
+  });
 });
 
 describe("compute accounting", () => {
@@ -60,6 +66,16 @@ describe("compute accounting", () => {
     expect(snap.compute.est_tokens_total).toBe(80);
     expect(snap.compute.est_tokens_note).toMatch(/estimates/);
     expect(typeof snap.uptime_s).toBe("number");
+  });
+  test("init prefill misses surface as slow_inits plus max", () => {
+    const m = new Metrics();
+    m.record({ status: 200, latencyMs: 1500, decodeTps: 40, initMs: 0 });
+    m.record({ status: 200, latencyMs: 8500, decodeTps: 40, initMs: 6900 });
+    m.record({ status: 200, latencyMs: 1600, decodeTps: 40, initMs: 2 });
+    const snap: any = m.snapshot();
+    expect(snap.compute.inference_runs).toBe(3);
+    expect(snap.compute.slow_inits).toBe(1);
+    expect(snap.compute.init_ms_max).toBe(6900);
   });
 });
 

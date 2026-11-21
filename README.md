@@ -19,15 +19,32 @@ name `needle` (renaming it would provision a new worker).
   including 49 regex-fastpath answers — the WASM engine alone scores 237
   (the same weights score 238 through Python; 7 borderline cases flip
   deterministically between engines — see `eval/README.md`).
-- Latency: p50 2.0s, p95 2.4s per request; engine decodes ~39 tok/s.
-- Throughput: ~0.48 req/s per isolate (mutex-serialized); see `eval/bench.json`.
-- Mixed-tools load: the mutex serves same-tools requests consecutively so
-  they share the engine's single-prefix cache (see `src/lib/async-mutex.ts`);
-  reproduce with `bun eval/bench.ts --tools-variants 2`.
-- Cost: ~2050 CPU-ms + ~135 estimated tokens per execution.
-- Caller guidance: keep `tools` payloads small — a tools change costs a full
-  init prefill (~20ms per prefix token; the 978-char golden tools take
-  ~5.5s), while repeats of the previous tools skip it entirely.
+- Latency: p50 1.5s, p95 1.8s per engine request (warm, same tools,
+  in-process reference box); engine decodes ~40 tok/s.
+- Throughput: ~0.63 req/s per isolate (mutex-serialized); see `eval/bench.json`.
+- Mixed-tools load: the mutex serves byte-identical-tools requests
+  consecutively so they share the engine's single-prefix cache (see
+  `src/lib/async-mutex.ts`); reproduce with
+  `bun eval/bench.ts --tools-variants 2`.
+- Cost: ~1500 CPU-ms + ~113 estimated tokens per execution.
+- Caller guidance: send byte-identical `tools` on every call, and keep the
+  payload small. The engine tokenizes the raw tools string: any byte
+  difference (even key order) costs a full init prefill (~20ms per prefix
+  token; the 978-char golden tools take ~5.5s), while a byte-identical
+  repeat skips it entirely — and key order alone has flipped verdicts in
+  testing (sorted-key tools scored 322/336 vs 336/336), so one fixed
+  serialization is a correctness rule, not just a speed tip. Prefix-cache
+  misses surface per request as `usage_details.init_ms` and per isolate
+  as `compute.slow_inits` in `/v1/metrics`.
+- Pinned tools (single-purpose deployments): set `PINNED_TOOLS` to the
+  deployment's canonical tools JSON and callers whose tools are
+  semantically identical (any key order) collapse onto those exact bytes:
+  proven verdicts plus prefix-cache hits, no re-prefill. Measured:
+  alternating golden/reversed traffic went from 4/4 slow inits with
+  verdict flips to 0/4 with golden verdicts, and a reversed-tools eval
+  from 320/336 to 336/336. Genuinely different tool sets still take the
+  normal path. Collapses count as `pinned` in `/v1/metrics` and carry
+  `X-Needle-Pinned: 1` per response.
 
 ## Quickstart
 
@@ -131,6 +148,7 @@ Details in `eval/README.md`.
 | `NEEDLE_LAYERS` | var | 20 for these weights |
 | `WEIGHTS_CHUNKS` | var | Comma-separated chunk paths under `./weights` |
 | `WEIGHTS_SHA` | var | sha256 of reassembled weights; load refuses on mismatch |
+| `PINNED_TOOLS` | var | Canonical tools JSON; identical callers collapse onto it; unset = off |
 | `AUTH_TOKEN` | secret | Bearer for chat + metrics; unset = open |
 | `ALLOWED_ORIGIN` | var | CORS origin; unset = `*` (demo posture) |
 | `BACKBLAZE_*` | secrets | B2 fallback for weights (optional) |

@@ -1,5 +1,9 @@
 import { describe, expect, test } from "bun:test";
-import { loadWeightsIntoEngine } from "../src/lib/weights";
+import {
+  fetchWeightResponses,
+  fillEngineFromResponses,
+  loadWeightsIntoEngine,
+} from "../src/lib/weights";
 
 function fetcher(files: Record<string, Uint8Array>, calls: string[] = []) {
   return {
@@ -142,5 +146,50 @@ describe("loadWeightsIntoEngine", () => {
     } finally {
       (globalThis as any).fetch = orig;
     }
+  });
+});
+
+describe("fetchWeightResponses + fillEngineFromResponses", () => {
+  test("split phases compose to the one-shot load's byte sequence", async () => {
+    const f = fetcher({ "a.aa": new Uint8Array([1, 2]), "a.ab": new Uint8Array([3]) });
+    const fetched = await fetchWeightResponses({
+      chunks: ["/a.aa", "/a.ab"], baseUrl: "http://x/", assetsFetcher: f,
+    });
+    expect(fetched.responses).toHaveLength(2);
+    const eng = fakeEngine();
+    const rc = await fillEngineFromResponses(eng, fetched, await shaOf("\x01\x02\x03"));
+    expect(rc).toBe(0);
+    expect(eng.calls).toEqual(["alloc:3", "write:0:2", "write:2:1", "finish:1000:3"]);
+    expect([...eng.mem()]).toEqual([1, 2, 3]);
+  });
+  test("fetch needs no engine: it stays in flight while other work runs", async () => {
+    let release!: () => void;
+    const gate = new Promise<void>((r) => { release = r; });
+    const inner = fetcher({ "a.aa": new Uint8Array([7]) });
+    const gated = { fetch: async (req: Request) => { await gate; return inner.fetch(req); } };
+    const pending = fetchWeightResponses({
+      chunks: ["/a.aa"], baseUrl: "http://x/", assetsFetcher: gated,
+    });
+    let settled = false;
+    void pending.then(() => { settled = true; });
+    await new Promise((r) => setTimeout(r, 20));
+    // Still parked on the gate: the caller was free to instantiate WASM meanwhile.
+    expect(settled).toBe(false);
+    release();
+    const fetched = await pending;
+    const eng = fakeEngine();
+    const rc = await fillEngineFromResponses(eng, fetched, await shaOf("\x07"));
+    expect(rc).toBe(0);
+    expect([...eng.mem()]).toEqual([7]);
+  });
+  test("fill rejects a failed response before touching the engine", async () => {
+    const f = fetcher({});
+    const fetched = await fetchWeightResponses({
+      chunks: ["/gone.aa"], baseUrl: "http://x/", assetsFetcher: f,
+    });
+    const eng = fakeEngine();
+    await expect(fillEngineFromResponses(eng, fetched, null))
+      .rejects.toThrow(/Static asset missing: \/gone\.aa \(404\)/);
+    expect(eng.calls).toEqual([]);
   });
 });
