@@ -75,20 +75,78 @@ export function __resetEngineForTests(): void {
 /** Requests currently parked on an in-flight cold engine init. */
 let initWaiters = 0;
 
-/** CORS origin: locked to ALLOWED_ORIGIN when set, else open (demo posture). */
-function corsOrigin(env: Env): string {
-  return (env as any).ALLOWED_ORIGIN || "*";
+/** Env var that opts a deployment into the open demo posture. Local-dev-only
+ * flag: staging/prod must never set it. Origin: SEC-12. */
+const ALLOW_OPEN_DEMO_VAR = "ALLOW_OPEN_DEMO";
+/** The only value that opens the demo posture; anything else fails closed. */
+const ALLOW_OPEN_DEMO_VALUE = "1";
+/** Env vars carrying the explicit CORS origin allowlist: a comma-separated
+ * list plus the legacy single-origin var. Origin: SEC-12. */
+const ALLOWED_ORIGINS_VAR = "ALLOWED_ORIGINS";
+const ALLOWED_ORIGIN_VAR = "ALLOWED_ORIGIN";
+
+/** True only when the operator explicitly opted into the open demo posture
+ * (local development). Anything else — staging, prod, previews — fails closed. */
+function isOpenDemoPosture(env: Env): boolean {
+  return (env as any)[ALLOW_OPEN_DEMO_VAR] === ALLOW_OPEN_DEMO_VALUE;
 }
 
-/** 401 unless AUTH_TOKEN is unset (open dev posture) or the bearer matches. */
-function requireAuth(request: Request, env: Env): Response | null {
-  const token = (env as any).AUTH_TOKEN as string | undefined;
-  if (!token) return null;
-  if (request.headers.get("Authorization") === `Bearer ${token}`) return null;
+/** Explicit CORS origin allowlist from env. Empty = unconfigured. */
+function parseAllowedOrigins(env: Env): string[] {
+  const list = String((env as any)[ALLOWED_ORIGINS_VAR] ?? "");
+  const single = String((env as any)[ALLOWED_ORIGIN_VAR] ?? "");
+  const origins = list.split(",").map((s) => s.trim()).filter(Boolean);
+  if (single.trim()) origins.push(single.trim());
+  return [...new Set(origins)];
+}
+
+/** CORS origin for this request: the request Origin echoed back iff it is
+ * allowlisted; "*" only in the explicit open-demo posture; otherwise null
+ * (callers omit the header and browsers deny the cross-origin read). */
+function corsOrigin(env: Env, request: Request): string | null {
+  const allowlist = parseAllowedOrigins(env);
+  if (allowlist.length > 0) {
+    const origin = request.headers.get("Origin");
+    return origin && allowlist.includes(origin) ? origin : null;
+  }
+  return isOpenDemoPosture(env) ? "*" : null;
+}
+
+/** Access-Control-Allow-Origin header for this request, or {} when the
+ * origin is not allowlisted (fail closed: no header, browser denies). */
+function corsHeaders(env: Env, request: Request): Record<string, string> {
+  const origin = corsOrigin(env, request);
+  return origin ? { "Access-Control-Allow-Origin": origin } : {};
+}
+
+function unauthorized(): Response {
   return new Response(JSON.stringify({ error: "Unauthorized" }), {
     status: 401,
     headers: { "Content-Type": "application/json" },
   });
+}
+
+/** Set once per isolate so a missing AUTH_TOKEN warns once, not per request. */
+let warnedMissingAuthToken = false;
+
+/** 401 unless the bearer matches AUTH_TOKEN. An unset AUTH_TOKEN fails closed
+ * (401) outside the explicit open-demo posture instead of serving open
+ * unauthenticated inference. */
+function requireAuth(request: Request, env: Env): Response | null {
+  const token = (env as any).AUTH_TOKEN as string | undefined;
+  if (!token) {
+    if (isOpenDemoPosture(env)) return null;
+    if (!warnedMissingAuthToken) {
+      warnedMissingAuthToken = true;
+      console.error(
+        "needle: refusing request: AUTH_TOKEN is not configured " +
+        "(set the AUTH_TOKEN secret, or ALLOW_OPEN_DEMO=1 for local dev only)"
+      );
+    }
+    return unauthorized();
+  }
+  if (request.headers.get("Authorization") === `Bearer ${token}`) return null;
+  return unauthorized();
 }
 
 /** Rejects tools payloads big enough to stall prefill (measured: the 978-char
@@ -154,7 +212,7 @@ export default {
       return new Response(null, {
         status: 204,
         headers: {
-          "Access-Control-Allow-Origin": corsOrigin(env),
+          ...corsHeaders(env, request),
           "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
           "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Needle-Layers, X-Request-Id",
           "Access-Control-Max-Age": "86400",
@@ -181,7 +239,7 @@ export default {
           status: 200,
           headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": corsOrigin(env),
+            ...corsHeaders(env, request),
           },
         }
       );
@@ -195,7 +253,7 @@ export default {
         status: 200,
         headers: {
           "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": corsOrigin(env),
+          ...corsHeaders(env, request),
         },
       });
     }
@@ -217,7 +275,7 @@ export default {
           status: ready ? 200 : 503,
           headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": corsOrigin(env),
+            ...corsHeaders(env, request),
           },
         }
       );
@@ -303,7 +361,7 @@ export default {
             200,
             fastBody,
             {
-              "Access-Control-Allow-Origin": corsOrigin(env),
+              ...corsHeaders(env, request),
               "X-Needle-Layers": env.NEEDLE_LAYERS || "20",
               "X-Needle-Fastpath": "1",
               "X-Needle-Rule": rule.id,
@@ -324,7 +382,7 @@ export default {
             200,
             fastBody,
             {
-              "Access-Control-Allow-Origin": corsOrigin(env),
+              ...corsHeaders(env, request),
               "X-Needle-Layers": env.NEEDLE_LAYERS || "20",
               "X-Needle-Fastpath": "1",
               "X-Needle-Rule": "bare-ask",
@@ -449,7 +507,7 @@ export default {
           200,
           responseBody,
           {
-            "Access-Control-Allow-Origin": corsOrigin(env),
+            ...corsHeaders(env, request),
             "X-Needle-Layers": env.NEEDLE_LAYERS || "20",
             "X-Needle-SIMD": "128",
             ...(retried ? { "X-Needle-Retried": "1" } : {}),

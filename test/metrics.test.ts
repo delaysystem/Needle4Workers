@@ -98,7 +98,8 @@ describe("GET /v1/metrics", () => {
   test("serves the snapshot without touching the engine", async () => {
     const res = await worker.fetch(
       new Request("http://localhost:8787/v1/metrics"),
-      {} as any,
+      // Explicit local posture: production default fails closed (see auth.test.ts).
+      { ALLOW_OPEN_DEMO: "1" } as any,
       {} as any
     );
     expect(res.status).toBe(200);

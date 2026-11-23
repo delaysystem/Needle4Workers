@@ -19,10 +19,15 @@
 		"WEIGHTS_CHUNKS": "/needle3-20l-handoff.cact.aa,/needle3-20l-handoff.cact.ab,/needle3-20l-handoff.cact.ac",
 		// sha256 of the reassembled weights; the worker refuses to load on mismatch.
 		"WEIGHTS_SHA": "eb33420b643d9eae311dd712504ef448735bcf08a9cca3fa11494dd3da170de7",
-		// Optional hardening (unset = open demo posture):
-		// "ALLOWED_ORIGIN": "https://your.app", // locks CORS down from "*"
+		// Hardening (required in staging/prod; unset AUTH_TOKEN answers 401):
 		// AUTH_TOKEN is a secret, not a var: `wrangler secret put AUTH_TOKEN`.
 		// When set, chat + metrics require `Authorization: Bearer <token>`.
+		// Explicit CORS origin allowlist (comma-separated; legacy single-origin
+		// ALLOWED_ORIGIN also honored). Request Origins outside it get no
+		// Access-Control-Allow-Origin header, so browsers deny the read.
+		// "ALLOWED_ORIGINS": "https://app.example,https://admin.example",
+		// LOCAL DEV ONLY: `wrangler dev --var ALLOW_OPEN_DEMO:1` (or .dev.vars)
+		// opens auth + CORS "*". Never set in staging/prod.
 		"BACKBLAZE_BUCKET_NAME": "example-encrypted",
 		"B2_WEIGHTS_PREFIX": "needle"
 	},

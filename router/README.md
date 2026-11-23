@@ -33,12 +33,14 @@ every chat response.
 ```sh
 cd router
 wrangler secret put AUTH_TOKEN   # optional but recommended
-wrangler deploy
+wrangler deploy --var BACKEND_20L_URL:https://<your-20l-worker>.workers.dev
 ```
 
 Backends are plain URLs (`BACKEND_4L_URL`, `BACKEND_16L_URL`,
 `BACKEND_20L_URL` — 20L required); point them at edge workers, bun
-servers, or anything OpenAI-compatible.
+servers, or anything OpenAI-compatible. They are per-environment config
+(passed via `--var`, `.dev.vars`, or the dashboard), never hardcoded in
+`wrangler.jsonc`.
 
 ## Tests
 

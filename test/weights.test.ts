@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import {
+  WEIGHTS_STREAM_PIECE_BYTES,
   fetchWeightResponses,
   fillEngineFromResponses,
   loadWeightsIntoEngine,
@@ -38,6 +39,11 @@ function lengthlessFetcher(files: Record<string, Uint8Array>) {
 
 async function shaOf(s: string): Promise<string> {
   const d = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
+  return [...new Uint8Array(d)].map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function shaOfBytes(bytes: Uint8Array): Promise<string> {
+  const d = await crypto.subtle.digest("SHA-256", bytes as any);
   return [...new Uint8Array(d)].map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
@@ -96,6 +102,52 @@ describe("loadWeightsIntoEngine", () => {
     expect(rc).toBe(0);
     expect(eng.calls).toEqual(["alloc:2", "write:0:2", "finish:1000:2"]);
     expect([...eng.mem()]).toEqual([4, 5]);
+  });
+  test("lengthless multi-chunk writes each part at its offset (no concat copy)", async () => {
+    const f = lengthlessFetcher({ "a.aa": new Uint8Array([4, 5]), "a.ab": new Uint8Array([6]) });
+    const eng = fakeEngine();
+    const rc = await loadWeightsIntoEngine(eng, {
+      chunks: ["/a.aa", "/a.ab"], baseUrl: "http://x/",
+      assetsFetcher: f, expectedSha: await shaOf("\x04\x05\x06"),
+    });
+    expect(rc).toBe(0);
+    expect(eng.calls).toEqual(["alloc:3", "write:0:2", "write:2:1", "finish:1000:3"]);
+    expect([...eng.mem()]).toEqual([4, 5, 6]);
+  });
+  test("oversized chunks drain in capped pieces at ascending offsets", async () => {
+    const big = new Uint8Array(WEIGHTS_STREAM_PIECE_BYTES + 4464);
+    for (let i = 0; i < big.length; i++) big[i] = i & 0xff;
+    const f = fetcher({ "a.aa": big });
+    const eng = fakeEngine();
+    const rc = await loadWeightsIntoEngine(eng, {
+      chunks: ["/a.aa"], baseUrl: "http://x/",
+      assetsFetcher: f, expectedSha: await shaOfBytes(big),
+    });
+    expect(rc).toBe(0);
+    const writes = eng.calls.filter((c) => c.startsWith("write:"));
+    expect(writes.length).toBeGreaterThan(1);
+    let offset = 0;
+    for (const w of writes) {
+      const [, off, len] = w.split(":").map(Number);
+      expect(off).toBe(offset);
+      expect(len).toBeLessThanOrEqual(WEIGHTS_STREAM_PIECE_BYTES);
+      offset += len;
+    }
+    expect(offset).toBe(big.length);
+    expect(eng.mem()).toEqual(big);
+  });
+  test("short body against a lying Content-Length refuses and discards", async () => {
+    const lying = {
+      fetch: async () => new Response(new Uint8Array([1, 2]) as any, {
+        headers: { "content-length": "999" },
+      }),
+    };
+    const eng = fakeEngine();
+    await expect(loadWeightsIntoEngine(eng, {
+      chunks: ["/a.aa"], baseUrl: "http://x/", assetsFetcher: lying,
+    })).rejects.toThrow(/truncated/);
+    expect(eng.calls[0]).toBe("alloc:999");
+    expect(eng.calls[eng.calls.length - 1]).toBe("discard:1000");
   });
   test("engine rc passes through (index refuses nonzero)", async () => {
     const f = fetcher({ "a.aa": new Uint8Array([1]) });

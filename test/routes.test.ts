@@ -11,6 +11,8 @@ const ROOT = path.resolve(import.meta.dir, "..");
 function env(extra: Record<string, any> = {}): any {
   return {
     NEEDLE_LAYERS: "20",
+    // Explicit local posture: production default fails closed (see auth.test.ts).
+    ALLOW_OPEN_DEMO: "1",
     WEIGHTS_CHUNKS: "/needle3-20l-handoff.cact.aa,/needle3-20l-handoff.cact.ab,/needle3-20l-handoff.cact.ac",
     ASSETS: {
       fetch: async (req: Request) => {
@@ -68,7 +70,7 @@ describe("fastpath", () => {
         }),
       }),
       // No ASSETS binding: any engine touch would 500, proving the bypass.
-      { NEEDLE_LAYERS: "20", WEIGHTS_CHUNKS: "/missing.aa" } as any,
+      { NEEDLE_LAYERS: "20", WEIGHTS_CHUNKS: "/missing.aa", ALLOW_OPEN_DEMO: "1" } as any,
       {} as any
     );
     expect(Date.now() - t0).toBeLessThan(500);

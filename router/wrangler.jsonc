@@ -4,8 +4,13 @@
 	"main": "index.ts",
 	"compatibility_date": "2026-09-21",
 	"vars": {
-		"ROUTE_POLICY": "single-20",
-		"BACKEND_20L_URL": "https://needle.emalteaproductions.workers.dev"
+		"ROUTE_POLICY": "single-20"
+		// Backend URLs are per-environment config, never hardcoded (ARCH-12).
+		// BACKEND_20L_URL is required; BACKEND_4L_URL / BACKEND_16L_URL only
+		// for ROUTE_POLICY=depth-split. Provide them via:
+		//   local:   echo 'BACKEND_20L_URL=https://<worker>.workers.dev' >> .dev.vars
+		//   deploy:  wrangler deploy --var BACKEND_20L_URL:https://<worker>.workers.dev
+		//   or the Cloudflare dashboard (Worker → Settings → Variables).
 	},
 	"observability": {
 		"enabled": true,

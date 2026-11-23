@@ -18,6 +18,8 @@ const TOOLS = [
 function slowEnv(delayMs: number): any {
   return {
     NEEDLE_LAYERS: "20",
+    // Explicit local posture: production default fails closed (see auth.test.ts).
+    ALLOW_OPEN_DEMO: "1",
     WEIGHTS_CHUNKS: "/needle3-20l-handoff.cact.aa,/needle3-20l-handoff.cact.ab,/needle3-20l-handoff.cact.ac",
     ASSETS: {
       fetch: async (req: Request) => {

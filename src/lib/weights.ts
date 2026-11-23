@@ -48,6 +48,12 @@ export interface EngineWeightsSink {
 export const AUTHORIZE_TIMEOUT_MS = 30_000;
 export const CHUNK_TIMEOUT_MS = 120_000;
 
+/** Max bytes drained from a chunk body per heap write. Bodies stream through
+ * the running sha into their heap slot in pieces this big, so peak JS-side
+ * cost is one piece, not one ~21MB chunk. Origin: COST-10; small vs the
+ * 128MB edge-isolate budget while keeping write-call overhead negligible. */
+export const WEIGHTS_STREAM_PIECE_BYTES = 65536;
+
 function withTimeout<T>(promise: Promise<T>, ms: number, what: string): Promise<T> {
   let timer: ReturnType<typeof setTimeout> | undefined;
   const timeout = new Promise<never>((_, reject) => {
@@ -62,17 +68,6 @@ export function b2ConfigFromEnv(env: Env): B2WeightsConfig | null {
   return e.BACKBLAZE_KEY_ID && e.BACKBLAZE_APPLICATION_KEY && e.BACKBLAZE_BUCKET_NAME
     ? { keyId: e.BACKBLAZE_KEY_ID, applicationKey: e.BACKBLAZE_APPLICATION_KEY, bucketName: e.BACKBLAZE_BUCKET_NAME, prefix: env.B2_WEIGHTS_PREFIX || "needle" }
     : null;
-}
-
-function concatParts(parts: Uint8Array[]): Uint8Array {
-  const total = parts.reduce((n, p) => n + p.byteLength, 0);
-  const out = new Uint8Array(total);
-  let offset = 0;
-  for (const p of parts) {
-    out.set(p, offset);
-    offset += p.byteLength;
-  }
-  return out;
 }
 
 function assertShaHex(actual: string, expected?: string | null): void {
@@ -122,13 +117,40 @@ export interface WeightFetch {
 }
 
 /**
+ * Drain one chunk body through `sink` in capped pieces. Reader-backed bodies
+ * stream (peak JS-side cost is one piece); bodies without a stream (test
+ * doubles, non-streaming servers) fall back to a single buffered piece.
+ */
+async function drainResponse(res: Response, sink: (piece: Uint8Array) => void): Promise<void> {
+  const body = (res as any).body as ReadableStream<Uint8Array> | null | undefined;
+  if (!body || typeof body.getReader !== "function") {
+    sink(new Uint8Array(await res.arrayBuffer()));
+    return;
+  }
+  const reader = body.getReader();
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      if (value && value.byteLength > 0) {
+        for (let off = 0; off < value.byteLength; off += WEIGHTS_STREAM_PIECE_BYTES) {
+          sink(value.subarray(off, Math.min(off + WEIGHTS_STREAM_PIECE_BYTES, value.byteLength)));
+        }
+      }
+    }
+  } finally {
+    reader.releaseLock();
+  }
+}
+
+/**
  * Fill the engine's heap allocation from fetched chunk responses: lengths
  * come from headers (no bodies held), then each body streams through the
- * running sha into its heap slot and is released. Peak JS-side cost is one
- * chunk, not the archive — bodies drain sequentially on purpose, so a
- * Promise.all here would triple peak memory against the 128MB isolate
- * budget. Servers without Content-Length fall back to the
- * accumulate-then-write path.
+ * running sha into its heap slot in capped pieces and is released. Peak
+ * JS-side cost is one piece, not the archive — bodies drain sequentially on
+ * purpose, so a Promise.all here would multiply peak memory against the
+ * 128MB isolate budget. Servers without Content-Length fall back to the
+ * buffer-then-write path below.
  */
 export async function fillEngineFromResponses(
   engine: EngineWeightsSink,
@@ -150,10 +172,18 @@ export async function fillEngineFromResponses(
       const hash = createHash("sha256");
       let offset = 0;
       for (const res of responses) {
-        const chunk = new Uint8Array(await res.arrayBuffer());
-        hash.update(chunk);
-        engine.writeWeightsChunk(ptr, offset, chunk);
-        offset += chunk.byteLength;
+        await drainResponse(res, (piece) => {
+          hash.update(piece);
+          engine.writeWeightsChunk(ptr, offset, piece);
+          offset += piece.byteLength;
+        });
+      }
+      // A short body against a lying Content-Length would leave uninitialized
+      // heap bytes under _needle_load: refuse instead of loading garbage.
+      if (offset !== total) {
+        throw new Error(
+          `Weights truncated: Content-Length promised ${total} bytes, body delivered ${offset}`
+        );
       }
       assertShaHex(hash.digest("hex"), expectedSha);
       return engine.finishWeightsLoad(ptr, total);
@@ -162,14 +192,27 @@ export async function fillEngineFromResponses(
       throw err;
     }
   }
+  // No Content-Length: the total is unknowable until every body arrives, so
+  // bodies buffer — but each part writes straight into the one allocation at
+  // its offset. No second full-archive concat copy (the old path held parts
+  // + concat + heap, ~3x the archive against the 128MB budget).
   const parts: Uint8Array[] = [];
-  for (const res of responses) parts.push(new Uint8Array(await res.arrayBuffer()));
-  const bytes = concatParts(parts);
-  assertShaHex(createHash("sha256").update(bytes).digest("hex"), expectedSha);
-  const ptr = engine.allocWeights(bytes.byteLength);
+  const hash = createHash("sha256");
+  for (const res of responses) {
+    const part = new Uint8Array(await res.arrayBuffer());
+    hash.update(part);
+    parts.push(part);
+  }
+  assertShaHex(hash.digest("hex"), expectedSha);
+  const total = parts.reduce((n, p) => n + p.byteLength, 0);
+  const ptr = engine.allocWeights(total);
   try {
-    engine.writeWeightsChunk(ptr, 0, bytes);
-    return engine.finishWeightsLoad(ptr, bytes.byteLength);
+    let offset = 0;
+    for (const part of parts) {
+      engine.writeWeightsChunk(ptr, offset, part);
+      offset += part.byteLength;
+    }
+    return engine.finishWeightsLoad(ptr, total);
   } catch (err) {
     engine.discardWeights(ptr);
     throw err;
