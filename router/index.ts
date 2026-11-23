@@ -8,7 +8,10 @@
  *
  * Env: ROUTE_POLICY ("single-20" default | "depth-split"),
  *   BACKEND_4L_URL, BACKEND_16L_URL, BACKEND_20L_URL (20L required),
- *   AUTH_TOKEN (optional, same semantics as the worker).
+ *   AUTH_TOKEN (required outside the open demo posture; unset fails closed
+ *   with 401, same semantics as the worker), ALLOWED_ORIGINS (comma-separated
+ *   CORS allowlist; legacy ALLOWED_ORIGIN also honored),
+ *   ALLOW_OPEN_DEMO=1 (local-dev-only opt-in to the open posture).
  * Override: X-Needle-Depth: 4|16|20 wins over the policy.
  */
 
@@ -24,6 +27,8 @@ interface RouterEnv {
   BACKEND_20L_URL?: string;
   AUTH_TOKEN?: string;
   ALLOWED_ORIGIN?: string;
+  ALLOWED_ORIGINS?: string;
+  ALLOW_OPEN_DEMO?: string;
 }
 
 const metrics = new Metrics();
@@ -44,14 +49,65 @@ function backendFor(depth: 4 | 16 | 20, env: RouterEnv): string | null {
   return env.BACKEND_20L_URL ?? null;
 }
 
-function requireAuth(request: Request, env: RouterEnv): Response | null {
-  const token = env.AUTH_TOKEN;
-  if (!token) return null;
-  if (request.headers.get("Authorization") === `Bearer ${token}`) return null;
+/** The only value that opens the demo posture; anything else fails closed.
+ * Origin: SEC-12 backend posture (src/index.ts ALLOW_OPEN_DEMO_VALUE). */
+const ROUTER_OPEN_DEMO_VALUE = "1";
+
+/** True only when the operator explicitly opted into the open demo posture
+ * (local development). Anything else — staging, prod, previews — fails closed. */
+function isRouterOpenDemo(env: RouterEnv): boolean {
+  return env.ALLOW_OPEN_DEMO === ROUTER_OPEN_DEMO_VALUE;
+}
+
+/** Explicit CORS origin allowlist from env. Empty = unconfigured. */
+function parseRouterAllowedOrigins(env: RouterEnv): string[] {
+  const origins = (env.ALLOWED_ORIGINS ?? "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  if (env.ALLOWED_ORIGIN?.trim()) origins.push(env.ALLOWED_ORIGIN.trim());
+  return [...new Set(origins)];
+}
+
+/** CORS origin for this request: the request Origin echoed back iff it is
+ * allowlisted; "*" only in the explicit open-demo posture; otherwise the
+ * header is omitted and browsers deny the cross-origin read. */
+function routerCorsOrigin(env: RouterEnv, request: Request): string | null {
+  const allowlist = parseRouterAllowedOrigins(env);
+  if (allowlist.length > 0) {
+    const origin = request.headers.get("Origin");
+    return origin && allowlist.includes(origin) ? origin : null;
+  }
+  return isRouterOpenDemo(env) ? "*" : null;
+}
+
+/** Set once per isolate so a missing AUTH_TOKEN warns once, not per request. */
+let warnedRouterMissingAuthToken = false;
+
+function routerUnauthorized(): Response {
   return new Response(JSON.stringify({ error: "Unauthorized" }), {
     status: 401,
     headers: { "Content-Type": "application/json" },
   });
+}
+
+/** 401 unless the bearer matches AUTH_TOKEN. An unset AUTH_TOKEN fails closed
+ * (401) outside the explicit open-demo posture instead of proxying open. */
+function requireAuth(request: Request, env: RouterEnv): Response | null {
+  const token = env.AUTH_TOKEN;
+  if (!token) {
+    if (isRouterOpenDemo(env)) return null;
+    if (!warnedRouterMissingAuthToken) {
+      warnedRouterMissingAuthToken = true;
+      console.error(
+        "needle-router: refusing request: AUTH_TOKEN is not configured " +
+        "(set the AUTH_TOKEN secret, or ALLOW_OPEN_DEMO=1 for local dev only)"
+      );
+    }
+    return routerUnauthorized();
+  }
+  if (request.headers.get("Authorization") === `Bearer ${token}`) return null;
+  return routerUnauthorized();
 }
 
 async function proxyChat(
@@ -87,16 +143,15 @@ export default {
   async fetch(request: Request, env: RouterEnv): Promise<Response> {
     const url = new URL(request.url);
     if (request.method === "OPTIONS") {
-      return new Response(null, {
-        status: 204,
-        headers: {
-          "Access-Control-Allow-Origin": env.ALLOWED_ORIGIN || "*",
-          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-          "Access-Control-Allow-Headers":
-            "Content-Type, Authorization, X-Request-Id, X-Needle-Depth",
-          "Access-Control-Max-Age": "86400",
-        },
-      });
+      const headers: Record<string, string> = {
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+        "Access-Control-Allow-Headers":
+          "Content-Type, Authorization, X-Request-Id, X-Needle-Depth",
+        "Access-Control-Max-Age": "86400",
+      };
+      const origin = routerCorsOrigin(env, request);
+      if (origin) headers["Access-Control-Allow-Origin"] = origin;
+      return new Response(null, { status: 204, headers });
     }
     if (request.method === "GET" && url.pathname === "/health") {
       return new Response(
